@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     function accesoPermitido(){
-        alert("Accesso permitido");
+    
     }
 
     function accesoDenegado(){
-        alert("Acceso denegado");
+        Swal.fire({
+			icon: 'error',
+            title: ' Uy! ',
+            text: 'Usuario u contraseña incorrecta!',
+            footer: '<a href="">Olvidé mi contraseña?</a>'
+            });
     }
 
     function validarPassword(password){
