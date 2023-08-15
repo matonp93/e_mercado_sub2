@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     function accesoPermitido(){
-    
+        Swal.fire({
+            title: 'Bienvenidx!',
+            text: 'Iniciaste sesión como',
+            icon: 'success'
+          });
     }
 
     function accesoDenegado(){
