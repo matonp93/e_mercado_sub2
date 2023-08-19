@@ -68,7 +68,7 @@ box-shadow: 0px 0px 15px 1px rgba(255, 255, 255, 0.639);
 /*ESTILOS DEL precio*/
 .precio{
     color: #830040ff;
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.345); 1px solid black;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.345) 1px solid black;
     font-size: 185%;
     font-weight: bold;
 }
@@ -92,7 +92,7 @@ font-size: 100%;
 }
 .encabezado h1{
     color: #830040ff;
-    -webkit-text-stroke: 1px #830040ff;: 1px solid black; */
+    -webkit-text-stroke: 1px #830040ff 1px solid black; 
     text-shadow: 0.5px 0px 10px grey;
     font-size: 350%;
     font-weight: 600;

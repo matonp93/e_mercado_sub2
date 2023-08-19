@@ -12,6 +12,7 @@ body {
 }
 
 main {
+	margin-top: 70px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -102,7 +103,7 @@ main {
 #alerta {
 	position: absolute;
 	top: 5%;
-	left: 40%;
+	left: 39.3%;
 	padding: 10px;
 	border: 1px solid red;
 	border-radius: 10px;
@@ -115,7 +116,6 @@ main {
 #alerta p {
 	font-size: 20px;
 	line-height: 2;
-	font-weight: 600;
 }
 
 #btnDenegado {
@@ -123,3 +123,4 @@ main {
 	border: 0px;
 	border-radius: 10px;
 }
+
