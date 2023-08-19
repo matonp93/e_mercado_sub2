@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function accesoDenegado(){
         alertaDenegado.classList.remove("hidden");
+        sleep(2000).then(() => {
+            alertaDenegado.style.opacity = '0';
+            alertaDenegado.classList.add("hidden");
+        }) /* hola q tal */
+        alertaDenegado.style.opacity = '1';
     }
 
     function validarPassword(password){
@@ -33,18 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
         let email = document.getElementById("email").value;
         login(password, email);
     });
-
-    btnDenegado.addEventListener("click", () => {
-        alertaDenegado.classList.add("hidden");
-        let password = document.getElementById("password");
-        let email = document.getElementById("email");
-        password.value= "";
-        email.value = "";
-    })
-    
     btnInvitado.addEventListener("click", ()=>{
         localStorage.setItem("email", "invitado");
         localStorage.setItem("password", "invitado");
         location.href = "index.html";
     })
+
+   function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+    }
 })
