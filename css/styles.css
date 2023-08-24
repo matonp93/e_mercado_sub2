@@ -190,6 +190,12 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
-#deslogear {
-  background-color: rgb(233, 102, 102);
+
+.boton-dropdown {
+  background-color: #830040ff;
+  color: white;
+}
+
+.btncito:hover{
+  color: rgb(216, 181, 200);
 }
