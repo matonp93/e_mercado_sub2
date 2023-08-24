@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: 'Verdana', serif;
 }
 
 .jumbotron .display-4 {
@@ -10,6 +10,8 @@
 }
 
 nav a {
+  font-size: 90%;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -29,7 +31,7 @@ nav a {
 }
 
 .jumbotron {
-  height: 50vh;
+  height: 28vh;
   padding: 5em inherit;
   margin-bottom: 0;
   background-color: #53C0FB;
@@ -187,4 +189,7 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+#deslogear {
+  background-color: rgb(233, 102, 102);
 }
