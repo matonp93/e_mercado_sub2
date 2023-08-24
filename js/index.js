@@ -28,16 +28,4 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-document.addEventListener("DOMContentLoaded", function (){
-    const userNav = document.getElementById("user-info");
-    
-    const storedUserName = localStorage.getItem("email");
-    
-        let parts = storedUserName.split('@');
-    
-        // Obtener solo el nombre de usuario
-        let username = parts[0];
-    
-        userNav.textContent = username;
-    }
-    )
+
