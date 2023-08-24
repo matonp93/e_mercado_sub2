@@ -71,6 +71,39 @@ function listadoProductos(){
             products.appendChild(containerDiv);
         });
 
-    })
+    });
+    }
+     //funcionalidad del buscador
+     //let  input =document.querySelector("buscador");
+    //let resultList =document.getElementById("resultados");
+ 
+//input.addEventListener(input,);
 
-}
+//function search() {
+    //let searchTerm = input.value.trim();
+  
+   // if (searchTerm === '') {
+    //  resultList.innerHTML = '';
+   //   return;
+   // }
+  
+    //fetch(`https://japceibal.github.io/emercado-api/cats_products/101.json`)
+    //  .then(response => response.json())
+     // .then(data => {
+     //   resultList.innerHTML = '';
+      //  data.forEach(item => {
+      //    let li = document.createElement('li');
+      //    li.textContent = item.title, item.description; 
+       //   resultList.appendChild(li);
+      //  });
+     // })
+     // .catch(error => {
+      //  console.error('Error fetching data:', error);
+     // });
+  //}
+  
+  
+  //}
+ 
+   
+  
