@@ -41,7 +41,17 @@
 						<li class="nav-item">
 							<a class="nav-link" href="sell.html">Vender</a>
 						</li>
-						<li class="nav-item"></li>
+						<li class="nav-item">
+						</li>
+						<li class="nav-item dropdown">
+							<button class="btn dropdown-toggle boton-dropdown shadow-none btncito" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<span id="user-info"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><a class="dropdown-item " href="#">Ver perfil</a></li>
+							<li><a class="dropdown-item " id="deslogear" href="#">Salir</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -57,7 +67,7 @@
 					<input type="number" id="precioMaximo" placeholder="Precio Máximo" />
 				</div>
 				<div>
-					<button id="ascendentePorPrecio">
+					<button id="descendentePorPrecio">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="icon icon-tabler icon-tabler-arrow-narrow-up"
@@ -75,7 +85,7 @@
 							<path d="M8 9l4 -4" />
 						</svg>
 					</button>
-					<button id="descendentePorPrecio">
+					<button id="ascendentePorPrecio">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="icon icon-tabler icon-tabler-arrow-narrow-down"

@@ -207,6 +207,11 @@ function ordenarDesendenciaPorRelevancia() {
 
 //Filtro buscador en tiempo real
 
-let input=document.getElementById("buscador");
+//let input=document.getElementById("buscador");
+//function buscarProductos(){
+//input.addEventListener("input", e =>{
 
-input.addEventListener("input", );
+
+//} );
+
+//}
