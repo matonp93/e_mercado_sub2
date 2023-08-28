@@ -6,6 +6,8 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+const btnSalir = document.getElementById("deslogear");
+const btnVerPerfil = document.getElementById("irAPerfil");
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -39,3 +41,34 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+function salir(){
+  localStorage.clear();
+  location.href = "login.html";
+}
+
+function verPerfil(){
+  location.href = "my-profile.html";
+}
+
+document.addEventListener("DOMContentLoaded", function (){
+  const userNav = document.getElementById("user-info");
+  
+  const storedUserName = localStorage.getItem("email");
+  
+  let parts = storedUserName.split('@');
+  
+  // Obtener solo el nombre de usuario
+  let username = parts[0];
+  
+  userNav.textContent = username;
+    
+  btnSalir.addEventListener("click", () => {
+    salir();
+  });
+
+  btnVerPerfil.addEventListener("click",()=>{
+    verPerfil();
+  });
+
+});

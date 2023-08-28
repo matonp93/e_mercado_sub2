@@ -31,7 +31,7 @@ nav a {
 }
 
 .jumbotron {
-  height: 50vh;
+  height: 28vh;
   padding: 5em inherit;
   margin-bottom: 0;
   background-color: #53C0FB;
@@ -189,4 +189,13 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+.boton-dropdown {
+  background-color: #830040ff;
+  color: white;
+}
+
+.btncito:hover{
+  color: rgb(216, 181, 200);
 }

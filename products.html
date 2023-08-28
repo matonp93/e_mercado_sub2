@@ -1,74 +1,194 @@
 <!DOCTYPE html>
 <html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>eMercado - Todo lo que busques está aquí</title>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap"
+			rel="stylesheet" />
+		<link href="css/font-awesome.min.css" rel="stylesheet" />
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/estiloproductos.css" />
+		<link rel="icon" href="favicon.ico" />
+	</head>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/estiloproductos.css">
-  <link rel="icon" href="favicon.ico">
-</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+			<div class="container">
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav w-100 justify-content-between">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="categories.html">Categorías</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="sell.html">Vender</a>
+						</li>
+						<li class="nav-item">
+						</li>
+						<li class="nav-item dropdown">
+							<button class="btn dropdown-toggle boton-dropdown shadow-none btncito" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<span id="user-info"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-lg-end">
+							<li><a class="dropdown-item " id="irAPerfil" href="#">Ver perfil</a></li>
+							<li><a class="dropdown-item " id="deslogear" href="#">Salir</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<div class="encabezado">
+				<h1 id="productsTitle"></h1>
+				<p id="productsDesc"></p>
+			</div>
+			<div class="filtros" id="filters">
+				<div class="precio">
+					<input type="number" id="precioMinimo" placeholder="Precio Mínimo" />
+					<input type="number" id="precioMaximo" placeholder="Precio Máximo" />
+				</div>
+				<div>
+					<button id="descendentePorPrecio">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-arrow-narrow-up"
+							width="44"
+							height="44"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M12 5l0 14" />
+							<path d="M16 9l-4 -4" />
+							<path d="M8 9l4 -4" />
+						</svg>
+					</button>
+					<button id="ascendentePorPrecio">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-arrow-narrow-down"
+							width="44"
+							height="44"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M12 5l0 14" />
+							<path d="M16 15l-4 4" />
+							<path d="M8 15l4 4" />
+						</svg>
+					</button>
+					<button id="descendentePorRelevancia">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-flame"
+							width="44"
+							height="44"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path
+								d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" />
+						</svg>
+					</button>
+				</div>
+				<div class="filtrosGenerales">
+					<button id="filtrar">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-adjustments-horizontal"
+							width="44"
+							height="44"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+							<path d="M4 6l8 0" />
+							<path d="M16 6l4 0" />
+							<path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+							<path d="M4 12l2 0" />
+							<path d="M10 12l10 0" />
+							<path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+							<path d="M4 18l11 0" />
+							<path d="M19 18l1 0" />
+						</svg>
+					</button>
+					<button id="normal">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-refresh"
+							width="44"
+							height="44"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+							<path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+						</svg>
+					</button>
+				</div>
+			</div>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="encabezado">
-          <h1 id="productsTitle"></h1>
-          <p id="productsDesc"></p>
-    </div>
-    <container id="products">
-        
-          
-    </container>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
-</body>
-
+			<container id="products"> </container>
+		</main>
+		<footer class="text-muted">
+			<div class="container">
+				<p class="float-end">
+					<a href="#">Volver arriba</a>
+				</p>
+				<p>
+					Este sitio forma parte de
+					<a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+				</p>
+			</div>
+		</footer>
+		<div id="spinner-wrapper">
+			<div class="lds-ring">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/init.js"></script>
+		<script src="js/products.js"></script>
+	</body>
 </html>

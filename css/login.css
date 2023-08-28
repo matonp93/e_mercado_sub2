@@ -1,20 +1,18 @@
 :root {
-	--primary: #fd7e14;
+	--primary: #830040ff;
 	--secondary: rgba(255, 166, 0, 0.208);
-	--blue: #0d6efd;
-	--indigo: #6610f2;
-	--red: red;
 	--dark: black;
 	--light: rgb(255, 247, 242);
 }
 
 body {
+	min-height: 100vh;
 	background-color: #fce9da;
 	font-family: 'poppins', 'Times New Roman', Times, serif;
 }
 
 main {
-	margin: 100px 20px;
+	margin-top: 70px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -23,13 +21,13 @@ main {
 .login {
 	box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
 	background-color: var(--light);
-	padding: 55px 40px;
+	padding: 45px 40px;
 	border-radius: 20px;
 }
 
 .login h2 {
 	font-size: 40px;
-	margin-bottom: 30px;
+	margin-bottom: 25px;
 	color: var(--primary);
 	text-align: center;
 	font-weight: 700;
@@ -39,14 +37,14 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 20px;
+	gap: 15px;
 }
 
 #login-form #btnEnviar {
 	padding: 5px 40px;
 	text-transform: uppercase;
 	font-weight: bold;
-	color: #ffe6d1;
+	color: var(--light);
 	border: none;
 	border-radius: 20px;
 	background-color: var(--primary);
@@ -55,7 +53,23 @@ main {
 }
 
 #login-form #btnEnviar:hover {
-	background-color: #ec6a00;
+	background-color: rgb(168, 0, 81);
+}
+
+#login-form #btnInvitado {
+	margin: 15px 0px 10px 0px;
+	font-size: 14px;
+	color: var(--primary);
+	border: none;
+	box-shadow: 0px 0px 5px 0px var(--dark);
+	padding: 5px 20px;
+	text-transform: uppercase;
+	border-radius: 20px;
+	transition: 0.3s;
+}
+
+#login-form #btnInvitado:hover {
+	background-color: rgb(255, 255, 255);
 }
 
 #login-form .camp input {
@@ -64,6 +78,7 @@ main {
 	border: 0.1px solid rgb(128, 128, 128);
 	background-color: rgb(255, 255, 255);
 	padding: 10px 15px;
+	outline: none;
 }
 
 .login .camp-registrate {
@@ -76,14 +91,19 @@ main {
 	margin-bottom: 0;
 }
 
-.hidden{
-	display: none;
+.login .camp-registrate a {
+	text-transform: uppercase;
 }
 
-#alerta{
+.hidden {
+	opacity: 0;
+	transition: opacity .3s;
+}
+
+#alerta {
 	position: absolute;
 	top: 5%;
-	left: 40%;
+	left: 39.3%;
 	padding: 10px;
 	border: 1px solid red;
 	border-radius: 10px;
@@ -93,14 +113,14 @@ main {
 	text-align: center;
 }
 
-#alerta p{
+#alerta p {
 	font-size: 20px;
 	line-height: 2;
-	font-weight: 600;
 }
 
-#btnDenegado{
-	background-color:#fce9da;
+#btnDenegado {
+	background-color: #fce9da;
 	border: 0px;
 	border-radius: 10px;
 }
+
