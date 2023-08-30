@@ -201,19 +201,21 @@ function ordenarDesendenciaPorRelevancia() { // POR HACER CON LOGICA NUEVA
 		});
 }
 
-function buscar(word){ // NO FUNCIONA JEJE (TODAVIA)
+function buscar(word){ // SI FUNCIONA JEJE
 	let tarjetas = document.getElementsByClassName("productcard");
 	tarjetas = Array.from(tarjetas);
-	let tarjetasEsconder = tarjetas.filter((tarjeta) => !tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word) )
-	products.innerHTML = "";
-	tarjetas.forEach(element=>{ 
-		if(tarjetasEsconder.includes(element)){
-			element.style.visibility = "hidden";
-		} else{
+	tarjetasFiltradas = tarjetas.filter (tarjeta => tarjeta.getElementsByClassName("tituloProducto")[0].innerHTML.toLowerCase().includes(word));
+	tarjetas.forEach(element =>{
+		if(tarjetasFiltradas.includes(element)){
 			element.style.visibility = "visible";
+			element.style.order = 0;
+		} else{
+			element.style.visibility = "hidden";
+			element.style.order = 1;
 		}
 	})
 }
+
 
 //* ====== Pop-Up ====== *//
 
