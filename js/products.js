@@ -194,3 +194,25 @@ function ordenarDesendenciaPorRelevancia() {
 			});
 		});
 }
+
+//* ====== Pop-Up ====== *//
+
+// ABRIR
+const btnPopUp = document.querySelector('.btn-pop-up');
+const popUp = document.querySelector('.filtros-container');
+
+btnPopUp.addEventListener('click', () => {
+	popUp.style.zIndex = '10';
+	popUp.style.opacity = '1';
+});
+
+// CERRAR
+
+let btnCerrar = document.querySelectorAll('.filtros-container div button');
+
+btnCerrar.forEach((element) => {
+	element.addEventListener('click', () => {
+		popUp.style.opacity = '0';
+		popUp.style.zIndex = '-1';
+	});
+});

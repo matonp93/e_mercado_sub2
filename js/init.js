@@ -7,6 +7,7 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 const btnSalir = document.getElementById("deslogear");
+const btnVerPerfil = document.getElementById("irAPerfil");
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -46,6 +47,10 @@ function salir(){
   location.href = "login.html";
 }
 
+function verPerfil(){
+  location.href = "my-profile.html";
+}
+
 document.addEventListener("DOMContentLoaded", function (){
   const userNav = document.getElementById("user-info");
   
@@ -61,4 +66,9 @@ document.addEventListener("DOMContentLoaded", function (){
   btnSalir.addEventListener("click", () => {
     salir();
   });
+
+  btnVerPerfil.addEventListener("click",()=>{
+    verPerfil();
+  });
+
 });
