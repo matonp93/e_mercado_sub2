@@ -45,23 +45,22 @@ let getJSONData = function(url){
 function salir(){
   localStorage.clear();
   location.href = "login.html";
-}
+} //Se encarga de limpiar el localStorage y nos redirecciona a la pagina login.html
 
 function verPerfil(){
   location.href = "my-profile.html";
-}
+} // Nos redirecciona a la pagina my-profile.html
 
 document.addEventListener("DOMContentLoaded", function (){
-  const userNav = document.getElementById("user-info");
+  let userNav = document.getElementById("user-info"); //Se selecciona un elemento del DOM con el id "user-info" y lo almacena en la variable userNav
   
-  const storedUserName = localStorage.getItem("email");
+  let storedUserName = localStorage.getItem("email"); //Se accede al valor del email almacenado en el localStorage
   
-  let parts = storedUserName.split('@');
+  let parts = storedUserName.split('@'); //Divide la dirección de correo electrónico en partes utilizando el símbolo "@" como delimitador
   
-  // Obtener solo el nombre de usuario
-  let username = parts[0];
+  let username = parts[0]; //Se obtiene solo el nombre de usuario 
   
-  userNav.textContent = username;
+  userNav.textContent = username; //Se establece el nombre de usuario como contenido 
     
   btnSalir.addEventListener("click", () => {
     salir();
