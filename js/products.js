@@ -63,9 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function contentProducts(element) {
 		let h3 = document.createElement('h3');
 		h3.innerHTML += element.name + ' <br>';
+		let precioDiv = document.createElement('div');
 		let h2 = document.createElement('h2');
-		h2.innerHTML += element.currency + ' ' + element.cost;
-		h2.classList.add('precio');
+		let p0 = document.createElement('p');
+		p0.innerHTML += element.cost;
+		h2.innerHTML += element.currency + ' ';
+		precioDiv.appendChild(h2);
+		precioDiv.appendChild(p0);
+		h2.classList.add('currency');
+		p0.classList.add('precio');
 		let p1 = document.createElement('p');
 		p1.classList.add('descripcion');
 		p1.innerHTML += element.description;
@@ -88,7 +94,8 @@ function contentProducts(element) {
 		image.setAttribute('src', element.image);
 		imgDiv.appendChild(image);
 		h3Div.appendChild(h3);
-		h3Div.appendChild(h2);
+		//h3Div.appendChild(h2);
+		h3Div.appendChild(precioDiv);
 		h3Div.appendChild(p1);
 		p2Div.appendChild(p2);
 		containerDiv.appendChild(imgDiv);
@@ -158,7 +165,7 @@ function volverAlNormal() {
 function ordenarAscendenciaPorPrecio() {
 	let tarjetas = document.getElementsByClassName("productcard"); // devuelve un HTMLCollection (parecido a un array) de los objetos de clase "productcard"
 	tarjetas = Array.from(tarjetas); // Array.from() convierte un objeto de tipo-array a un array
-	tarjetas.sort((a,b) => a.getElementsByClassName("precio")[0].innerHTML.replace("USD ","") - b.getElementsByClassName("precio")[0].innerHTML.replace("USD ","") )
+	tarjetas.sort((a,b) => a.getElementsByClassName("precio")[0].innerHTML - b.getElementsByClassName("precio")[0].innerHTML )
 	// string.replace("Pepe","Manteca") te reemplaza la palabra "Pepe" por "Manteca" en un string
 	products.innerHTML = ""; // Borra todas las tarjetas de el contenedor "products"
 	tarjetas.forEach(element=>{ products.appendChild(element) }) // Pone las tarjetas del array con sort en products
@@ -167,7 +174,7 @@ function ordenarAscendenciaPorPrecio() {
 function ordenarDesendenciaPorPrecio() {
 	let tarjetas = document.getElementsByClassName("productcard");
 	tarjetas = Array.from(tarjetas);
-	tarjetas.sort((a,b) => b.getElementsByClassName("precio")[0].innerHTML.replace("USD ","") - a.getElementsByClassName("precio")[0].innerHTML.replace("USD ","") )
+	tarjetas.sort((a,b) => b.getElementsByClassName("precio")[0].innerHTML - a.getElementsByClassName("precio")[0].innerHTML )
 	products.innerHTML = "";
 	tarjetas.forEach(element=>{ products.appendChild(element) })
 }
