@@ -41,15 +41,18 @@
 						<li class="nav-item">
 							<a class="nav-link" href="sell.html">Vender</a>
 						</li>
-						<li class="nav-item">
-						</li>
+						<li class="nav-item"></li>
 						<li class="nav-item dropdown">
-							<button class="btn dropdown-toggle boton-dropdown shadow-none btncito" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<span id="user-info"></span>
+							<button
+								class="btn dropdown-toggle boton-dropdown shadow-none btncito"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false">
+								<span id="user-info"></span>
 							</button>
 							<ul class="dropdown-menu dropdown-menu-lg-end">
-							<li><a class="dropdown-item " id="irAPerfil" href="#">Ver perfil</a></li>
-							<li><a class="dropdown-item " id="deslogear" href="#">Salir</a></li>
+								<li><a class="dropdown-item" id="irAPerfil" href="#">Ver perfil</a></li>
+								<li><a class="dropdown-item" id="deslogear" href="#">Salir</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -61,16 +64,39 @@
 				<h1 id="productsTitle"></h1>
 				<p id="productsDesc"></p>
 			</div>
-			<div class="filtros" id="filters">
-				<div class="precio">
-					<input type="number" id="precioMinimo" placeholder="Precio Mínimo" />
-					<input type="number" id="precioMaximo" placeholder="Precio Máximo" />
-				</div>
-				<div>
-					<button id="descendentePorPrecio">
+
+			<!-- FILTROS -->
+
+			<div class="filtros">
+				<button class="btn-pop-up">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon icon-tabler icon-tabler-adjustments-horizontal"
+						width="44"
+						height="44"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+						<path d="M4 6l8 0" />
+						<path d="M16 6l4 0" />
+						<path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+						<path d="M4 12l2 0" />
+						<path d="M10 12l10 0" />
+						<path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+						<path d="M4 18l11 0" />
+						<path d="M19 18l1 0" />
+					</svg>
+				</button>
+				<div class="filtros-container">
+					<div class="precios-camp">
+						<input class="camp" type="number" id="precioMinimo" placeholder="Precio Mínimo" />
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="icon icon-tabler icon-tabler-arrow-narrow-up"
+							class="icon icon-tabler icon-tabler-math-lower"
 							width="44"
 							height="44"
 							viewBox="0 0 24 24"
@@ -80,92 +106,84 @@
 							stroke-linecap="round"
 							stroke-linejoin="round">
 							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-							<path d="M12 5l0 14" />
-							<path d="M16 9l-4 -4" />
-							<path d="M8 9l4 -4" />
+							<path d="M19 18l-14 -6l14 -6" />
 						</svg>
-					</button>
-					<button id="ascendentePorPrecio">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="icon icon-tabler icon-tabler-arrow-narrow-down"
-							width="44"
-							height="44"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							fill="none"
-							stroke-linecap="round"
-							stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-							<path d="M12 5l0 14" />
-							<path d="M16 15l-4 4" />
-							<path d="M8 15l4 4" />
-						</svg>
-					</button>
-					<button id="descendentePorRelevancia">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="icon icon-tabler icon-tabler-flame"
-							width="44"
-							height="44"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							fill="none"
-							stroke-linecap="round"
-							stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-							<path
-								d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" />
-						</svg>
-					</button>
-				</div>
-				<div class="filtrosGenerales">
-					<button id="filtrar">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="icon icon-tabler icon-tabler-adjustments-horizontal"
-							width="44"
-							height="44"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							fill="none"
-							stroke-linecap="round"
-							stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-							<path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-							<path d="M4 6l8 0" />
-							<path d="M16 6l4 0" />
-							<path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-							<path d="M4 12l2 0" />
-							<path d="M10 12l10 0" />
-							<path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-							<path d="M4 18l11 0" />
-							<path d="M19 18l1 0" />
-						</svg>
-					</button>
-					<button id="normal">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="icon icon-tabler icon-tabler-refresh"
-							width="44"
-							height="44"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							fill="none"
-							stroke-linecap="round"
-							stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-							<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-							<path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-						</svg>
-					</button>
+						<input class="camp" type="number" id="precioMaximo" placeholder="Precio Máximo" />
+					</div>
+					<div class="otros-filtros">
+						<button id="descendentePorPrecio">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="icon icon-tabler icon-tabler-arrow-narrow-up"
+								width="44"
+								height="44"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<path d="M12 5l0 14" />
+								<path d="M16 9l-4 -4" />
+								<path d="M8 9l4 -4" />
+							</svg>
+						</button>
+						<button id="ascendentePorPrecio">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="icon icon-tabler icon-tabler-arrow-narrow-down"
+								width="44"
+								height="44"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<path d="M12 5l0 14" />
+								<path d="M16 15l-4 4" />
+								<path d="M8 15l4 4" />
+							</svg>
+						</button>
+						<button id="descendentePorRelevancia">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="icon icon-tabler icon-tabler-flame"
+								width="44"
+								height="44"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<path
+									d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" />
+							</svg>
+						</button>
+						<button id="normal">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="icon icon-tabler icon-tabler-refresh"
+								width="44"
+								height="44"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								fill="none"
+								stroke-linecap="round"
+								stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+								<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+								<path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+							</svg>
+						</button>
+					</div>
+					<div>
+						<button id="filtrar" class="btn-filtrar">filtrar</button>
+					</div>
 				</div>
 			</div>
-
+			<input type="text" id="buscador"/>
 			<container id="products"> </container>
 		</main>
 		<footer class="text-muted">
