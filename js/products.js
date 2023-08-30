@@ -8,6 +8,7 @@ let link = 'https://japceibal.github.io/emercado-api/cats_products/';
 const btnAscendente = document.getElementById('ascendentePorPrecio');
 const btnDescendente = document.getElementById('descendentePorPrecio');
 const btnDescendenteRelevancia = document.getElementById('descendentePorRelevancia');
+const buscador = document.getElementById("buscador");
 let initialPromise;
 
 // PAGINA
@@ -56,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	btnDescendenteRelevancia.addEventListener('click', () => {
 		ordenarDesendenciaPorRelevancia();
 	});
+
+	buscador.addEventListener("input",()=>{
+		buscar(buscador.value.toLowerCase());
+	})
 });
 
 // FUNCIONES
@@ -63,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function contentProducts(element) {
 		let h3 = document.createElement('h3');
 		h3.innerHTML += element.name + ' <br>';
+		h3.classList.add('tituloProducto');
 		let precioDiv = document.createElement('div');
 		let h2 = document.createElement('h2');
 		let p0 = document.createElement('p');
@@ -123,7 +129,7 @@ function listadoProductosInicial(){
 // Agregamos Filtros:
 // Tenemos que crear una función que filtre los precios del Array, a partir de un rango que el usuario determina en dos imput, un maximo y un mínimo.
 
-function filtrarPorRangoDePrecio() {
+function filtrarPorRangoDePrecio() { //POR HACER CON LOGICA NUEVA
 	let precioMaximo = document.getElementById('precioMaximo').value;
 	let precioMinimo = document.getElementById('precioMinimo').value;
 	initialPromise.then((data) => {
@@ -179,7 +185,7 @@ function ordenarDesendenciaPorPrecio() {
 	tarjetas.forEach(element=>{ products.appendChild(element) })
 }
 
-function ordenarDesendenciaPorRelevancia() {
+function ordenarDesendenciaPorRelevancia() { // POR HACER CON LOGICA NUEVA
 	initialPromise.then((data) => {
 			products.innerHTML = '';
 			let ordenadosD = [];
@@ -193,6 +199,20 @@ function ordenarDesendenciaPorRelevancia() {
 				contentProducts(element);
 			});
 		});
+}
+
+function buscar(word){ // NO FUNCIONA JEJE (TODAVIA)
+	let tarjetas = document.getElementsByClassName("productcard");
+	tarjetas = Array.from(tarjetas);
+	let tarjetasEsconder = tarjetas.filter((tarjeta) => !tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word) )
+	products.innerHTML = "";
+	tarjetas.forEach(element=>{ 
+		if(tarjetasEsconder.includes(element)){
+			element.style.visibility = "hidden";
+		} else{
+			element.style.visibility = "visible";
+		}
+	})
 }
 
 //* ====== Pop-Up ====== *//
