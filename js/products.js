@@ -134,34 +134,25 @@ function filtrarPorRangoDePrecio() {
 	let precioMinimo = document.getElementById('precioMinimo').value;
 	let tarjetas = document.getElementsByClassName('productcard');
 	tarjetas = Array.from(tarjetas);
-	let tarjetasFiltradas;
-	if (precioMaximo != '' && precioMinimo != '') {
-		tarjetasFiltradas = tarjetas.filter((element) => {
-			element.getElementsByClassName('precio')[0].innerHTML <= precioMaximo &&
-				element.getElementsByClassName('precio')[0].innerHTML >= precioMinimo;
-		});
-	}
-
-	if (precioMinimo == '') {
-		tarjetasFiltradas = tarjetas.filter((element) => {
-			element.getElementsByClassName('precio')[0].innerHTML <= precioMaximo;
-		});
-	}
-
-	if (precioMaximo == '') {
-		tarjetasFiltradas = tarjetas.filter((element) => {
-			element.getElementsByClassName('precio')[0].innerHTML >= precioMinimo;
-		});
-	}
+	let tarjetasFiltradas = [];
+	if (!(precioMaximo === "") && !(precioMinimo === "")){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML>=precioMinimo && element.getElementsByClassName('precio')[0].innerHTML <= precioMaximo);
+}
+	if (precioMinimo === ""){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML<= precioMaximo);
+}
+	if (precioMaximo === ""){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML>= precioMinimo);
+}
 	tarjetas.forEach((element) => {
-		if (tarjetasFiltradas.includes(element)) {
-			element.style.visibility = 'visible';
-			element.style.order = 0;
-		} else {
-			element.style.visibility = 'hidden';
-			element.style.order = 1;
-		}
-	});
+	if (tarjetasFiltradas.includes(element)) {
+		element.style.visibility = 'visible';
+		element.style.order = 0;
+	} else {
+		element.style.visibility = 'hidden';
+		element.style.order = 1;
+	}
+})
 }
 
 function volverAlNormal() {
