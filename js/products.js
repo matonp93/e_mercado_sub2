@@ -136,14 +136,15 @@ function filtrarPorRangoDePrecio() {
 	tarjetas = Array.from(tarjetas);
 	let tarjetasFiltradas = [];
 	if (!(precioMaximo === "") && !(precioMinimo === "")){
-	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML>=precioMinimo && element.getElementsByClassName('precio')[0].innerHTML <= precioMaximo);
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>=precioMinimo*1 && element.getElementsByClassName('precio')[0].innerHTML*1 <= precioMaximo*1);
 }
 	if (precioMinimo === ""){
-	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML<= precioMaximo);
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1<= precioMaximo*1);
 }
 	if (precioMaximo === ""){
-	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML>= precioMinimo);
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>= precioMinimo*1);
 }
+console.log(tarjetasFiltradas);
 	tarjetas.forEach((element) => {
 	if (tarjetasFiltradas.includes(element)) {
 		element.style.visibility = 'visible';
@@ -169,8 +170,8 @@ function ordenarAscendenciaPorPrecio() {
 	tarjetas = Array.from(tarjetas); // Array.from() convierte un objeto de tipo-array a un array
 	tarjetas.sort(
 		(a, b) =>
-			a.getElementsByClassName('precio')[0].innerHTML -
-			b.getElementsByClassName('precio')[0].innerHTML
+			a.getElementsByClassName('precio')[0].innerHTML*1 -
+			b.getElementsByClassName('precio')[0].innerHTML*1
 	);
 	// string.replace("Pepe","Manteca") te reemplaza la palabra "Pepe" por "Manteca" en un string
 	products.innerHTML = ''; // Borra todas las tarjetas de el contenedor "products"
@@ -184,8 +185,8 @@ function ordenarDesendenciaPorPrecio() {
 	tarjetas = Array.from(tarjetas);
 	tarjetas.sort(
 		(a, b) =>
-			b.getElementsByClassName('precio')[0].innerHTML -
-			a.getElementsByClassName('precio')[0].innerHTML
+			b.getElementsByClassName('precio')[0].innerHTML*1 -
+			a.getElementsByClassName('precio')[0].innerHTML*1
 	);
 	products.innerHTML = '';
 	tarjetas.forEach((element) => {
@@ -198,8 +199,8 @@ function ordenarDesendenciaPorRelevancia() {
 	tarjetas = Array.from(tarjetas);
 	tarjetas.sort(
 		(a, b) =>
-			b.getElementsByClassName('vendidos')[0].innerHTML.split(' ')[0] -
-			a.getElementsByClassName('vendidos')[0].innerHTML.split(' ')[0]
+			b.getElementsByClassName('vendidos')[0].innerHTML.split(' ')[0]*1 -
+			a.getElementsByClassName('vendidos')[0].innerHTML.split(' ')[0]*1
 	);
 	products.innerHTML = '';
 	tarjetas.forEach((element) => {
