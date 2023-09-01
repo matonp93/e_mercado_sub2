@@ -126,6 +126,7 @@ function listadoProductosInicial() {
 	});
 }
 
+
 // Agregamos Filtros:
 // Tenemos que crear una función que filtre los precios del Array, a partir de un rango que el usuario determina en dos imput, un maximo y un mínimo.
 
