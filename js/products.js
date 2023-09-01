@@ -205,13 +205,3 @@ function ordenarDesendenciaPorRelevancia() {
 		});
 }
 
-//Filtro buscador en tiempo real
-
-//let input=document.getElementById("buscador");
-//function buscarProductos(){
-//input.addEventListener("input", e =>{
-
-
-//} );
-
-//}

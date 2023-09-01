@@ -206,7 +206,7 @@ a.custom-card:hover {
   white-space: nowrap;
   position: relative;
 }
-.container-1 input#search{
+.container-1 input#buscador{
   width: 250px;
   height: 40px;
   background: #f2ebf7;
