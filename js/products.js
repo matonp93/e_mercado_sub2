@@ -209,7 +209,7 @@ function ordenarDesendenciaPorRelevancia() {
 }
 
 function buscar(word) {
-	// SI FUNCIONA JEJE
+	
 	let tarjetas = document.getElementsByClassName('productcard');
 	tarjetas = Array.from(tarjetas);
 	tarjetasFiltradas = tarjetas.filter((tarjeta) =>
