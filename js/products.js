@@ -126,6 +126,7 @@ function listadoProductosInicial() {
 	});
 }
 
+
 // Agregamos Filtros:
 // Tenemos que crear una función que filtre los precios del Array, a partir de un rango que el usuario determina en dos imput, un maximo y un mínimo.
 
@@ -209,7 +210,7 @@ function ordenarDesendenciaPorRelevancia() {
 }
 
 function buscar(word) {
-	// SI FUNCIONA JEJE
+	
 	let tarjetas = document.getElementsByClassName('productcard');
 	tarjetas = Array.from(tarjetas);
 	tarjetasFiltradas = tarjetas.filter((tarjeta) =>
