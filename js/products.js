@@ -8,6 +8,8 @@ let link = 'https://japceibal.github.io/emercado-api/cats_products/';
 const btnAscendente = document.getElementById('ascendentePorPrecio');
 const btnDescendente = document.getElementById('descendentePorPrecio');
 const btnDescendenteRelevancia = document.getElementById('descendentePorRelevancia');
+const buscador = document.getElementById('buscador');
+let initialPromise;
 
 // PAGINA
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			productsTitle.innerHTML += 'Muebles';
 			productsDesc.innerHTML += 'Muebles antiguos, nuevos y para ser armados por uno mismo.';
 	}
-	listadoProductos();
+	listadoProductosInicial();
 
 	btnFiltrar.addEventListener('click', () => {
 		filtrarPorRangoDePrecio();
@@ -55,6 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	btnDescendenteRelevancia.addEventListener('click', () => {
 		ordenarDesendenciaPorRelevancia();
 	});
+
+	buscador.addEventListener('input', () => {
+		buscar(buscador.value.toLowerCase());
+	});
 });
 
 // FUNCIONES
@@ -62,19 +68,26 @@ document.addEventListener('DOMContentLoaded', () => {
 function contentProducts(element) {
 	let h3 = document.createElement('h3');
 	h3.innerHTML += element.name + ' <br>';
+	h3.classList.add('tituloProducto');
+	let precioDiv = document.createElement('div');
 	let h2 = document.createElement('h2');
-	h2.innerHTML += element.currency + ' ' + element.cost;
-	h2.classList.add('precio');
+	let p0 = document.createElement('p');
+	p0.innerHTML += element.cost;
+	h2.innerHTML += element.currency + ' ';
+	precioDiv.appendChild(h2);
+	precioDiv.appendChild(p0);
+	h2.classList.add('currency');
+	p0.classList.add('precio');
 	let p1 = document.createElement('p');
 	p1.classList.add('descripcion');
 	p1.innerHTML += element.description;
 	let p2 = document.createElement('p');
 	p2.classList.add('vendidos');
 	p2.innerHTML += element.soldCount + ' vendidos';
-
 	/* Contenedores y clase de divs*/
 	let containerDiv = document.createElement('div');
 	containerDiv.classList.add('productcard');
+	containerDiv.setAttribute('id', element.id);
 	let imgDiv = document.createElement('div');
 	imgDiv.classList.add('imgdiv');
 	let h3Div = document.createElement('div');
@@ -87,7 +100,8 @@ function contentProducts(element) {
 	image.setAttribute('src', element.image);
 	imgDiv.appendChild(image);
 	h3Div.appendChild(h3);
-	h3Div.appendChild(h2);
+	//h3Div.appendChild(h2);
+	h3Div.appendChild(precioDiv);
 	h3Div.appendChild(p1);
 	p2Div.appendChild(p2);
 	containerDiv.appendChild(imgDiv);
@@ -95,16 +109,23 @@ function contentProducts(element) {
 	containerDiv.appendChild(p2Div);
 	products.appendChild(containerDiv);
 }
-
 function listadoProductos() {
-	fetch(link)
-		.then((response) => response.json())
-		.then((data) => {
-			data.products.forEach((element) => {
-				contentProducts(element);
-			});
-		});
+	initialPromise = new Promise((resolve, reject) => {
+		fetch(link)
+			.then((response) => response.json())
+			.then((data) => resolve(data.products))
+			.catch((error) => reject(error));
+	});
 }
+function listadoProductosInicial() {
+	listadoProductos();
+	initialPromise.then((data) => {
+		data.forEach((element) => {
+			contentProducts(element);
+		});
+	});
+}
+
 
 // Agregamos Filtros:
 // Tenemos que crear una función que filtre los precios del Array, a partir de un rango que el usuario determina en dos imput, un maximo y un mínimo.
@@ -112,38 +133,33 @@ function listadoProductos() {
 function filtrarPorRangoDePrecio() {
 	let precioMaximo = document.getElementById('precioMaximo').value;
 	let precioMinimo = document.getElementById('precioMinimo').value;
-	fetch(link)
-		.then((response) => response.json())
-		.then((data) => {
-			products.innerHTML = '';
-			if (precioMaximo != '' && precioMinimo != '') {
-				let prodfiltrados = data.products.filter(
-					(element) => element.cost <= precioMaximo && element.cost >= precioMinimo
-				);
-				prodfiltrados.forEach((element) => {
-					contentProducts(element);
-				});
-			}
-
-			if (precioMinimo == '') {
-				let prodfiltrados = data.products.filter((element) => element.cost <= precioMaximo);
-				prodfiltrados.forEach((element) => {
-					contentProducts(element);
-				});
-			}
-
-			if (precioMaximo == '') {
-				let prodfiltrados = data.products.filter((element) => element.cost >= precioMinimo);
-				prodfiltrados.forEach((element) => {
-					contentProducts(element);
-				});
-			}
-		});
+	let tarjetas = document.getElementsByClassName('productcard');
+	tarjetas = Array.from(tarjetas);
+	let tarjetasFiltradas = [];
+	if (!(precioMaximo === "") && !(precioMinimo === "")){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>=precioMinimo*1 && element.getElementsByClassName('precio')[0].innerHTML*1 <= precioMaximo*1);
+}
+	if (precioMinimo === ""){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1<= precioMaximo*1);
+}
+	if (precioMaximo === ""){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>= precioMinimo*1);
+}
+console.log(tarjetasFiltradas);
+	tarjetas.forEach((element) => {
+	if (tarjetasFiltradas.includes(element)) {
+		element.style.visibility = 'visible';
+		element.style.order = 0;
+	} else {
+		element.style.visibility = 'hidden';
+		element.style.order = 1;
+	}
+})
 }
 
 function volverAlNormal() {
 	products.innerHTML = '';
-	listadoProductos();
+	listadoProductosInicial();
 	document.getElementById('precioMaximo').value = '';
 	document.getElementById('precioMinimo').value = '';
 }
@@ -151,55 +167,84 @@ function volverAlNormal() {
 //* ====== Filtro Orden Relevancia ====== *//
 
 function ordenarAscendenciaPorPrecio() {
-	fetch(link)
-		.then((response) => response.json())
-		.then((data) => {
-			products.innerHTML = '';
-			let ordenadosA = [];
-
-			for (let element of data.products) {
-				ordenadosA.push(element);
-				ordenadosA.sort((a, b) => a.cost - b.cost);
-			}
-
-			ordenadosA.forEach((element) => {
-				contentProducts(element);
-			});
-		});
+	let tarjetas = document.getElementsByClassName('productcard'); // devuelve un HTMLCollection (parecido a un array) de los objetos de clase "productcard"
+	tarjetas = Array.from(tarjetas); // Array.from() convierte un objeto de tipo-array a un array
+	tarjetas.sort(
+		(a, b) =>
+			a.getElementsByClassName('precio')[0].innerHTML*1 -
+			b.getElementsByClassName('precio')[0].innerHTML*1
+	);
+	// string.replace("Pepe","Manteca") te reemplaza la palabra "Pepe" por "Manteca" en un string
+	products.innerHTML = ''; // Borra todas las tarjetas de el contenedor "products"
+	tarjetas.forEach((element) => {
+		products.appendChild(element);
+	}); // Pone las tarjetas del array con sort en products
 }
 
 function ordenarDesendenciaPorPrecio() {
-	fetch(link)
-		.then((response) => response.json())
-		.then((data) => {
-			products.innerHTML = '';
-			let ordenadosD = [];
-
-			for (let element of data.products) {
-				ordenadosD.push(element);
-				ordenadosD.sort((a, b) => b.cost - a.cost);
-			}
-
-			ordenadosD.forEach((element) => {
-				contentProducts(element);
-			});
-		});
+	let tarjetas = document.getElementsByClassName('productcard');
+	tarjetas = Array.from(tarjetas);
+	tarjetas.sort(
+		(a, b) =>
+			b.getElementsByClassName('precio')[0].innerHTML*1 -
+			a.getElementsByClassName('precio')[0].innerHTML*1
+	);
+	products.innerHTML = '';
+	tarjetas.forEach((element) => {
+		products.appendChild(element);
+	});
 }
 
 function ordenarDesendenciaPorRelevancia() {
-	fetch(link)
-		.then((response) => response.json())
-		.then((data) => {
-			products.innerHTML = '';
-			let ordenadosD = [];
-
-			for (let element of data.products) {
-				ordenadosD.push(element);
-				ordenadosD.sort((a, b) => b.soldCount - a.soldCount);
-			}
-
-			ordenadosD.forEach((element) => {
-				contentProducts(element);
-			});
-		});
+	let tarjetas = document.getElementsByClassName('productcard');
+	tarjetas = Array.from(tarjetas);
+	tarjetas.sort(
+		(a, b) =>
+			b.getElementsByClassName('vendidos')[0].innerHTML.split(' ')[0]*1 -
+			a.getElementsByClassName('vendidos')[0].innerHTML.split(' ')[0]*1
+	);
+	products.innerHTML = '';
+	tarjetas.forEach((element) => {
+		products.appendChild(element);
+	});
 }
+
+function buscar(word) {
+	
+	let tarjetas = document.getElementsByClassName('productcard');
+	tarjetas = Array.from(tarjetas);
+	tarjetasFiltradas = tarjetas.filter((tarjeta) =>
+		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word)
+	);
+	tarjetas.forEach((element) => {
+		if (tarjetasFiltradas.includes(element)) {
+			element.style.visibility = 'visible';
+			element.style.order = 0;
+		} else {
+			element.style.visibility = 'hidden';
+			element.style.order = 1;
+		}
+	});
+}
+
+//* ====== Pop-Up ====== *//
+
+// ABRIR
+const btnPopUp = document.querySelector('.btn-pop-up');
+const popUp = document.querySelector('.filtros-container');
+
+btnPopUp.addEventListener('click', () => {
+	popUp.style.zIndex = '10';
+	popUp.style.opacity = '1';
+});
+
+// CERRAR
+
+let btnCerrar = document.querySelectorAll('.filtros-container div button');
+
+btnCerrar.forEach((element) => {
+	element.addEventListener('click', () => {
+		popUp.style.opacity = '0';
+		popUp.style.zIndex = '-1';
+	});
+});
