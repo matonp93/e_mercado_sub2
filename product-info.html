@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>eMercado - Todo lo que busques está aquí</title>
 
   <link href="css/product-info.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
@@ -14,65 +13,112 @@
   <link rel="icon" href="favicon.ico">
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-          <li class="nav-item dropdown">
-            <button class="btn dropdown-toggle boton-dropdown shadow-none btncito" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <span id="user-info"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-lg-end">
-            <li><a class="dropdown-item " id="irAPerfil" href="#">Ver perfil</a></li>
-            <li><a class="dropdown-item " id="deslogear" href="#">Salir</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-  <main>
-    <div class="comentarios">
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+			<div class="container">
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav w-100 justify-content-between">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="categories.html">Categorías</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="sell.html">Vender</a>
+						</li>
+						<li class="nav-item"></li>
+						<li class="nav-item dropdown">
+							<button
+								class="btn dropdown-toggle boton-dropdown shadow-none btncito"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false">
+								<span id="user-info"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-lg-end">
+								<li><a class="dropdown-item" id="irAPerfil" href="#">Ver perfil</a></li>
+								<li><a class="dropdown-item" id="deslogear" href="#">Salir</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<main>
+			<div class="comentarios">
+				<!-- * ====== COMENTARIOS ====== * -->
 
-    </div>
-  </main>
+				<div class="comment-section">
+					<div class="comment-section__comment-container">
+						<h3 class="comment-container__title">Opiniones del producto</h3>
+						<div class="comment-container__comment-list">
+							<div class="comment-list__comment-item"></div>
+						</div>
+					</div>
+					<!-- AGREGAR COMENTARIOS -->
+					<div class="comment-section__add-comment">
+						<h4 class="add-comment__title">¿Qué opinas del producto?</h4>
+						<div class="add-comment__camp">
+							<textarea
+								class="add-comment__input"
+								name="add-comment__input"
+								id="add-comment__input"
+								cols="30"
+								rows="10"></textarea>
+							<div class="add-comment__score">
+								<input type="radio" name="rate" id="star-1" value="5" /><!-- 
+									 --><label for="star-1" class="fa fa-star"> </label>
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/product-info.js"></script>
-</body>
+								<input type="radio" name="star" id="star-2" value="4" /><!-- 
+									 --><label for="star-2" class="fa fa-star"> </label>
 
+								<input type="radio" name="star" id="star-3" value="3" /><!-- 
+									 --><label for="star-3" class="fa fa-star"></label>
+
+								<input type="radio" name="star" id="star-4" value="2" /><!-- 
+									 --><label for="star-4" class="fa fa-star"></label>
+
+								<input type="radio" name="star" id="star-5" value="1" /><!-- 
+									 --><label for="star-5" class="fa fa-star"></label>
+							</div>
+						</div>
+						<button class="add-comment-btn" type="submit">Enviar</button>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="text-muted">
+			<div class="container">
+				<p class="float-end">
+					<a href="#">Volver arriba</a>
+				</p>
+				<p>
+					Este sitio forma parte de
+					<a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+				</p>
+			</div>
+		</footer>
+		<div id="spinner-wrapper">
+			<div class="lds-ring">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/init.js"></script>
+		<script src="js/product-info.js"></script>
+	</body>
 </html>

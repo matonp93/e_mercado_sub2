@@ -57,3 +57,108 @@
   background-size: 200% 100%;
   background-position: 100% 0;
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+	font-family: 'poppins', 'Times New Roman', Times, serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/** ====== COMMENT SECTION ====== **/
+
+.comment-section {
+	border-radius: 20px;
+	margin: 0 auto;
+	max-width: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	background-color: rgb(255, 235, 205);
+	padding: 25px;
+}
+
+.comment-section__add-comment {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.add-comment__title {
+	text-align: center;
+	font-weight: 700;
+}
+
+.add-comment__camp {
+	height: 150px;
+	position: relative;
+}
+
+.add-comment__input {
+	box-shadow: inset 8px 8px 30px rgba(151, 151, 151, 0.452);
+	background-color: #444;
+	color: white;
+	padding: 15px;
+	resize: none;
+	border-radius: 20px;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	font-weight: 500;
+}
+
+.add-comment__score {
+	direction: rtl;
+	unicode-bidi: bidi-override;
+	padding: 8px 10px;
+	display: flex;
+	justify-content: end;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.add-comment__score label {
+	width: 20px;
+	color: #9b9b9b;
+	transition: all 0.3s ease;
+}
+
+.add-comment__score input[type='radio'] {
+	display: none;
+}
+
+.add-comment__score label:hover,
+.add-comment__score label:hover ~ label {
+	color: #fd4;
+}
+
+input:checked ~ label {
+	color: #fd4;
+}
+
+input#star-1:checked ~ label {
+	color: #fe7;
+	text-shadow: 0 0 20px #952;
+}
+
+.add-comment-btn {
+	background-color: #830040ff;
+	color: white;
+	text-transform: uppercase;
+	font-weight: 700;
+	box-shadow: 0px 0px 5px 0px rgb(102, 102, 102);
+	border-radius: 20px;
+	border: none;
+	padding: 10px 0px;
+	width: 50%;
+	margin: auto;
+	transition: 0.2s;
+}
+
+.add-comment-btn:hover {
+	background-color: rgb(161, 0, 78);
+}
