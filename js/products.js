@@ -174,7 +174,7 @@ function ordenarAscendenciaPorPrecio() {
 			b.getElementsByClassName('precio')[0].innerHTML
 	);
 	// string.replace("Pepe","Manteca") te reemplaza la palabra "Pepe" por "Manteca" en un string
-	products.innerHTML = ''; // Borra todas las tarjetas de el contenedor "products"
+		products.innerHTML = ''; // Borra todas las tarjetas de el contenedor "products"
 	tarjetas.forEach((element) => {
 		products.appendChild(element);
 	}); // Pone las tarjetas del array con sort en products
