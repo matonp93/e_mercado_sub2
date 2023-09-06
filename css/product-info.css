@@ -55,9 +55,8 @@ body {
 }
 
 .add-comment__input {
-	box-shadow: inset 8px 8px 30px rgba(151, 151, 151, 0.452);
-	background-color: #444;
-	color: white;
+	background-color: whitesmoke;
+	color: black;
 	padding: 15px;
 	resize: none;
 	border-radius: 20px;
@@ -80,7 +79,7 @@ body {
 
 .add-comment__score label {
 	width: 20px;
-	color: #9b9b9b;
+	color: grey;
 	transition: all 0.3s ease;
 }
 
