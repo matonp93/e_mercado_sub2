@@ -162,3 +162,31 @@ input#star-1:checked ~ label {
 .add-comment-btn:hover {
 	background-color: rgb(161, 0, 78);
 }
+
+.divImgInfo {
+    display: flex;
+    margin: 0 auto;
+    width: 1000px; 
+    height: 460px;
+    padding: 20px;
+}
+
+img {
+    width: 0;
+    flex-grow: 1;
+    object-fit: cover;
+    transition: 0.5s ease;
+	border-radius: 5px ;
+}
+
+img:nth-child(3) {
+    order: 4; /* Cambia el orden de la tercera imagen */
+}
+
+
+img:hover {
+    cursor: crosshair;
+    width: 600px; 
+    opacity: 1;
+    filter: contrast(150%); 
+}
