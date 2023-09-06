@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	buscador.addEventListener('input', () => {
 		buscar(buscador.value.toLowerCase());
 	});
-});
+	
+})
 
 // FUNCIONES
 
@@ -87,7 +88,7 @@ function contentProducts(element) {
 	/* Contenedores y clase de divs*/
 	let containerDiv = document.createElement('div');
 	containerDiv.classList.add('productcard');
-	containerDiv.setAttribute('id', element.id);
+	containerDiv.setAttribute('cardId', element.id);
 	let imgDiv = document.createElement('div');
 	imgDiv.classList.add('imgdiv');
 	let h3Div = document.createElement('div');
@@ -107,6 +108,12 @@ function contentProducts(element) {
 	containerDiv.appendChild(imgDiv);
 	containerDiv.appendChild(h3Div);
 	containerDiv.appendChild(p2Div);
+	containerDiv.addEventListener('click', () => {
+   
+		let id = element.id;
+
+		setCardId(id);
+	});
 	products.appendChild(containerDiv);
 }
 function listadoProductos() {
@@ -125,6 +132,13 @@ function listadoProductosInicial() {
 		});
 	});
 }
+
+
+function setCardId(id) {
+    localStorage.setItem("cardId", id);
+    location.href = "product-info.html";
+};
+
 
 
 // Agregamos Filtros:
