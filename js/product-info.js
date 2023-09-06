@@ -2,7 +2,7 @@ let localStorageValue = '50921';
 const comentarios = document.getElementsByClassName("comentarios")[0];
 
 document.addEventListener("DOMContentLoaded",()=>{
-   // localStorageValue = localStorage.getItem("product-id");
+   // localStorageValue = localStorage.getItem("cardId");
   fetch(PRODUCT_INFO_COMMENTS_URL + localStorageValue +EXT_TYPE)
   .then(response => response.json())
   .then(data => {
