@@ -1,10 +1,9 @@
-let localStorageValue = '50921';
 const comentarios = document.getElementsByClassName('comment-section__comment-container')[0];
 const commentList = document.querySelector('.comment-container__comment-list');
 const btnEnviar = document.getElementById('enviar');
 
 document.addEventListener('DOMContentLoaded', () => {
-	// localStorageValue = localStorage.getItem("cardId");
+	localStorageValue = localStorage.getItem("cardId");
 	fetch(PRODUCT_INFO_COMMENTS_URL + localStorageValue + EXT_TYPE)
 		.then((response) => response.json())
 		.then((data) => {
