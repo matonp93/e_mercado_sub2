@@ -11,6 +11,7 @@ body {
 /** ====== COMMENT SECTION ====== **/
 
 .comment-section {
+	background-color: rgb(233, 199, 253);
 	box-shadow: 0px 0px 5px 0px rgb(122, 122, 122);
 	border-radius: 20px;
 	margin: 0 auto;
@@ -18,7 +19,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-	background-color: rgb(233, 199, 253);
+
 	width: 900px;
 }
 
@@ -96,7 +97,6 @@ body {
 	flex-direction: column;
 	gap: 10px;
 	padding: 40px 40px 40px 10px;
-	border-left: 2px solid rgb(140, 76, 146);
 }
 
 .add-comment__title {
