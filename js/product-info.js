@@ -9,22 +9,38 @@ document.addEventListener('DOMContentLoaded', () => {
 		.then((response) => response.json())
 		.then((data) => {
 			data.forEach((element) => {
-				//Creación de elementos HTML
+
+				// Creación de elementos HTML //
 				let divCard = document.createElement('div');
 				let divCardLoad = document.createElement('div');
 				let divDescription = document.createElement('div');
 				let pTitle = document.createElement('p');
 				let pDescription = document.createElement('p');
 				let image = document.createElement('img');
-				//Atributos y clases
+
+        // Estrellas en los comentarios //
+        let estrellas = [];
+        for (let i = 0; i < 5; i++){
+          estrellas.push(document.createElement("label"));
+          estrellas[i].classList.add("fa");
+          estrellas[i].classList.add("fa-star");
+          estrellas[i].style.color = "grey";
+          pTitle.appendChild(estrellas[i]);
+        };
+
+        for (let i = 0; i < element.score; i++){
+          estrellas[i].style.color = "#fd4";
+        };
+
+				// Atributos y clases //
 				image.src = '/img/gitlab.svg';
 				pTitle.classList.add('comment-title');
 				divCard.classList.add('cards');
 				divCardLoad.classList.add('tarjeta_load');
 				divDescription.classList.add('tarjeta_load_extreme_description');
-				pTitle.innerHTML = element.user + ' ' + element.dateTime + ' ' + element.score;
+        pTitle.innerHTML = element.user + ' ' + pTitle.innerHTML;
 				pDescription.innerHTML = element.description;
-				//AppendChild's
+				// AppendChild's //
 				divDescription.appendChild(pTitle);
 				divDescription.appendChild(pDescription);
 				divCardLoad.appendChild(image);
@@ -33,37 +49,32 @@ document.addEventListener('DOMContentLoaded', () => {
 				commentList.appendChild(divCard);
 			});
 		});
+
 	btnEnviar.addEventListener('click', () => {
 		agregarComentario();
 	});
 });
 
 // AGREGAR COMENTARIOS //
-function agregarComentario() {
-	// nombre del user //
+function agregarComentario(){
+
+  // Creacion de elementos HTML //
+  let divCard = document.createElement('div');
+  let divCardLoad = document.createElement('div');
+  let divDescription = document.createElement('div');
+  let pTitle = document.createElement('p');
+  let pDescription = document.createElement('p');
+  let image = document.createElement('img');
+
+	// Nombre del user //
 	let user = localStorage.getItem('email');
 	let partesDelUser = user.split('@');
 	let nombreUser = partesDelUser[0];
 
-	// comentario del user //
+	// Comentario del user //
 	let comentario = document.getElementById('add-comment__input').value;
 
-	// fecha y hora //
-	let fechaHoraActual = new Date();
-
-	// hora //
-	let horaFormateada = fechaHoraActual.toLocaleString().split(', ');
-	let hora = horaFormateada[1];
-	// fecha //
-	let dia = fechaHoraActual.getDay();
-	let mes = fechaHoraActual.getMonth() + 1;
-	if (mes <= 9) {
-		mes = '0' + mes;
-	}
-	let anio = fechaHoraActual.getFullYear();
-	let fecha = anio + '-' + mes + '-' + dia;
-
-	// puntaje //
+	// Puntaje //
 	let puntajes = Array.from(document.getElementsByName('star'));
 	let puntaje = '';
 	puntajes.forEach((element) => {
@@ -72,27 +83,38 @@ function agregarComentario() {
 		}
 	});
 
-	let divCard = document.createElement('div');
-	let divCardLoad = document.createElement('div');
-	let divTitle = document.createElement('div');
-	let divDescription = document.createElement('div');
-	let pTitle = document.createElement('p');
-	let pDescription = document.createElement('p');
-	let image = document.createElement('img');
-	//Atributos y clases
-	image.src = '/img/gitlab.svg';
-	divCard.classList.add('cards');
-	divCardLoad.classList.add('tarjeta_load');
-	divTitle.classList.add('tarjeta_load_extreme_title');
-	divDescription.classList.add('tarjeta_load_extreme_description');
-	pTitle.innerHTML = nombreUser + ' ' + fecha + ' ' + hora + ' ' + ' ' + puntaje;
-	pDescription.innerHTML = comentario;
-	//AppendChild's
-	divTitle.appendChild(pTitle);
-	divDescription.appendChild(pDescription);
-	divCardLoad.appendChild(image);
-	divCard.appendChild(divCardLoad);
-	divCard.appendChild(divTitle);
-	divCard.appendChild(divDescription);
-	commentList.appendChild(divCard);
-}
+  // Agregar estrellas al comentario //
+  let estrellas = [];
+  for (let i = 0; i < 5; i++){
+    estrellas.push(document.createElement("label"));
+    estrellas[i].classList.add("fa");
+    estrellas[i].classList.add("fa-star");
+    estrellas[i].style.color = "grey";
+    pTitle.appendChild(estrellas[i]);
+  };
+
+  for (let i = 0; i < puntaje; i++){
+    estrellas[i].style.color = "#fd4";
+  };
+
+  // Atributos y clases //
+  image.src = '/img/gitlab.svg';
+  pTitle.classList.add('comment-title');
+  divCard.classList.add('cards');
+  divCardLoad.classList.add('tarjeta_load');
+  divDescription.classList.add('tarjeta_load_extreme_description');
+  pTitle.innerHTML = nombreUser + ' ' + pTitle.innerHTML;
+  pDescription.innerHTML = comentario;
+
+  // AppendChild's //
+  divDescription.appendChild(pTitle);
+  divDescription.appendChild(pDescription);
+  divCardLoad.appendChild(image);
+  divCard.appendChild(divCardLoad);
+  divCard.appendChild(divDescription);
+  commentList.appendChild(divCard);
+
+  // Borrar inputs //
+  document.getElementById("add-comment__input").value = "";
+  puntajes.forEach(element => element.checked = false);
+};
