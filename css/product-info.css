@@ -163,6 +163,7 @@ input#star-1:checked ~ label {
 	background-color: rgb(161, 0, 78);
 }
 
+/** ====== PRODUCTS SECTION ====== **/
 .divImgInfo {
     display: flex;
     margin: 0 auto;
@@ -180,9 +181,8 @@ img {
 }
 
 img:nth-child(3) {
-    order: 4; /* Cambia el orden de la tercera imagen */
+    order: 4; 
 }
-
 
 img:hover {
     cursor: crosshair;
@@ -190,3 +190,4 @@ img:hover {
     opacity: 1;
     filter: contrast(150%); 
 }
+
