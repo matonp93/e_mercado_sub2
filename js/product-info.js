@@ -12,9 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(response => response.json())
   .then(data => {
     // Creación de elementos HTML //
-    let divinfoP = document.createElement("div");
     let divinfoTitle = document.createElement("div");
     let divinfoImages = document.createElement("div");
+    let divPrice = document.createElement("div");
+    let divCategory = document.createElement("div");
+    let divSoldCount = document.createElement("div");
+    let divinfoP = document.createElement("div");
     let h1infoTitle = document.createElement("h1");
     let pPrice = document.createElement("p");
     let pDescription = document.createElement("p");
@@ -49,13 +52,16 @@ document.addEventListener("DOMContentLoaded", () => {
                
     // AppendChild's //
     divinfoTitle.appendChild(h1infoTitle);
-    divinfoP.appendChild(pPrice);
+    divPrice.appendChild(pPrice);
     divinfoP.appendChild(pDescription);
-    divinfoP.appendChild(pCategory);
-    divinfoP.appendChild(pSoldCount);
+    divCategory.appendChild(pCategory);
+    divSoldCount.appendChild(pSoldCount);
     infoProductos.appendChild(divinfoTitle);
-    infoProductos.appendChild(divinfoP);
+    infoProductos.appendChild(divCategory);
+    infoProductos.appendChild(divPrice);
+    infoProductos.appendChild(divSoldCount);
     infoProductos.appendChild(divimgInfo);
+    infoProductos.appendChild(divinfoP);
   });
 
   // FETCH PARA COMENTARIOS DEL PRODUCTO //

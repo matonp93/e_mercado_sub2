@@ -7,6 +7,28 @@ body {
 * {
 	box-sizing: border-box;
 }
+/* Estructura del Grid en función del diseño pensado */
+.info_prod{
+	display: grid;
+	display: grid;
+	grid-template-rows: 1fr 1fr auto auto;
+	grid-template-columns: 1fr 0.5fr;
+	/* Puedes ajustar el espacio entre las celdas según tus preferencias */
+	/* Estilos específicos para la Fila 3 y Fila 4 (sin columnas) */
+	background-color: rgb(233, 199, 253);
+	box-shadow: 0px 0px 5px 0px rgb(122, 122, 122);
+	border-radius: 20px;
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	width: 900px;
+}
+
+.info_prod > :nth-child(5) {
+  grid-column: 1 / span 2; /* Ocupan las dos columnas disponibles */
+}
+
 
 /** ====== COMMENT SECTION ====== **/
 
@@ -179,7 +201,7 @@ input#star-1:checked ~ label {
 .divImgInfo {
     display: flex;
     margin: 0 auto;
-    width: 1000px; 
+    width: 750px; 
     height: 460px;
     padding: 20px;
 }
