@@ -211,7 +211,6 @@ a.custom-card:hover {
   position: relative;
 }
 .container-1 input#buscador{
-  width: 250px;
   height: 40px;
   background: #faecf8;
   border: none;
@@ -219,6 +218,7 @@ a.custom-card:hover {
   float: left;
   color: #ba98bd;
   padding-left: 45px;
+  padding-right: 8px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;

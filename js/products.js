@@ -7,6 +7,8 @@ const btnNormal = document.getElementById('normal');
 const btnAscendente = document.getElementById('ascendentePorPrecio');
 const btnDescendente = document.getElementById('descendentePorPrecio');
 const btnDescendenteRelevancia = document.getElementById('descendentePorRelevancia');
+const precioMinimo = document.getElementById("precioMinimo");
+const precioMaximo = document.getElementById("precioMaximo");
 const buscador = document.getElementById('buscador');
 
 // PAGINA
@@ -44,8 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	buscador.addEventListener('input', () => {
 		filtrarPriceRangeYBusqueda(buscador.value.toLowerCase());
 	});
+
+	precioMinimo.addEventListener("click", (e) => {
+		e.stopPropagation();
+	});
+
+	precioMaximo.addEventListener("click", (e) => {
+		e.stopPropagation();
+	});
 	
-})
+});
 
 // FUNCIONES
 
@@ -211,7 +221,8 @@ function ordenarDesendenciaPorRelevancia() {
 const btnPopUp = document.querySelector('.btn-pop-up');
 const popUp = document.querySelector('.filtros-container');
 
-btnPopUp.addEventListener('click', () => {
+btnPopUp.addEventListener('click', (e) => {
+	e.stopPropagation();
 	popUp.style.zIndex = '10';
 	popUp.style.opacity = '1';
 });
@@ -225,4 +236,11 @@ btnCerrar.forEach((element) => {
 		popUp.style.opacity = '0';
 		popUp.style.zIndex = '-1';
 	});
+});
+
+document.getElementsByTagName("main")[0].addEventListener("click", () => {
+	if (popUp.style.opacity == 1){
+		popUp.style.opacity = '0';
+		popUp.style.zIndex = '-1';
+	};
 });
