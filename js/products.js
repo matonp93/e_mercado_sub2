@@ -221,6 +221,10 @@ function ordenarDesendenciaPorRelevancia() {
 const btnPopUp = document.querySelector('.btn-pop-up');
 const popUp = document.querySelector('.filtros-container');
 
+popUp.addEventListener("click", (e) => {
+	e.stopPropagation();
+});
+
 btnPopUp.addEventListener('click', (e) => {
 	e.stopPropagation();
 	popUp.style.zIndex = '10';
