@@ -12,9 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(response => response.json())
   .then(data => {
     // Creación de elementos HTML //
-    let divinfoP = document.createElement("div");
     let divinfoTitle = document.createElement("div");
     let divinfoImages = document.createElement("div");
+    let divPrice = document.createElement("div");
+    let divCategory = document.createElement("div");
+    let divSoldCount = document.createElement("div");
+    let divinfoP = document.createElement("div");
     let h1infoTitle = document.createElement("h1");
     let pPrice = document.createElement("p");
     let pDescription = document.createElement("p");
@@ -34,28 +37,34 @@ document.addEventListener("DOMContentLoaded", () => {
     divinfoP.classList.add("divInfoP");
     divinfoTitle.classList.add("divinfoTitle");
     divinfoImages.classList.add("divinfoImages");
+    divPrice.classList.add("divPrice");
+    divCategory.classList.add("divCategory");
+    divSoldCount.classList.add("divSoldCount");
     h1infoTitle.classList.add("h1infoTitle");
-    pPrice.classList.add("pDescription");
+    pPrice.classList.add("pPrice");
     pDescription.classList.add("pDescription");
-    pCategory.classList.add("pDescription");
-    pSoldCount.classList.add("pDescription");
+    pCategory.classList.add("pCategory");
+    pSoldCount.classList.add("pSoldCount");
                
     // Contenido de cada elemento //
     h1infoTitle.innerHTML = data.name;
-    pPrice.innerHTML = "<b>Precio:</b> <br>" + data.currency + " " + data.cost;
+    pPrice.innerHTML = data.currency + " " + data.cost;
     pDescription.innerHTML = "<b>Descripción:</b> <br>" + data.description;
-    pCategory.innerHTML = "<b>Categoría:</b> <br>" + data.category;
-    pSoldCount.innerHTML = "<b>Cantidad de Vendidos:</b> <br>" + data.soldCount;
+    pCategory.innerHTML = " ";
+    pSoldCount.innerHTML = "<b>Vendidos:</b>   " + data.soldCount;
                
     // AppendChild's //
     divinfoTitle.appendChild(h1infoTitle);
-    divinfoP.appendChild(pPrice);
+    divPrice.appendChild(pPrice);
     divinfoP.appendChild(pDescription);
-    divinfoP.appendChild(pCategory);
-    divinfoP.appendChild(pSoldCount);
+    divCategory.appendChild(pCategory);
+    divSoldCount.appendChild(pSoldCount);
     infoProductos.appendChild(divinfoTitle);
-    infoProductos.appendChild(divinfoP);
+    infoProductos.appendChild(divCategory);
+    infoProductos.appendChild(divPrice);
+    infoProductos.appendChild(divSoldCount);
     infoProductos.appendChild(divimgInfo);
+    infoProductos.appendChild(divinfoP);
   });
 
   // FETCH PARA COMENTARIOS DEL PRODUCTO //
@@ -101,10 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
         divCardLoad.appendChild(image);
         divCard.appendChild(divCardLoad);
         divCard.appendChild(divDescription);
-        commentList.appendChild(divCard);   
+        commentList.appendChild(divCard);  
       });
     });
-
     btnEnviar.addEventListener('click', () => {
       agregarComentario();
     });
@@ -120,7 +128,7 @@ function agregarComentario(){
   let divDescription = document.createElement('div');
   let pTitle = document.createElement('p');
   let pDescription = document.createElement('p');
-  let image = document.createElement('img');
+  let image = document.createElement('object');
 
 	// Nombre del user //
 	let user = localStorage.getItem('email');
@@ -154,7 +162,8 @@ function agregarComentario(){
   };
 
   // Atributos y clases //
-  image.src = '/img/gitlab.svg';
+  image.data = 'gitlab.svg';
+  image.type = "image/svg+xml";
   pTitle.classList.add('comment-title');
   divCard.classList.add('cards');
   divCardLoad.classList.add('tarjeta_load');
@@ -173,4 +182,20 @@ function agregarComentario(){
   // Borrar inputs //
   document.getElementById("add-comment__input").value = "";
   puntajes.forEach(element => element.checked = false);
+  ResetearColores();
 };
+
+window.onload = ResetearColores;
+function ResetearColores(){
+  let colores = ["blue","pink","orange","violet"];
+  let contador = 0;
+  setTimeout(() => {
+    Array.from(document.getElementsByTagName("object")).forEach(element =>{
+      if (contador > colores.length-1){
+        contador = 0
+      }
+        element.contentDocument.getElementsByTagName("svg")[0].style.color = colores[contador];
+        contador++
+    })
+  }, 200);
+}
