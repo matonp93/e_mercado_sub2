@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // Atributos y clases //
-        image.data = "/img/gitlab.svg";
+        image.data = 'gitlab.svg';
         image.type = "image/svg+xml";
         pTitle.classList.add('comment-title');
         divCard.classList.add('cards');
