@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
     h1infoTitle.innerHTML = data.name;
     pPrice.innerHTML = data.currency + " " + data.cost;
     pDescription.innerHTML = "<b>Descripción:</b> <br>" + data.description;
-    pCategory.innerHTML = data.category;
-    pSoldCount.innerHTML = "<b>Vendidos:</b> <br>" + data.soldCount;
+    pCategory.innerHTML = " ";
+    pSoldCount.innerHTML = "<b>Vendidos:</b>   " + data.soldCount;
                
     // AppendChild's //
     divinfoTitle.appendChild(h1infoTitle);
