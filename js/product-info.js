@@ -7,6 +7,7 @@ const btnEnviar = document.getElementById('enviar');
 document.addEventListener('DOMContentLoaded', () => {
 	let localStorageValue = localStorage.getItem('cardId');
 
+
 	// FECTH PARA INFO DEL PRODUCTO //
 	fetch(PRODUCT_INFO_URL + localStorageValue + EXT_TYPE)
 		.then((response) => response.json())
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				// Atributos y clases //
 				image.data = 'gitlab.svg';
 				image.type = 'image/svg+xml';
+				image.onload = e => ResetearColores();
 				pTitle.classList.add('comment-title');
 				divCard.classList.add('cards');
 				divCardLoad.classList.add('tarjeta_load');
@@ -162,6 +164,7 @@ function agregarComentario() {
 	// Atributos y clases //
 	image.data = 'gitlab.svg';
 	image.type = 'image/svg+xml';
+	image.onload = e => ResetearColores();
 	pTitle.classList.add('comment-title');
 	divCard.classList.add('cards');
 	divCardLoad.classList.add('tarjeta_load');
@@ -180,14 +183,12 @@ function agregarComentario() {
 	// Borrar inputs //
 	document.getElementById('add-comment__input').value = '';
 	puntajes.forEach((element) => (element.checked = false));
-	ResetearColores();
+
 }
 
-window.onload = ResetearColores;
 function ResetearColores() {
 	let colores = ['#ffa7a7', '#ffa7fb', '#fff9a7', '#a7b0ff', '#b1ffa7', '#a7ffff'];
 	let contador = 0;
-	setTimeout(() => {
 		Array.from(document.getElementsByTagName('object')).forEach((element) => {
 			if (contador > colores.length - 1) {
 				contador = 0;
@@ -195,5 +196,4 @@ function ResetearColores() {
 			element.contentDocument.getElementsByTagName('svg')[0].style.color = colores[contador];
 			contador++;
 		});
-	}, 200);
 }
