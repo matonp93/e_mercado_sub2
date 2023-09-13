@@ -182,7 +182,7 @@ function ResetearColores(){
   let contador = 0;
   setTimeout(() => {
     Array.from(document.getElementsByTagName("object")).forEach(element =>{
-      if (contador > 3){
+      if (contador > colores.length-1){
         contador = 0
       }
         element.contentDocument.getElementsByTagName("svg")[0].style.color = colores[contador];
