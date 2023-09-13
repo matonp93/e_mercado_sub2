@@ -37,18 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
     divinfoP.classList.add("divInfoP");
     divinfoTitle.classList.add("divinfoTitle");
     divinfoImages.classList.add("divinfoImages");
+    divPrice.classList.add("divPrice");
+    divCategory.classList.add("divCategory");
+    divSoldCount.classList.add("divSoldCount");
     h1infoTitle.classList.add("h1infoTitle");
-    pPrice.classList.add("pDescription");
+    pPrice.classList.add("pPrice");
     pDescription.classList.add("pDescription");
-    pCategory.classList.add("pDescription");
-    pSoldCount.classList.add("pDescription");
+    pCategory.classList.add("pCategory");
+    pSoldCount.classList.add("pSoldCount");
                
     // Contenido de cada elemento //
     h1infoTitle.innerHTML = data.name;
-    pPrice.innerHTML = "<b>Precio:</b> <br>" + data.currency + " " + data.cost;
+    pPrice.innerHTML = data.currency + " " + data.cost;
     pDescription.innerHTML = "<b>Descripción:</b> <br>" + data.description;
-    pCategory.innerHTML = "<b>Categoría:</b> <br>" + data.category;
-    pSoldCount.innerHTML = "<b>Cantidad de Vendidos:</b> <br>" + data.soldCount;
+    pCategory.innerHTML = data.category;
+    pSoldCount.innerHTML = "<b>Vendidos:</b> <br>" + data.soldCount;
                
     // AppendChild's //
     divinfoTitle.appendChild(h1infoTitle);
