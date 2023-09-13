@@ -185,7 +185,7 @@ function agregarComentario() {
 
 window.onload = ResetearColores;
 function ResetearColores() {
-	let colores = ['#a12957', '#3a3aa8', '#59a129', 'orange', 'violet', '#a12929', '#29a18d'];
+	let colores = ['#ffa7a7', '#ffa7fb', '#fff9a7', '#a7b0ff', '#b1ffa7', '#a7ffff'];
 	let contador = 0;
 	setTimeout(() => {
 		Array.from(document.getElementsByTagName('object')).forEach((element) => {
