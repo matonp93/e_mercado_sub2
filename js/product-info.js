@@ -101,10 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
         divCardLoad.appendChild(image);
         divCard.appendChild(divCardLoad);
         divCard.appendChild(divDescription);
-        commentList.appendChild(divCard);   
+        commentList.appendChild(divCard);  
       });
     });
-
     btnEnviar.addEventListener('click', () => {
       agregarComentario();
     });
@@ -120,7 +119,7 @@ function agregarComentario(){
   let divDescription = document.createElement('div');
   let pTitle = document.createElement('p');
   let pDescription = document.createElement('p');
-  let image = document.createElement('img');
+  let image = document.createElement('object');
 
 	// Nombre del user //
 	let user = localStorage.getItem('email');
@@ -154,7 +153,8 @@ function agregarComentario(){
   };
 
   // Atributos y clases //
-  image.src = '/img/gitlab.svg';
+  image.data = 'gitlab.svg';
+  image.type = "image/svg+xml";
   pTitle.classList.add('comment-title');
   divCard.classList.add('cards');
   divCardLoad.classList.add('tarjeta_load');
@@ -173,4 +173,20 @@ function agregarComentario(){
   // Borrar inputs //
   document.getElementById("add-comment__input").value = "";
   puntajes.forEach(element => element.checked = false);
+  ResetearColores();
 };
+
+window.onload = ResetearColores;
+function ResetearColores(){
+  let colores = ["blue","pink","orange","violet"];
+  let contador = 0;
+  setTimeout(() => {
+    Array.from(document.getElementsByTagName("object")).forEach(element =>{
+      if (contador > colores.length-1){
+        contador = 0
+      }
+        element.contentDocument.getElementsByTagName("svg")[0].style.color = colores[contador];
+        contador++
+    })
+  }, 200);
+}
