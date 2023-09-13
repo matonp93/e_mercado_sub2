@@ -4,12 +4,12 @@ const productsTitle = document.getElementById('productsTitle');
 const productsDesc = document.getElementById('productsDesc');
 const btnFiltrar = document.getElementById('filtrar');
 const btnNormal = document.getElementById('normal');
-let link = 'https://japceibal.github.io/emercado-api/cats_products/';
 const btnAscendente = document.getElementById('ascendentePorPrecio');
 const btnDescendente = document.getElementById('descendentePorPrecio');
 const btnDescendenteRelevancia = document.getElementById('descendentePorRelevancia');
+const precioMinimo = document.getElementById("precioMinimo");
+const precioMaximo = document.getElementById("precioMaximo");
 const buscador = document.getElementById('buscador');
-let initialPromise;
 
 // PAGINA
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,26 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		location.href = 'login.html';
 	}
 
-	link += localStorage.getItem('catID') + '.json';
-
-	switch (localStorage.getItem('catID')) {
-		case '101':
-			productsTitle.innerHTML += 'Autos';
-			productsDesc.innerHTML += 'Los mejores precios en autos 0 kilómetro, de alta y media gama.';
-			break;
-		case '102':
-			productsTitle.innerHTML += 'Juguetes';
-			productsDesc.innerHTML +=
-				'Encuentra aquí los mejores precios para niños/as de cualquier edad.';
-			break;
-		case '103':
-			productsTitle.innerHTML += 'Muebles';
-			productsDesc.innerHTML += 'Muebles antiguos, nuevos y para ser armados por uno mismo.';
-	}
-	listadoProductosInicial();
+	tituloYDescripcion();
+	listadoProductos();
 
 	btnFiltrar.addEventListener('click', () => {
-		filtrarPorRangoDePrecio();
+		filtrarPriceRangeYBusqueda(buscador.value.toLowerCase());
 	});
 
 	btnNormal.addEventListener('click', () => {
@@ -59,10 +44,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	buscador.addEventListener('input', () => {
-		buscar(buscador.value.toLowerCase());
+		filtrarPriceRangeYBusqueda(buscador.value.toLowerCase());
+	});
+
+	precioMinimo.addEventListener("click", (e) => {
+		e.stopPropagation();
+	});
+
+	precioMaximo.addEventListener("click", (e) => {
+		e.stopPropagation();
 	});
 	
-})
+});
 
 // FUNCIONES
 
@@ -109,42 +102,38 @@ function contentProducts(element) {
 	containerDiv.appendChild(h3Div);
 	containerDiv.appendChild(p2Div);
 	containerDiv.addEventListener('click', () => {
-   
-		let id = element.id;
-
-		setCardId(id);
+		setCardId(element.id);
 	});
 	products.appendChild(containerDiv);
 }
 function listadoProductos() {
-	initialPromise = new Promise((resolve, reject) => {
-		fetch(link)
-			.then((response) => response.json())
-			.then((data) => resolve(data.products))
-			.catch((error) => reject(error));
-	});
+	fetch(PRODUCTS_URL+localStorage.getItem('catID')+EXT_TYPE)
+	.then(response => response.json())
+	.then(data => data.products.forEach(element=> contentProducts(element)))
 }
-function listadoProductosInicial() {
-	listadoProductos();
-	initialPromise.then((data) => {
-		data.forEach((element) => {
-			contentProducts(element);
-		});
-	});
-}
-
 
 function setCardId(id) {
     localStorage.setItem("cardId", id);
     location.href = "product-info.html";
 };
 
-
+function tituloYDescripcion(){
+	fetch(CATEGORIES_URL)
+	.then(response => response.json())
+	.then(data => {
+		data.forEach(element =>{
+			if(element.id === localStorage.getItem("catID")*1){
+				productsTitle.innerHTML = element.name;
+				productsDesc.innerHTML = element.description;
+			}
+		})
+	})
+}
 
 // Agregamos Filtros:
 // Tenemos que crear una función que filtre los precios del Array, a partir de un rango que el usuario determina en dos imput, un maximo y un mínimo.
 
-function filtrarPorRangoDePrecio() {
+function filtrarPriceRangeYBusqueda(word) {
 	let precioMaximo = document.getElementById('precioMaximo').value;
 	let precioMinimo = document.getElementById('precioMinimo').value;
 	let tarjetas = document.getElementsByClassName('productcard');
@@ -159,7 +148,9 @@ function filtrarPorRangoDePrecio() {
 	if (precioMaximo === ""){
 	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>= precioMinimo*1);
 }
-console.log(tarjetasFiltradas);
+tarjetasFiltradas = tarjetasFiltradas.filter((tarjeta) =>
+		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word)
+	);
 	tarjetas.forEach((element) => {
 	if (tarjetasFiltradas.includes(element)) {
 		element.style.visibility = 'visible';
@@ -173,7 +164,7 @@ console.log(tarjetasFiltradas);
 
 function volverAlNormal() {
 	products.innerHTML = '';
-	listadoProductosInicial();
+	listadoProductos();
 	document.getElementById('precioMaximo').value = '';
 	document.getElementById('precioMinimo').value = '';
 }
@@ -223,23 +214,6 @@ function ordenarDesendenciaPorRelevancia() {
 	});
 }
 
-function buscar(word) {
-	
-	let tarjetas = document.getElementsByClassName('productcard');
-	tarjetas = Array.from(tarjetas);
-	tarjetasFiltradas = tarjetas.filter((tarjeta) =>
-		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word)
-	);
-	tarjetas.forEach((element) => {
-		if (tarjetasFiltradas.includes(element)) {
-			element.style.visibility = 'visible';
-			element.style.order = 0;
-		} else {
-			element.style.visibility = 'hidden';
-			element.style.order = 1;
-		}
-	});
-}
 
 //* ====== Pop-Up ====== *//
 
@@ -247,7 +221,12 @@ function buscar(word) {
 const btnPopUp = document.querySelector('.btn-pop-up');
 const popUp = document.querySelector('.filtros-container');
 
-btnPopUp.addEventListener('click', () => {
+popUp.addEventListener("click", (e) => {
+	e.stopPropagation();
+});
+
+btnPopUp.addEventListener('click', (e) => {
+	e.stopPropagation();
 	popUp.style.zIndex = '10';
 	popUp.style.opacity = '1';
 });
@@ -261,4 +240,11 @@ btnCerrar.forEach((element) => {
 		popUp.style.opacity = '0';
 		popUp.style.zIndex = '-1';
 	});
+});
+
+document.getElementsByTagName("main")[0].addEventListener("click", () => {
+	if (popUp.style.opacity == 1){
+		popUp.style.opacity = '0';
+		popUp.style.zIndex = '-1';
+	};
 });

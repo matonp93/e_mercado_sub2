@@ -240,29 +240,28 @@ input#star-1:checked ~ label {
 
 /** ====== PRODUCTS SECTION ====== **/
 .divImgInfo {
-    display: flex;
-    margin: 0 auto;
-    width: 750px; 
-    height: 460px;
-    padding: 20px;
+	display: flex;
+	margin: 0 auto;
+	width: 1000px;
+	height: 460px;
+	padding: 20px;
 }
 
-img {
-    width: 0;
-    flex-grow: 1;
-    object-fit: cover;
-    transition: 0.5s ease;
-	border-radius: 5px ;
+.divImgInfo img {
+	width: 0;
+	flex-grow: 1;
+	object-fit: cover;
+	transition: 0.5s ease;
+	border-radius: 5px;
 }
 
-img:nth-child(3) {
-    order: 4; 
+.divImgInfo img:nth-child(3) {
+	order: 4;
 }
 
-img:hover {
-    cursor: crosshair;
-    width: 600px; 
-    opacity: 1;
-    filter: contrast(150%); 
+.divImgInfo img:hover {
+	cursor: crosshair;
+	width: 600px;
+	opacity: 1;
+	filter: contrast(150%);
 }
-
