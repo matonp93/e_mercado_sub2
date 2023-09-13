@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let divDescription = document.createElement('div');
         let pTitle = document.createElement('p');
         let pDescription = document.createElement('p');
-        let image = document.createElement('img');
+        let image = document.createElement('object');
 
         // Estrellas en los comentarios //
         let estrellas = [];
@@ -86,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // Atributos y clases //
-        image.src = '/img/gitlab.svg';
+        image.data = 'gitlab.svg';
+        image.type = "image/svg+xml";
         pTitle.classList.add('comment-title');
         divCard.classList.add('cards');
         divCardLoad.classList.add('tarjeta_load');
