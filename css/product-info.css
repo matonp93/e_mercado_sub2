@@ -8,18 +8,18 @@ body {
 * {
 	box-sizing: border-box;
 }
-.container{
+.container {
 	padding: 10px 10px 10px 10px;
 }
 /* Estructura del Grid en función del diseño pensado */
-.info_prod{
+.info_prod {
 	display: grid;
 	grid-template-rows: 0.1fr 0.1fr 0.5fr 0.1fr;
-    grid-template-columns: 0.1fr 0.03fr;
+	grid-template-columns: 0.1fr 0.03fr;
 	margin: 30px auto;
-    text-align: left;
-    border-radius: 15px 15px 15px 15px;
-    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.473);
+	text-align: left;
+	border-radius: 15px 15px 15px 15px;
+	box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.473);
 	justify-content: center;
 	align-items: center;
 	padding: 35px;
@@ -28,48 +28,47 @@ body {
 }
 
 .info_prod > :nth-child(5) {
-  grid-column: 1 / span 2; /* Ocupan las dos columnas disponibles */
+	grid-column: 1 / span 2; /* Ocupan las dos columnas disponibles */
 }
 
-.divinfoTitle{
+.divinfoTitle {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
-.divSoldCount{
+.divSoldCount {
 	display: flex;
 	align-content: stretch;
 	justify-content: center;
 }
-.divPrice{
+.divPrice {
 	display: flex;
 	align-content: stretch;
 	justify-content: space-between;
 }
-.divCategory{
+.divCategory {
 	display: flex;
 	align-content: stretch;
 	justify-content: center;
 }
-.divInfoP{
+.divInfoP {
 	display: flex;
 	align-content: stretch;
 	justify-content: center;
 }
-.h1infoTitle{
-font-size: 50px;
+.h1infoTitle {
+	font-size: 50px;
 }
-.pPrice{
+.pPrice {
 	display: flex;
 	align-content: stretch;
-		justify-content: space-between;
-		font-size: 35px;
+	justify-content: space-between;
+	font-size: 35px;
 }
 
-.pCategory{
-font-size: 20px;
+.pCategory {
+	font-size: 20px;
 }
-
 
 /** ====== PRODUCTS Images ====== **/
 .divImgInfo {
@@ -150,16 +149,16 @@ font-size: 20px;
 
 .cards {
 	background-color: whitesmoke;
-    padding: 16px 18px;
-    border-radius: 20px;
-    /* display: flex; */
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    width: 400px;
-    margin: 0 20px;
-    display: flex;
-    border: solid 0.5px #777474;
+	padding: 16px 18px;
+	border-radius: 20px;
+	/* display: flex; */
+	align-items: center;
+	gap: 10px;
+	font-size: 16px;
+	width: 400px;
+	margin: 0 20px;
+	display: flex;
+	border: solid 0.5px #777474;
 }
 
 .tarjeta_load_extreme_description {
@@ -267,4 +266,3 @@ input#star-1:checked ~ label {
 .add-comment-btn:hover {
 	background-color: rgb(161, 0, 78);
 }
-
