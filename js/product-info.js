@@ -1,5 +1,6 @@
 const comentarios = document.getElementsByClassName('comentarios')[0];
 const infoProductos = document.getElementsByClassName('info_prod')[0];
+const productosRelacionados = document.getElementsByClassName('related-products')[0];
 const comentariosSection = document.getElementsByClassName('comment-section__comment-container')[0];
 const commentList = document.querySelector('.comment-container__comment-list');
 const btnEnviar = document.getElementById('enviar');
@@ -34,6 +35,30 @@ document.addEventListener('DOMContentLoaded', () => {
 				divimgInfo.appendChild(imginfo);
 			});
 
+			// Array de productos relacionados //
+			let divRelatedProducts = document.createElement('div');
+			divRelatedProducts.classList.add('relatedProducts');
+			data.relatedProducts.forEach(element =>{
+				let divProductoRelacionado = document.createElement('div');
+				let imageProductoRelacionado = document.createElement('img');
+				let nameProductoRelacionado = document.createElement('p');
+				
+				// Atributos y clases //
+				divProductoRelacionado.classList.add('divRelated');
+				imageProductoRelacionado.classList.add('imageRelated');
+				nameProductoRelacionado.classList.add('pRelated');
+				imageProductoRelacionado.setAttribute('src', element.image);
+				nameProductoRelacionado.innerHTML+= element.name;
+				divProductoRelacionado.addEventListener("click",()=>{
+					localStorage.setItem("cardId", element.id);
+					location.href = "product-info.html";
+				})
+				divProductoRelacionado.appendChild(imageProductoRelacionado);
+				divProductoRelacionado.appendChild(nameProductoRelacionado);
+				divRelatedProducts.appendChild(divProductoRelacionado);
+			})
+			productosRelacionados.appendChild(divRelatedProducts);
+			
 			// Atributos y clases //
 			divinfoP.classList.add('divInfoP');
 			divinfoTitle.classList.add('divinfoTitle');
