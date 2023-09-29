@@ -72,13 +72,36 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Modo Oscuro
-
 const modoOscuroBtn = document.querySelector('#modoOscuro');
+let links = document.head.getElementsByTagName("link");
+
+function cambiarTema(estiloABorrar, estiloAAgregar){
+	for (let link of links){
+		if (link.getAttribute("href") === "css/productos" + estiloABorrar + ".css"){
+			let linkNuevo = document.createElement("link");
+			linkNuevo.href = "css/productos" + estiloAAgregar + ".css";
+			linkNuevo.rel = "stylesheet";
+			link.parentNode.appendChild(linkNuevo);
+			setTimeout(() => {
+				link.parentNode.removeChild(link);
+			}, 10);
+			localStorage.setItem("preferencia", estiloAAgregar);
+			break;
+		};
+	};
+};
+
+if (localStorage.getItem("preferencia") === "Dark"){
+	modoOscuroBtn.innerText = 'Modo claro';
+	cambiarTema("Light", "Dark");
+};
 
 modoOscuroBtn.addEventListener('click', () => {
-	if (modoOscuroBtn.innerText === 'Modo Oscuro') {
-		modoOscuroBtn.innerText = 'Modo Claro';
+	if (modoOscuroBtn.innerText === 'Modo oscuro') {
+		modoOscuroBtn.innerText = 'Modo claro';
+		cambiarTema("Light", "Dark");
 	} else {
-		modoOscuroBtn.innerText = 'Modo Oscuro';
-	}
-});
+		modoOscuroBtn.innerText = 'Modo oscuro';
+		cambiarTema("Dark", "Light");
+	};
+})
