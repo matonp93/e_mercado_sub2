@@ -241,3 +241,8 @@ a.custom-card:hover {
 	gap: 5px;
 	font-size: 14.4px;
 }
+
+#searchdiv{
+	margin:auto;
+	max-width: 50%;
+}
