@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded",()=>{
             })
         });
     })
+	btninput.addEventListener("click",()=>{
+		filtrarPriceRangeYBusqueda(searchinput.value.toLowerCase());
+	})
 })
 
 function contentProducts(element) {
@@ -62,9 +65,41 @@ function contentProducts(element) {
 	containerDiv.addEventListener('click', () => {
 		setCardId(element.id);
 	});
+	containerDiv.style.visibility = 'hidden';
+	containerDiv.style.order = 1;
 	products.appendChild(containerDiv);
 }
 function setCardId(id) {
     localStorage.setItem("cardId", id);
     location.href = "product-info.html";
 };
+
+function filtrarPriceRangeYBusqueda(word) {
+	console.log(word);
+/*	let precioMaximo = document.getElementById('precioMaximo').value;
+	let precioMinimo = document.getElementById('precioMinimo').value;*/
+	let tarjetas = document.getElementsByClassName('productcard');
+	tarjetas = Array.from(tarjetas);
+	let tarjetasFiltradas = [];
+	/*if (!(precioMaximo === "") && !(precioMinimo === "")){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>=precioMinimo*1 && element.getElementsByClassName('precio')[0].innerHTML*1 <= precioMaximo*1);
+}
+	if (precioMinimo === ""){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1<= precioMaximo*1);
+}
+	if (precioMaximo === ""){
+	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>= precioMinimo*1);
+}*/
+	tarjetasFiltradas = tarjetas.filter((tarjeta) =>
+		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word)
+	);
+	tarjetas.forEach((element) => {
+	if (tarjetasFiltradas.includes(element)) {
+		element.style.visibility = 'visible';
+		element.style.order = 0;
+	} else {
+		element.style.visibility = 'hidden';
+		element.style.order = 1;
+	}
+})
+}
