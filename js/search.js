@@ -2,25 +2,12 @@ const searchinput = document.getElementById("searchinput");
 const btninput = document.getElementById("button-addon2");
 const products = document.getElementById('products');
 
-document.addEventListener("DOMContentLoaded",()=>{
-    // searchinput.value = localStorage.getItem("searchquery");
-    // getJSONData(CATEGORIES_URL).then(result =>{
-    //     result.data.forEach(element => {
-    //         let linksArray = new Array();
-    //         linksArray.push(PRODUCTS_URL +element.id + EXT_TYPE);
-    //         linksArray.forEach(element =>{
-    //             getJSONData(element).then(result =>{
-    //                 result.data.products.forEach(element => contentProducts(element));
-    //             })
-    //         })
-    //     });
-    // })
+document.addEventListener("DOMContentLoaded", () => {
 	searchinput.value = localStorage.getItem("searchquery");
 	localStorage.removeItem("searchquery");
 	mostrarProductosBuscados();
 
 	btninput.addEventListener("click", () => {
-		//filtrarPriceRangeYBusqueda(searchinput.value.toLowerCase());
 		mostrarProductosBuscados();
 	});
 });
@@ -36,7 +23,7 @@ function mostrarProductosBuscados(){
 				data.data.products.forEach(element => {
 					if (element.name.toLowerCase().includes(searchinput.value)){
 						contentProducts(element);
-						filtrarPriceRangeYBusqueda(searchinput.value)
+						filtrarPriceRangeYBusqueda(searchinput.value);
 					};
 				});
 			});
@@ -92,7 +79,8 @@ function contentProducts(element) {
 	containerDiv.style.visibility = 'hidden';
 	containerDiv.style.order = 1;
 	products.appendChild(containerDiv);
-}
+};
+
 function setCardId(id) {
     localStorage.setItem("cardId", id);
     location.href = "product-info.html";
@@ -117,12 +105,12 @@ function filtrarPriceRangeYBusqueda(word) {
 		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word)
 	);
 	tarjetas.forEach((element) => {
-	if (tarjetasFiltradas.includes(element)) {
-		element.style.visibility = 'visible';
-		element.style.order = 0;
-	} else {
-		element.style.visibility = 'hidden';
-		element.style.order = 1;
-	}
-})
-}
+		if (tarjetasFiltradas.includes(element)) {
+			element.style.visibility = 'visible';
+			element.style.order = 0;
+		} else {
+			element.style.visibility = 'hidden';
+			element.style.order = 1;
+		};
+	});
+};
