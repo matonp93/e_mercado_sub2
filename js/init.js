@@ -61,6 +61,28 @@ document.addEventListener('DOMContentLoaded', function () {
 	let username = parts[0]; //Se obtiene solo el nombre de usuario
 
 	userNav.textContent = username; //Se establece el nombre de usuario como contenido
+	const modoOscuroBtn = document.getElementsByName("Tema");
+
+	switch(localStorage.getItem("preferencia")){
+		case "Oscuro":
+			document.getElementById("Oscuro").checked = true;
+				break;
+			case "Claro":
+			document.getElementById("Claro").checked = true;
+				break;
+			case "Sistema":
+			document.getElementById("Sistema").checked = true;
+				break;
+	}	
+	DetectarTema(localStorage.getItem("preferencia"));
+
+
+	modoOscuroBtn.forEach(radio =>{
+		radio.addEventListener('click', () => {
+			DetectarTema(radio.value);
+			localStorage.setItem("preferencia", radio.value);
+		})
+	})
 
 	btnSalir.addEventListener('click', () => {
 		salir();
@@ -72,9 +94,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Modo Oscuro
-const modoOscuroBtn = document.querySelector('#modoOscuro');
 let links = document.head.getElementsByTagName("link");
 
+function DetectarTema(value){
+	switch(value){
+		case "Oscuro":
+			cambiarTema("Light", "Dark");
+			break;
+		case "Claro":
+			cambiarTema("Dark", "Light");
+			break;
+		case "Sistema":
+			if (window.matchMedia) {
+				if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+					cambiarTema("Light", "Dark");
+				} else {
+					cambiarTema("Dark", "Light");
+				}
+			  }
+			break;
+	}
+}
 function cambiarTema(estiloABorrar, estiloAAgregar){
 	for (let link of links){
 		if (link.getAttribute("href") === "css/productos" + estiloABorrar + ".css"){
@@ -85,23 +125,8 @@ function cambiarTema(estiloABorrar, estiloAAgregar){
 			setTimeout(() => {
 				link.parentNode.removeChild(link);
 			}, 10);
-			localStorage.setItem("preferencia", estiloAAgregar);
 			break;
 		};
 	};
 };
 
-if (localStorage.getItem("preferencia") === "Dark"){
-	modoOscuroBtn.innerText = 'Modo claro';
-	cambiarTema("Light", "Dark");
-};
-
-modoOscuroBtn.addEventListener('click', () => {
-	if (modoOscuroBtn.innerText === 'Modo oscuro') {
-		modoOscuroBtn.innerText = 'Modo claro';
-		cambiarTema("Light", "Dark");
-	} else {
-		modoOscuroBtn.innerText = 'Modo oscuro';
-		cambiarTema("Dark", "Light");
-	};
-})
