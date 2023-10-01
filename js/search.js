@@ -3,22 +3,46 @@ const btninput = document.getElementById("button-addon2");
 const products = document.getElementById('products');
 
 document.addEventListener("DOMContentLoaded",()=>{
-    searchinput.value = localStorage.getItem("searchquery");
-    getJSONData(CATEGORIES_URL).then(result =>{
-        result.data.forEach(element => {
-            let linksArray = new Array();
-            linksArray.push(PRODUCTS_URL +element.id + EXT_TYPE);
-            linksArray.forEach(element =>{
-                getJSONData(element).then(result =>{
-                    result.data.products.forEach(element => contentProducts(element));
-                })
-            })
-        });
-    })
-	btninput.addEventListener("click",()=>{
-		filtrarPriceRangeYBusqueda(searchinput.value.toLowerCase());
-	})
-})
+    // searchinput.value = localStorage.getItem("searchquery");
+    // getJSONData(CATEGORIES_URL).then(result =>{
+    //     result.data.forEach(element => {
+    //         let linksArray = new Array();
+    //         linksArray.push(PRODUCTS_URL +element.id + EXT_TYPE);
+    //         linksArray.forEach(element =>{
+    //             getJSONData(element).then(result =>{
+    //                 result.data.products.forEach(element => contentProducts(element));
+    //             })
+    //         })
+    //     });
+    // })
+	searchinput.value = localStorage.getItem("searchquery");
+	localStorage.removeItem("searchquery");
+	mostrarProductosBuscados();
+
+	btninput.addEventListener("click", () => {
+		//filtrarPriceRangeYBusqueda(searchinput.value.toLowerCase());
+		mostrarProductosBuscados();
+	});
+});
+
+function mostrarProductosBuscados(){
+	products.innerHTML = "";
+
+	getJSONData(CATEGORIES_URL)
+	.then(data => {
+		data.data.forEach(element => {
+			getJSONData(PRODUCTS_URL + element.id + EXT_TYPE)
+			.then(data => {
+				data.data.products.forEach(element => {
+					if (element.name.toLowerCase().includes(searchinput.value)){
+						contentProducts(element);
+						filtrarPriceRangeYBusqueda(searchinput.value)
+					};
+				});
+			});
+		});
+	});
+};
 
 function contentProducts(element) {
 	let h3 = document.createElement('h3');
@@ -75,7 +99,6 @@ function setCardId(id) {
 };
 
 function filtrarPriceRangeYBusqueda(word) {
-	console.log(word);
 /*	let precioMaximo = document.getElementById('precioMaximo').value;
 	let precioMinimo = document.getElementById('precioMinimo').value;*/
 	let tarjetas = document.getElementsByClassName('productcard');
