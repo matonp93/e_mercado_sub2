@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			case "Sistema":
 			document.getElementById("Sistema").checked = true;
 				break;
+			default:
+			document.getElementById("Claro").checked = true;
+			localStorage.setItem("preferencia", "Claro");
+			break;
 	}	
 	DetectarTema(localStorage.getItem("preferencia"));
 
