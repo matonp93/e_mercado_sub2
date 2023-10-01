@@ -181,7 +181,7 @@ body {
 
 .tarjeta_load_extreme_description .comment-title {
   font-weight: 700;
-  color: #830040ff;
+  color:  #985eff;
 }
 
 .tarjeta_load_extreme_description > * {
@@ -262,7 +262,7 @@ input#star-1:checked ~ label {
 }
 
 .add-comment-btn {
-  background-color: #830040ff;
+  background-color:  #985eff;
   color: white;
   text-transform: uppercase;
   font-weight: 700;
@@ -276,7 +276,7 @@ input#star-1:checked ~ label {
 }
 
 .add-comment-btn:hover {
-  background-color: rgb(161, 0, 78);
+  background-color: rgb(158, 21, 192);
 }
 
 /*productos relacionados */
