@@ -4,14 +4,15 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<title>eMercado - Todo lo que busques está aquí</title>
-
-		<link href="css/product-info.css" rel="stylesheet" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;700&display=swap"
 			rel="stylesheet" />
-		<link href="css/font-awesome.min.css" rel="stylesheet" />
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/font-awesome.min.css" rel="stylesheet" />
 		<link href="css/styles.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/productosDark.css" />
 		<link rel="icon" href="favicon.ico" />
 	</head>
 
@@ -58,56 +59,35 @@
 				</div>
 			</div>
 		</nav>
-		
-			<div class="container">
-				<!-- * ====== INFO PRODUCTOS ====== * -->
-				<div class="info_prod">
-
-				</div>
-				<!-- * ===== PRODUCTOS RELACIONADOS ===== * -->
-				
-				<div class="related-products">
-					<h2 class="hRelacionados">Productos relacionados</h2>
-				</div>
-				<!-- * ====== COMENTARIOS ====== * -->
-
-				<div class="comment-section">
-					<div class="comment-section__comment-container">
-						<h3 class="comment-container__title">Opiniones del producto</h3>
-						<div class="comment-container__comment-list"></div>
-					</div>
-					<!-- AGREGAR COMENTARIOS -->
-					<div class="comment-section__add-comment">
-						<h4 class="add-comment__title">¿Qué opinas del producto?</h4>
-						<div class="add-comment__camp">
-							<textarea
-								class="add-comment__input"
-								name="add-comment__input"
-								id="add-comment__input"
-								cols="30"
-								rows="10"></textarea>
-							<div class="add-comment__score">
-								<input type="radio" name="star" id="star-1" value="5" /><!-- 
-									 --><label for="star-1" class="fa fa-star"> </label>
-
-								<input type="radio" name="star" id="star-2" value="4" /><!-- 
-									 --><label for="star-2" class="fa fa-star"> </label>
-
-								<input type="radio" name="star" id="star-3" value="3" /><!-- 
-									 --><label for="star-3" class="fa fa-star"></label>
-
-								<input type="radio" name="star" id="star-4" value="2" /><!-- 
-									 --><label for="star-4" class="fa fa-star"></label>
-
-								<input type="radio" name="star" id="star-5" value="1" /><!-- 
-									 --><label for="star-5" class="fa fa-star"></label>
-							</div>
-						</div>
-						<button class="add-comment-btn" type="submit" id="enviar">Enviar</button>
-					</div>
-				</div>
+		<main>
+			<div class="input-group mb-3" id="searchdiv">
+				<input
+					type="text"
+					id="searchinput"
+					class="form-control"
+					placeholder="Busqueda"
+					aria-label="Busqueda"
+					aria-describedby="button-addon2" />
+				<button class="btn btn-outline-secondary" type="button" id="button-addon2">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon icon-tabler icon-tabler-search"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						stroke-width="2"
+						stroke="currentColor"
+						fill="none"
+						stroke-linecap="round"
+						stroke-linejoin="round">
+						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+						<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+						<path d="M21 21l-6 -6"></path>
+					</svg>
+				</button>
 			</div>
-		
+			<container id="products"> </container>
+		</main>
 		<footer class="text-muted">
 			<div class="container">
 				<p class="float-end">
@@ -129,6 +109,6 @@
 		</div>
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/init.js"></script>
-		<script src="js/product-info.js"></script>
+		<script src="js/search.js"></script>
 	</body>
 </html>

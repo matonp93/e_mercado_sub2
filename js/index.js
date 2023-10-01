@@ -1,3 +1,5 @@
+const searchBtn = document.getElementById("button-addon2");
+
 document.addEventListener("DOMContentLoaded", function(){
     function comprobarLogin(){
         return ((localStorage.getItem("email") != null) && (localStorage.getItem("password") != null))
@@ -6,6 +8,10 @@ document.addEventListener("DOMContentLoaded", function(){
         location.href = "login.html"
     } 
 
+    searchBtn.addEventListener("click", ()=>{
+        localStorage.setItem("searchquery",document.getElementById("searchinput").value);
+        location.href = "search.html"
+    });
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"

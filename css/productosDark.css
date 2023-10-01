@@ -86,7 +86,7 @@ body {
 	padding: 0;
 }
 .encabezado p {
-	color: var(--dark);
+	color: var(--light);
 	font-size: 100%;
 	font-weight: 400;
 	padding: 0px 40px;

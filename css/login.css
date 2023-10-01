@@ -1,5 +1,5 @@
 :root {
-	--primary: #830040ff;
+	--primary: #985eff;
 	--secondary: rgba(255, 166, 0, 0.208);
 	--dark: black;
 	--light: rgb(255, 247, 242);
@@ -53,7 +53,7 @@ main {
 }
 
 #login-form #btnEnviar:hover {
-	background-color: rgb(168, 0, 81);
+	background-color: #8f4fff;
 }
 
 #login-form #btnInvitado {
@@ -97,20 +97,24 @@ main {
 
 .hidden {
 	opacity: 0;
-	transition: opacity .3s;
+	transition: opacity 0.3s;
 }
 
 #alerta {
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
 	position: absolute;
 	top: 5%;
 	left: 39.3%;
 	padding: 10px;
-	border: 1px solid red;
+	border: 1px solid rgb(80, 27, 27);
 	border-radius: 10px;
-	box-shadow: 0 0 10px 0px black;
-	background-color: salmon;
+	box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.5);
+	background-color: rgb(247, 152, 142);
 	width: 20%;
-	text-align: center;
 }
 
 #alerta p {
