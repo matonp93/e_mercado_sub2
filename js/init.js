@@ -75,22 +75,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 	//Pone el nombre del usuario en el dropdown del navbar
 	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
-	
-	switch(localStorage.getItem("preferencia")){
-		case "Oscuro":
-			document.getElementById("Oscuro").checked = true;
-				break;
-			case "Claro":
-			document.getElementById("Claro").checked = true;
-				break;
-			case "Sistema":
-			document.getElementById("Sistema").checked = true;
-				break;
-			default:
-			document.getElementById("Claro").checked = true;
-			localStorage.setItem("preferencia", "Claro");
-			break;
-	}	
+		
 	DetectarTema(localStorage.getItem("preferencia"));
 });
 
@@ -100,12 +85,15 @@ let links = document.head.getElementsByTagName("link");
 function DetectarTema(value){
 	switch(value){
 		case "Oscuro":
+			document.getElementById("Oscuro").checked = true;
 			cambiarTema("Light", "Dark");
 			break;
 		case "Claro":
+			document.getElementById("Claro").checked = true;
 			cambiarTema("Dark", "Light");
 			break;
 		case "Sistema":
+			document.getElementById("Sistema").checked = true;
 			if (window.matchMedia) {
 				if(window.matchMedia('(prefers-color-scheme: dark)').matches){
 					cambiarTema("Light", "Dark");
@@ -119,8 +107,13 @@ function DetectarTema(value){
 				cambiarTema("Dark", "Light");
 			  }
 			break;
-	}
-}
+		default:
+			document.getElementById("Claro").checked = true;
+			localStorage.setItem("preferencia", "Claro");
+			break;
+	};
+};
+
 function cambiarTema(estiloABorrar, estiloAAgregar){
 	for (let link of links){
 		if (link.getAttribute("href") === "css/productos" + estiloABorrar + ".css"){
