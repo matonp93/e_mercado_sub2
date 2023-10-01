@@ -6,8 +6,10 @@ const PRODUCT_INFO_COMMENTS_URL = 'https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
 const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
 const EXT_TYPE = '.json';
+const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
+const btnVerCarrito = document.getElementById('irCarrito');
 
 let showSpinner = function () {
 	document.getElementById('spinner-wrapper').style.display = 'block';
@@ -43,7 +45,8 @@ let getJSONData = function (url) {
 };
 
 function salir() {
-	localStorage.clear();
+	localStorage.removeItem("email");
+	localStorage.removeItem("password");
 	location.href = 'login.html';
 } //Se encarga de limpiar el localStorage y nos redirecciona a la pagina login.html
 
@@ -51,18 +54,28 @@ function verPerfil() {
 	location.href = 'my-profile.html';
 } // Nos redirecciona a la pagina my-profile.html
 
-document.addEventListener('DOMContentLoaded', function () {
-	let userNav = document.getElementById('user-info'); //Se selecciona un elemento del DOM con el id "user-info" y lo almacena en la variable userNav
+document.addEventListener('DOMContentLoaded', ()=> {
+	btnSalir.addEventListener('click', () => {
+		salir();
+	});
 
-	let storedUserName = localStorage.getItem('email'); //Se accede al valor del email almacenado en el localStorage
+	btnVerPerfil.addEventListener('click', () => {
+		verPerfil();
+	});
 
-	let parts = storedUserName.split('@'); //Divide la dirección de correo electrónico en partes utilizando el símbolo "@" como delimitador
+	btnVerCarrito.addEventListener('click',()=>{
+		location.href = "cart.html";
+	})
+	modoOscuroBtn.forEach(radio =>{
+		radio.addEventListener('click', () => {
+			DetectarTema(radio.value);
+			localStorage.setItem("preferencia", radio.value);
+		})
+	})
 
-	let username = parts[0]; //Se obtiene solo el nombre de usuario
-
-	userNav.textContent = username; //Se establece el nombre de usuario como contenido
-	const modoOscuroBtn = document.getElementsByName("Tema");
-
+	//Pone el nombre del usuario en el dropdown del navbar
+	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
+	
 	switch(localStorage.getItem("preferencia")){
 		case "Oscuro":
 			document.getElementById("Oscuro").checked = true;
@@ -79,22 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			break;
 	}	
 	DetectarTema(localStorage.getItem("preferencia"));
-
-
-	modoOscuroBtn.forEach(radio =>{
-		radio.addEventListener('click', () => {
-			DetectarTema(radio.value);
-			localStorage.setItem("preferencia", radio.value);
-		})
-	})
-
-	btnSalir.addEventListener('click', () => {
-		salir();
-	});
-
-	btnVerPerfil.addEventListener('click', () => {
-		verPerfil();
-	});
 });
 
 // Modo Oscuro
@@ -115,6 +112,11 @@ function DetectarTema(value){
 				} else {
 					cambiarTema("Dark", "Light");
 				}
+			  }else {
+				alert("Tu PC no sirve ni para atrás amigo");
+				document.getElementById("Claro").checked = true;
+				localStorage.setItem("preferencia", "Claro");
+				cambiarTema("Dark", "Light");
 			  }
 			break;
 	}
