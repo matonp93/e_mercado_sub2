@@ -246,3 +246,10 @@ a.custom-card:hover {
 	margin:auto;
 	max-width: 50%;
 }
+
+.btn-check:checked + .checkedefect{
+display: inline;
+outline-color: red;
+outline-style: solid;
+outline-width: 1px;
+}
