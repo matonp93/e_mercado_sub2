@@ -243,8 +243,36 @@ a.custom-card:hover {
 }
 
 #searchdiv {
-	margin: auto;
-	max-width: 50%;
+	margin: -57px auto;
+	max-width: 35%;
+}
+
+#searchdiv input {
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.521);
+	border-radius: 40px;
+	background-color: rgb(230, 230, 230);
+	color: rgb(29, 29, 29);
+	outline: none;
+	padding: 5px 20px;
+	position: relative;
+}
+
+#button-addon2 {
+	z-index: 100;
+	border: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin-right: 15px;
+	transition: 0.2s;
+	padding: 0;
+
+	&:hover {
+		background: transparent;
+		color: rgb(29, 29, 29);
+		opacity: 0.8;
+	}
 }
 
 .btn-check:checked + .checkedefect {
