@@ -242,14 +242,12 @@ a.custom-card:hover {
 	font-size: 14.4px;
 }
 
-#searchdiv{
-	margin:auto;
+#searchdiv {
+	margin: auto;
 	max-width: 50%;
 }
 
-.btn-check:checked + .checkedefect{
-display: inline;
-outline-color: red;
-outline-style: solid;
-outline-width: 1px;
+.btn-check:checked + .checkedefect {
+	display: inline;
+	background-color: rgb(102, 49, 116);
 }
