@@ -24,11 +24,12 @@ body {
 .divRelated {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 .info_prod {
 	display: grid;
-	grid-template-rows: 0.1fr 0.1fr 0.5fr 0.1fr;
-	grid-template-columns: 0.1fr 0.03fr;
+	grid-template-rows: auto;
+	grid-template-columns: 1fr auto;
 	margin: 30px auto;
 	text-align: left;
 	border-radius: 15px 15px 15px 15px;
@@ -37,7 +38,7 @@ body {
 	align-items: center;
 	padding: 35px;
 	gap: 10px;
-	width: 900px;
+	width: 100%;
 }
 
 .info_prod > :nth-child(5) {
@@ -87,7 +88,7 @@ body {
 .divImgInfo {
 	display: flex;
 	margin: 0 auto;
-	width: 750px;
+	width: 100%;
 	height: 460px;
 }
 
@@ -105,7 +106,7 @@ body {
 
 .divImgInfo img:hover {
 	cursor: crosshair;
-	width: 600px;
+	width: 75%;
 	opacity: 1;
 }
 
@@ -121,8 +122,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-
-	width: 900px;
+	width: 100%;
 }
 
 /* COMMENT LIST */
@@ -163,7 +163,6 @@ body {
 	background-color: whitesmoke;
 	padding: 16px 18px;
 	border-radius: 20px;
-	/* display: flex; */
 	align-items: center;
 	gap: 10px;
 	font-size: 16px;
@@ -201,6 +200,7 @@ body {
 	flex-direction: column;
 	gap: 10px;
 	padding: 40px 40px 40px 10px;
+	width: 100%;
 }
 
 .add-comment__title {
@@ -291,7 +291,7 @@ input#star-1:checked ~ label {
 	align-items: center;
 	padding: 35px;
 	gap: 10px;
-	width: 900px;
+	width: 100%;
 }
 .relatedProducts {
 	display: flex;
@@ -303,11 +303,10 @@ input#star-1:checked ~ label {
 }
 
 .imageRelated {
-	width: 60%;
-	height: 60%;
+	width: 75%;
+	height: 75%;
 	transition: 1s;
 	border-radius: 10px;
-	margin: 10px 10px 10px 88px;
 }
 .pRelated {
 	display: flex;
@@ -316,7 +315,7 @@ input#star-1:checked ~ label {
 }
 
 .imageRelated:hover {
-	transform: scale(1.2);
+	transform: scale(1.05);
 }
 
 .hRelacionados {
