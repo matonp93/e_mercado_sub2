@@ -194,9 +194,10 @@ a.custom-card:hover {
 .boton-dropdown {
 	background-color: #985eff;
 	color: white;
+	font-weight: 700;
 }
 
-.btncito:hover {
+.boton-dropdown:hover {
 	color: rgb(216, 181, 200);
 }
 
