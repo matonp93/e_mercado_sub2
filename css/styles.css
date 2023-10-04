@@ -233,15 +233,7 @@ a.custom-card:hover {
 	color: #4f5b66;
 }
 
-/* Modo Oscuro */
-
-#modoOscuro {
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	font-size: 14.4px;
-}
-
+/* Search Index */
 #searchdiv {
 	margin: -57px auto;
 	max-width: 35%;

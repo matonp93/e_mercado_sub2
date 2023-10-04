@@ -637,10 +637,7 @@ progress {
 .container-xl,
 .container-xxl {
 	width: 100%;
-	padding-right: var(--bs-gutter-x, 0.75rem);
-	padding-left: var(--bs-gutter-x, 0.75rem);
-	margin-right: auto;
-	margin-left: auto;
+	margin: 0 auto;
 }
 
 @media (min-width: 576px) {
@@ -4053,10 +4050,7 @@ fieldset:disabled .btn {
 	}
 }
 
-@media (min-width: 1400px) {
-	.dropdown-menu-xxl-start {
-		--bs-position: start;
-	}
+
 
 	.dropdown-menu-xxl-start[data-bs-popper] {
 		right: auto;

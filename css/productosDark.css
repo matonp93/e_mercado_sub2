@@ -4,29 +4,43 @@
 	--light: rgb(240, 240, 240);
 	--primary: #985eff;
 }
+* {
+	padding: 0;
+	margin: 0;
+}
+
 body {
 	font-family: 'poppins', 'Times New Roman', Times, serif;
 	background-color: var(--dark);
 }
 /*ESTILOS DEL CONTENEDOR*/
+
+.container-products {
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
 #products {
-	display: grid;
-	grid-template-columns: 0.5fr 0.5fr 0.5fr;
-	text-align: center;
-	padding: 10px 100px 0 70px;
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
 }
 .productcard {
+	padding: 20px;
 	color: var(--light);
 	background-color: var(--grey);
-	display: grid;
-	margin: 20px;
-	text-align: left;
-	align-items: center;
-	justify-content: center;
-	max-width: 90%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 330px;
+	height: 500px;
+	align-items: start;
 	border-radius: 15px 15px 15px 15px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 	cursor: pointer;
+	position: relative;
 }
 /*ESTILOS DEL div y imagen*/
 .imgdiv {
@@ -34,14 +48,13 @@ body {
 	place-items: center;
 }
 .imgdiv img {
-	max-width: 90%;
-	max-height: 90%;
+	max-width: 100%;
+	max-height: 100%;
 	border-radius: 15px 15px 15px 15px;
 	box-shadow: 0px 0px 15px 1px rgba(27, 27, 27, 0.639);
 }
 /*ESTILOS DEL div y h3*/
 .h3div {
-	padding: 0px 70px;
 }
 .h3div h3 {
 	font-size: 220%;
@@ -49,9 +62,10 @@ body {
 
 /*ESTILOS DEL div y contador ventas*/
 .p2div {
-	display: flex;
-	justify-content: end;
-	width: 90%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 20px 20px 20px 0px;
 }
 /*ESTILOS DEL precio*/
 .precio {
@@ -143,17 +157,25 @@ main {
 .precios-camp {
 	display: flex;
 	gap: 5px;
+
+	@media (width <= 648px) {
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 .precios-camp .icon-tabler-math-lower {
 	stroke: var(--light);
+	@media (width <= 648px) {
+		display: none;
+	}
 }
 
 .precios-camp .camp {
 	font-weight: bold;
 	border-radius: 20px;
 	border: none;
-	padding: 0px 15px;
+	padding: 10px 15px;
 	outline: none;
 	color: var(--primary);
 	background-color: var(--light);
