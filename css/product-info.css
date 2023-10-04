@@ -316,7 +316,7 @@ input#star-1:checked ~ label {
 }
 
 .imageRelated:hover {
-	transform: scale(1);
+	transform: scale(1.2);
 }
 
 .hRelacionados {
