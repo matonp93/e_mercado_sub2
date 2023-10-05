@@ -33,7 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
         nameCart.innerHTML += name;
         priceCart.innerHTML += currency + " " + unitCost;
         cantCart.setAttribute('type', 'number');
+        cantCart.setAttribute('min','1');
         cantCart.value = count;
+        cantCart.addEventListener('change',()=>{
+            subtotalCart.innerHTML = currency + " " + unitCost * cantCart.value;
+        });
         btnBorrar.innerHTML = "Eliminar";
         btnBorrar.addEventListener("click", () => {
             btnBorrar.parentElement.remove();
