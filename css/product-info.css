@@ -60,7 +60,7 @@ body {
 	align-content: stretch;
 	justify-content: space-between;
 }
-.divCategory {
+.divBtnCarrito {
 	display: flex;
 	align-content: stretch;
 	justify-content: center;
@@ -82,6 +82,19 @@ body {
 
 .pCategory {
 	font-size: 20px;
+}
+
+.btnAddCarrito{
+	background-color: #985eff;
+	color: white;
+	text-transform: uppercase;
+	font-weight: 700;
+	box-shadow: 0px 0px 5px 0px rgb(102, 102, 102);
+	border-radius: 20px;
+	border: none;
+	padding: 4px 15px;
+	margin: auto;
+	transition: 0.2s;
 }
 
 /** ====== PRODUCTS Images ====== **/
