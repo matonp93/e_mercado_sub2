@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
 		})
 	})
 
+	if (localStorage.getItem("productosCarrito") == null){
+		localStorage.setItem("productosCarrito", JSON.stringify([]));
+	}
+
 	//Pone el nombre del usuario en el dropdown del navbar
 	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
 		
