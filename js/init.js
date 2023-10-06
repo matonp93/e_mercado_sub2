@@ -9,7 +9,7 @@ const EXT_TYPE = '.json';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
-const btnVerCarrito = document.getElementById('irCarrito');
+
 
 let showSpinner = function () {
 	document.getElementById('spinner-wrapper').style.display = 'block';
@@ -63,9 +63,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
 		verPerfil();
 	});
 
-	btnVerCarrito.addEventListener('click',()=>{
-		location.href = "cart.html";
-	})
 	modoOscuroBtn.forEach(radio =>{
 		radio.addEventListener('click', () => {
 			DetectarTema(radio.value);
