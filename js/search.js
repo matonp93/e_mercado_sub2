@@ -1,6 +1,7 @@
 const searchinput = document.getElementById("searchinput");
 const btninput = document.getElementById("button-addon2");
 const products = document.getElementById('products');
+const test = document.getElementById('test');
 
 document.addEventListener("DOMContentLoaded", () => {
 	searchinput.value = localStorage.getItem("searchquery");
@@ -10,6 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	btninput.addEventListener("click", () => {
 		mostrarProductosBuscados();
 	});
+
+	test.addEventListener("click",()=>{
+		let arrayDarkMode = Array.from(document.body.getElementsByTagName("*"));
+		arrayDarkMode.push(document.body);
+		arrayDarkMode.forEach(element => element.setAttribute("data-theme","dark"));
+	})
 });
 
 function mostrarProductosBuscados(){
