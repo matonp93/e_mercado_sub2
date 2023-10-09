@@ -9,6 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="stylecart.css" rel="stylesheet">
   <link rel="icon" href="favicon.ico">
 </head>
 
@@ -46,12 +47,67 @@
       </div>
     </div>
   </nav>
+  
   <main>
         <h1 class="cartTitle">Carrito de compras</h1>
       <div id="cartItems">
         <h2 class="cartTitle">Articulos a comprar</h2>
       </div>
+        
+       <hr>
+        
+        <h2 class="Envio"> Tipo de envío</h2>    
+      <div class="wrapper">
+        <div class="card">
+          <input class="input" type="radio" name="card" value="basic">
+          <span class="check"></span>
+          <label class="label">
+            <div class="title">STANDARD</div>
+            <div class="price">
+              12~15 días
+              <span class="span">(5%)</span>
+            </div>
+          </label>
+        </div>
+        <div class="card">
+          <input class="input" type="radio" name="card" value="standart">
+          <span class="check"></span>
+          <label class="label">
+            <div class="title">EXPRESS</div>
+            <div class="price">
+              5~8 días
+              <span class="span">(7%)</span>
+            </div>
+          </label>
+        </div>
+        <div class="card">
+          <input class="input" type="radio" name="card" value="premium">
+          <span class="check"></span>
+          <label class="label">
+            <div class="title">PREMIUM</div>
+            <div class="price">
+              2~5 días
+              <span class="span">(15%)</span>
+            </div>
+          </label>
+        </div>
+    </div>
+    <h3 style="margin-top: 1em; margin-bottom: 1em;"> Dirección de envío</h3>
+    <div class="inputGroup">
+      <input type="text" required="" autocomplete="off">
+      <label for="name">Calle</label>
+    </div>
+  
+     <div class="inputGroup">
+      <input type="text" required="" autocomplete="off">
+      <label for="name">Número</label>
+     </div>
+     <div class="inputGroup">
+      <input type="text" required="" autocomplete="off">
+      <label for="name">Esquina</label>
+     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
