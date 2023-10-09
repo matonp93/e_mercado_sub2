@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let divinfoTitle = document.createElement("div");
       let divinfoImages = document.createElement("div");
       let divPrice = document.createElement("div");
-      let divCategory = document.createElement("div");
+      let divBtnCarrito = document.createElement("div");
       let divSoldCount = document.createElement("div");
       let divinfoP = document.createElement("div");
       let h1infoTitle = document.createElement("h1");
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let pDescription = document.createElement("p");
       let pCategory = document.createElement("p");
       let pSoldCount = document.createElement("p");
+      let btnAddCarrito = document.createElement("button");
 
       // Array de imagenes //
       let divimgInfo = document.createElement("div");
@@ -66,13 +67,23 @@ document.addEventListener("DOMContentLoaded", () => {
       divinfoTitle.classList.add("divinfoTitle");
       divinfoImages.classList.add("divinfoImages");
       divPrice.classList.add("divPrice");
-      divCategory.classList.add("divCategory");
+      divBtnCarrito.classList.add("divBtnCarrito");
       divSoldCount.classList.add("divSoldCount");
       h1infoTitle.classList.add("h1infoTitle");
       pPrice.classList.add("pPrice");
       pDescription.classList.add("pDescription");
       pCategory.classList.add("pCategory");
       pSoldCount.classList.add("pSoldCount");
+      btnAddCarrito.classList.add("btnAddCarrito");
+      btnAddCarrito.addEventListener("click", () => {
+        let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+        if (productosCarrito.includes(data.id)){
+          alert("Ya esta en el carrito mi rey");
+        } else {
+          productosCarrito.push(data.id);
+          localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+        };
+      });
 
       // Contenido de cada elemento //
       h1infoTitle.innerHTML = data.name;
@@ -80,15 +91,16 @@ document.addEventListener("DOMContentLoaded", () => {
       pDescription.innerHTML = "<b>Descripción:</b> <br>" + data.description;
       pCategory.innerHTML = " ";
       pSoldCount.innerHTML = "<b>Vendidos:</b>   " + data.soldCount;
+      btnAddCarrito.innerHTML = "Agregar al carrito";
 
       // AppendChild's //
       divinfoTitle.appendChild(h1infoTitle);
       divPrice.appendChild(pPrice);
       divinfoP.appendChild(pDescription);
-      divCategory.appendChild(pCategory);
+      divBtnCarrito.appendChild(btnAddCarrito);
       divSoldCount.appendChild(pSoldCount);
       infoProductos.appendChild(divinfoTitle);
-      infoProductos.appendChild(divCategory);
+      infoProductos.appendChild(divBtnCarrito);
       infoProductos.appendChild(divPrice);
       infoProductos.appendChild(divSoldCount);
       infoProductos.appendChild(divimgInfo);

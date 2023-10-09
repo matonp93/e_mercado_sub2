@@ -9,7 +9,8 @@ const EXT_TYPE = '.json';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
-const btnVerCarrito = document.getElementById('irCarrito');
+const btnCarrito = document.getElementById('carrito');
+
 
 let showSpinner = function () {
 	document.getElementById('spinner-wrapper').style.display = 'block';
@@ -63,15 +64,20 @@ document.addEventListener('DOMContentLoaded', ()=> {
 		verPerfil();
 	});
 
-	btnVerCarrito.addEventListener('click',()=>{
-		location.href = "cart.html";
-	})
+	btnCarrito.addEventListener('click', () => {
+	location.href = 'cart.html';
+})
+
 	modoOscuroBtn.forEach(radio =>{
 		radio.addEventListener('click', () => {
 			DetectarTema(radio.value);
 			localStorage.setItem("preferencia", radio.value);
 		})
 	})
+
+	if (localStorage.getItem("productosCarrito") == null){
+		localStorage.setItem("productosCarrito", JSON.stringify([]));
+	}
 
 	//Pone el nombre del usuario en el dropdown del navbar
 	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
