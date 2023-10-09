@@ -136,15 +136,22 @@ body {
 	align-items: center;
 	gap: 10px;
 	width: 100%;
+	@media (max-width: 770px) {
+	 flex-direction: column;
+	}
 }
 
 /* COMMENT LIST */
 
 .comment-section__comment-container {
-	padding: 40px 0px 40px 40px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	gap: 15px;
+	width: 100%;
+	@media (max-width: 770px) {
+		padding: 20px 0px 0px 0px;
+	}
 }
 
 .comment-container__title {
@@ -155,8 +162,10 @@ body {
 
 .comment-container__comment-list {
 	overflow: auto;
+	width: 90%;
 	height: 200px;
 	display: flex;
+	align-items: center;
 	gap: 20px;
 	flex-direction: column;
 }
@@ -179,7 +188,7 @@ body {
 	align-items: center;
 	gap: 10px;
 	font-size: 16px;
-	width: 400px;
+	width: 70%;
 	margin: 0 20px;
 	display: flex;
 	border: solid 0.5px #777474;
@@ -213,7 +222,11 @@ body {
 	flex-direction: column;
 	gap: 10px;
 	padding: 40px 40px 40px 10px;
-	width: 100%;
+	width: 90%;
+	@media (max-width: 770px) {
+		padding: 10px 0px 10px 0px;
+		width: 70%;
+	}
 }
 
 .add-comment__title {
@@ -247,7 +260,6 @@ body {
 	justify-content: end;
 	position: absolute;
 	bottom: 0;
-	right: 0;
 }
 
 .add-comment__score label {
@@ -292,7 +304,8 @@ input#star-1:checked ~ label {
 	background-color: #8f4fff;
 }
 
-/*productos relacionados */
+/*----PRODUCTOS RELACIONADOS------ */
+
 .related-products {
 	display: flex;
 	flex-direction: column;
@@ -314,7 +327,6 @@ input#star-1:checked ~ label {
 	font-family: 'poppins', 'Times New Roman', Times, serif;
 	margin: auto;
 }
-
 .imageRelated {
 	width: 75%;
 	height: 75%;
@@ -330,7 +342,6 @@ input#star-1:checked ~ label {
 .imageRelated:hover {
 	transform: scale(1.05);
 }
-
 .hRelacionados {
 	justify-content: center;
 	align-items: center;
@@ -339,3 +350,6 @@ input#star-1:checked ~ label {
 	font-size: 25px;
 	font-family: 'poppins', 'Times New Roman', Times, serif;
 }
+ /* MEDIA QUERIES PROD RELACIONADOS*/
+
+ 
