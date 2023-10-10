@@ -136,7 +136,7 @@ body {
 }
 
 .img-jumbotron {
-	filter: drop-shadow(0px 1000px 0 var(--textcolor));
+	filter: var(--filtervalue);
 	transform: var(--transformvalue);
 	@media (width <= 768px) {
 		max-width: 400px;
