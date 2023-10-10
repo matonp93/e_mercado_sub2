@@ -396,6 +396,43 @@ a.custom-card:hover {
 	}
 }
 
+#cat-list-container .list-group-item {
+	border-radius: 20px;
+	margin: 0.5%;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+	
+	}
+
+#categoriesTitle {
+	color: var(--primary);
+    text-shadow: 0px 0px 2px rgb(54, 54, 54);
+    font-size: 350%;
+    font-weight: 600 ;
+}
+
+#rangeFilterCountMin{
+	width: 80%;
+}
+
+#rangeFilterCountMax{
+	width: 80%;}
+
+#cat-list-container img {
+	border: none;
+	border-radius: 5%;
+}	
+	
+#cat-list-container h4 { 
+	padding-top: 3%;
+	padding-left: 2%;
+}
+	
+#cat-list-container p {
+	padding-left: 2%;
+}
+	
+
+
 /* SELL */
 
 .costosSell li {
