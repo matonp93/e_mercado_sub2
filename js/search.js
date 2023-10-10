@@ -5,32 +5,27 @@ const products = document.getElementById('products');
 document.addEventListener("DOMContentLoaded", () => {
 	searchinput.value = localStorage.getItem("searchquery");
 	localStorage.removeItem("searchquery");
-	mostrarProductosBuscados();
+	initialApiGetData();
 
 	btninput.addEventListener("click", () => {
-		mostrarProductosBuscados();
+		filtrarPriceRangeYBusqueda(searchinput.value.toLowerCase());
 	});
 
 });
 
-function mostrarProductosBuscados(){
-	products.innerHTML = "";
-
+function initialApiGetData(){
 	getJSONData(CATEGORIES_URL)
-	.then(data => {
-		data.data.forEach(element => {
+	.then(response => {
+		response.data.forEach(element =>{
 			getJSONData(PRODUCTS_URL + element.id + EXT_TYPE)
-			.then(data => {
-				data.data.products.forEach(element => {
-					if (element.name.toLowerCase().includes(searchinput.value)){
-						contentProducts(element);
-						filtrarPriceRangeYBusqueda(searchinput.value);
-					};
-				});
-			});
-		});
-	});
-};
+			.then(response =>{
+				response.data.products.forEach(element =>{
+					contentProducts(element);
+				})
+			})
+		})
+	})
+}
 
 function contentProducts(element) {
 	let h3 = document.createElement('h3');
@@ -77,8 +72,13 @@ function contentProducts(element) {
 	containerDiv.addEventListener('click', () => {
 		setCardId(element.id);
 	});
-	containerDiv.style.visibility = 'hidden';
-	containerDiv.style.order = 1;
+	if((element.name.toLowerCase().includes(searchinput.value.toLowerCase())) || (element.description.toLowerCase().includes(searchinput.value.toLowerCase()))){
+		containerDiv.style.visibility = 'visible';
+		containerDiv.style.order = 0;
+	}else{
+		containerDiv.style.visibility = 'hidden';
+		containerDiv.style.order = 1;
+	}
 	products.appendChild(containerDiv);
 };
 
@@ -103,7 +103,7 @@ function filtrarPriceRangeYBusqueda(word) {
 	tarjetasFiltradas = tarjetas.filter (element => element.getElementsByClassName('precio')[0].innerHTML*1>= precioMinimo*1);
 }*/
 	tarjetasFiltradas = tarjetas.filter((tarjeta) =>
-		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word)
+		tarjeta.getElementsByClassName('tituloProducto')[0].innerHTML.toLowerCase().includes(word) || tarjeta.getElementsByClassName('descripcion')[0].innerHTML.toLowerCase().includes(word)
 	);
 	tarjetas.forEach((element) => {
 		if (tarjetasFiltradas.includes(element)) {
