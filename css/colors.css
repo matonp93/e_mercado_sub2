@@ -4,6 +4,7 @@
 	--background2: rgb(255, 255, 255);
 	--textcolor: rgb(36, 36, 36);
 	--textcolor2: rgb(240, 240, 240);
+	--transformvalue: none;
 }
 [data-theme='dark'] {
 	--primary: #bb86fc;
@@ -11,4 +12,5 @@
 	--background2: rgb(42, 42, 42);
 	--textcolor: rgb(240, 240, 240);
 	--textcolor2: rgb(240, 240, 240);
+	--transformvalue: translateY(-1000px);
 }
