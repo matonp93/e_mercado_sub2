@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 	modoOscuroBtn.forEach(radio =>{
 		radio.addEventListener('click', () => {
-			DetectarTema(radio.value);
+			DiferenciarTema(radio.value);
 			localStorage.setItem("preferencia", radio.value);
 		})
 	})
@@ -82,56 +82,53 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	//Pone el nombre del usuario en el dropdown del navbar
 	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
 		
-	DetectarTema(localStorage.getItem("preferencia"));
+	DiferenciarTema(localStorage.getItem("preferencia"));
 });
 
 // Modo Oscuro
-let links = document.head.getElementsByTagName("link");
 
-function DetectarTema(value){
+function DiferenciarTema(value){
 	switch(value){
 		case "Oscuro":
 			document.getElementById("Oscuro").checked = true;
-			cambiarTema("Light", "Dark");
+			cambiarTema("Dark");
 			break;
 		case "Claro":
 			document.getElementById("Claro").checked = true;
-			cambiarTema("Dark", "Light");
+			cambiarTema("Light");
 			break;
 		case "Sistema":
 			document.getElementById("Sistema").checked = true;
 			if (window.matchMedia) {
 				if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-					cambiarTema("Light", "Dark");
+					cambiarTema("Dark");
 				} else {
-					cambiarTema("Dark", "Light");
+					cambiarTema("Light");
 				}
 			  }else {
-				alert("Tu PC no sirve ni para atrás amigo");
-				document.getElementById("Claro").checked = true;
-				localStorage.setItem("preferencia", "Claro");
-				cambiarTema("Dark", "Light");
+				alert("Tu sistema no tiene un tema predefinido");
+				document.getElementById("Oscuro").checked = true;
+				localStorage.setItem("preferencia", "Oscuro");
+				cambiarTema("Dark");
 			  }
 			break;
 		default:
-			document.getElementById("Claro").checked = true;
-			localStorage.setItem("preferencia", "Claro");
+			document.getElementById("Oscuro").checked = true;
+			localStorage.setItem("preferencia", "Oscuro");
+			cambiarTema("Dark")
 			break;
 	};
 };
 
-function cambiarTema(estiloABorrar, estiloAAgregar){
-	for (let link of links){
-		if (link.getAttribute("href") === "css/productos" + estiloABorrar + ".css"){
-			let linkNuevo = document.createElement("link");
-			linkNuevo.href = "css/productos" + estiloAAgregar + ".css";
-			linkNuevo.rel = "stylesheet";
-			link.parentNode.appendChild(linkNuevo);
-			setTimeout(() => {
-				link.parentNode.removeChild(link);
-			}, 10);
+function cambiarTema(tema){
+	console.log(tema);
+	switch(tema){
+		case "Dark":
+			document.querySelectorAll("body *, body").forEach(element => element.setAttribute("data-theme","dark"));
 			break;
-		};
-	};
+		case "Light":
+			document.querySelectorAll("body *, body").forEach(element => element.removeAttribute("data-theme"));
+			break;
+	}
 };
 
