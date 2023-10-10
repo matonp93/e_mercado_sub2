@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const url = CART_INFO_URL + '25801' + EXT_TYPE;
     const cartItems = document.getElementById('cartItems');
-
+    cartItems.classList.add("cartItems");
     getJSONData(url)
     .then(response =>{
         response.data.articles.forEach(element => {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         priceCart.classList.add('pPrice');
         cantCart.classList.add('pCant');
         subtotalCart.classList.add('pSubtotal');
-    
+        btnBorrar.classList.add("btnBorrar");
         // AppendChild's //
         titlePriceDiv.appendChild(nameCart);
         titlePriceDiv.appendChild(priceCart);
