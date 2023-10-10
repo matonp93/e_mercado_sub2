@@ -10,16 +10,9 @@ const btnDescendenteRelevancia = document.getElementById('descendentePorRelevanc
 const precioMinimo = document.getElementById('precioMinimo');
 const precioMaximo = document.getElementById('precioMaximo');
 const buscador = document.getElementById('buscador');
-const test = document.getElementById('test');
 
 // PAGINA
 document.addEventListener('DOMContentLoaded', () => {
-	test.addEventListener('click', () => {
-		let arrayDarkMode = Array.from(document.body.getElementsByTagName('*'));
-		arrayDarkMode.push(document.body);
-		arrayDarkMode.forEach((element) => element.setAttribute('data-theme', 'dark'));
-	});
-
 	function comprobarLogin() {
 		return localStorage.getItem('email') != null && localStorage.getItem('password') != null;
 	}
