@@ -1,0 +1,14 @@
+:root {
+	--primary: #651acf;
+	--background: rgb(240, 240, 240);
+	--background2: rgb(255, 255, 255);
+	--textcolor: rgb(36, 36, 36);
+	--textcolor2: rgb(240, 240, 240);
+}
+[data-theme='dark'] {
+	--primary: #bb86fc;
+	--background: rgb(27, 27, 27);
+	--background2: rgb(42, 42, 42);
+	--textcolor: rgb(240, 240, 240);
+	--textcolor2: rgb(240, 240, 240);
+}
