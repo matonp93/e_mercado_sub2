@@ -1,32 +1,42 @@
-:root {
-	--dark: rgb(36, 36, 36);
-	--grey: rgb(66, 66, 66);
-	--light: rgb(240, 240, 240);
-	--primary: #985eff;
+@import 'colors.css';
+* {
+	padding: 0;
+	margin: 0;
 }
+
 body {
 	font-family: 'poppins', 'Times New Roman', Times, serif;
-	background-color: var(--dark);
+	background-color: var(--background);
+	color: var(--textcolor);
 }
 /*ESTILOS DEL CONTENEDOR*/
+
+.container-products {
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
 #products {
-	display: grid;
-	grid-template-columns: 0.5fr 0.5fr 0.5fr;
-	text-align: center;
-	padding: 10px 100px 0 70px;
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
 }
 .productcard {
-	color: var(--light);
-	background-color: var(--grey);
-	display: grid;
-	margin: 20px;
-	text-align: left;
-	align-items: center;
-	justify-content: center;
-	max-width: 90%;
+	padding: 20px;
+
+	background-color: var(--background2);
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 330px;
+	height: 500px;
+	align-items: start;
 	border-radius: 15px 15px 15px 15px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.404);
 	cursor: pointer;
+	position: relative;
 }
 /*ESTILOS DEL div y imagen*/
 .imgdiv {
@@ -34,24 +44,21 @@ body {
 	place-items: center;
 }
 .imgdiv img {
-	max-width: 90%;
-	max-height: 90%;
+	max-width: 100%;
+	max-height: 100%;
 	border-radius: 15px 15px 15px 15px;
-	box-shadow: 0px 0px 15px 1px rgba(27, 27, 27, 0.639);
 }
 /*ESTILOS DEL div y h3*/
-.h3div {
-	padding: 0px 70px;
-}
 .h3div h3 {
 	font-size: 220%;
 }
 
 /*ESTILOS DEL div y contador ventas*/
 .p2div {
-	display: flex;
-	justify-content: end;
-	width: 90%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 20px 20px 20px 0px;
 }
 /*ESTILOS DEL precio*/
 .precio {
@@ -77,20 +84,6 @@ body {
 	flex-direction: column;
 	align-items: center;
 }
-.encabezado h1 {
-	color: var(--primary);
-	text-shadow: 0px 0px 10px rgb(54, 54, 54);
-	font-size: 350%;
-	font-weight: 600;
-	margin-top: 20px;
-	padding: 0;
-}
-.encabezado p {
-	color: var(--light);
-	font-size: 100%;
-	font-weight: 400;
-	padding: 0px 40px;
-}
 
 main {
 	display: flex;
@@ -110,9 +103,9 @@ main {
 .btn-pop-up {
 	border-radius: 50px;
 	padding: 5px 15px;
-	border: 2px solid var(--dark);
-	stroke: var(--dark);
-	background-color: var(--light);
+	border: 2px solid var(--background);
+	stroke: var(--background);
+	background-color: var(--background);
 	transition: 0.3s;
 }
 
@@ -120,7 +113,7 @@ main {
 	padding: 5px 15px;
 	border: 2px solid var(--primary);
 	stroke: var(--primary);
-	background-color: var(--light);
+	background-color: var(--background);
 	box-shadow: 0px 0px 5px 0px var(--primary);
 }
 
@@ -143,20 +136,28 @@ main {
 .precios-camp {
 	display: flex;
 	gap: 5px;
+
+	@media (width <= 648px) {
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 .precios-camp .icon-tabler-math-lower {
-	stroke: var(--light);
+	stroke: var(--background);
+	@media (width <= 648px) {
+		display: none;
+	}
 }
 
 .precios-camp .camp {
 	font-weight: bold;
 	border-radius: 20px;
 	border: none;
-	padding: 0px 15px;
+	padding: 10px 15px;
 	outline: none;
 	color: var(--primary);
-	background-color: var(--light);
+	background-color: var(--background);
 }
 
 .precios-camp .camp::-webkit-inner-spin-button,
@@ -169,9 +170,9 @@ main {
 .otros-filtros button {
 	border-radius: 50px;
 	padding: 5px 15px;
-	border: 2px solid var(--dark);
-	stroke: var(--dark);
-	background-color: var(--light);
+	border: 2px solid var(--background);
+	stroke: var(--background);
+	background-color: var(--background);
 	transition: 0.3s;
 }
 
@@ -179,7 +180,7 @@ main {
 	padding: 5px 15px;
 	border: 2px solid var(--primary);
 	stroke: var(--primary);
-	background-color: var(--light);
+	background-color: var(--background);
 	box-shadow: 0px 0px 5px 0px var(--primary);
 }
 
@@ -190,7 +191,7 @@ main {
 	font-size: 20px;
 	text-transform: uppercase;
 	font-weight: bold;
-	color: var(--light);
+	color: var(--background);
 	border: none;
 	transition: 0.3s;
 }

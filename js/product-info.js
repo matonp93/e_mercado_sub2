@@ -8,7 +8,6 @@ const btnEnviar = document.getElementById('enviar');
 document.addEventListener('DOMContentLoaded', () => {
 	let localStorageValue = localStorage.getItem('cardId');
 
-
 	// FECTH PARA INFO DEL PRODUCTO //
 	fetch(PRODUCT_INFO_URL + localStorageValue + EXT_TYPE)
 		.then((response) => response.json())
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let divinfoTitle = document.createElement('div');
 			let divinfoImages = document.createElement('div');
 			let divPrice = document.createElement('div');
-			let divCategory = document.createElement('div');
+			let divBtnCarrito = document.createElement('div');
 			let divSoldCount = document.createElement('div');
 			let divinfoP = document.createElement('div');
 			let h1infoTitle = document.createElement('h1');
@@ -25,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let pDescription = document.createElement('p');
 			let pCategory = document.createElement('p');
 			let pSoldCount = document.createElement('p');
+			let btnAddCarrito = document.createElement('button');
 
 			// Array de imagenes //
 			let divimgInfo = document.createElement('div');
@@ -38,39 +38,49 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Array de productos relacionados //
 			let divRelatedProducts = document.createElement('div');
 			divRelatedProducts.classList.add('relatedProducts');
-			data.relatedProducts.forEach(element =>{
+			data.relatedProducts.forEach((element) => {
 				let divProductoRelacionado = document.createElement('div');
 				let imageProductoRelacionado = document.createElement('img');
 				let nameProductoRelacionado = document.createElement('p');
-				
+
 				// Atributos y clases //
 				divProductoRelacionado.classList.add('divRelated');
 				imageProductoRelacionado.classList.add('imageRelated');
 				nameProductoRelacionado.classList.add('pRelated');
 				imageProductoRelacionado.setAttribute('src', element.image);
-				nameProductoRelacionado.innerHTML+= element.name;
-				divProductoRelacionado.addEventListener("click",()=>{
-					localStorage.setItem("cardId", element.id);
-					location.href = "product-info.html";
-				})
+				nameProductoRelacionado.innerHTML += element.name;
+				divProductoRelacionado.addEventListener('click', () => {
+					localStorage.setItem('cardId', element.id);
+					location.href = 'product-info.html';
+				});
 				divProductoRelacionado.appendChild(imageProductoRelacionado);
 				divProductoRelacionado.appendChild(nameProductoRelacionado);
 				divRelatedProducts.appendChild(divProductoRelacionado);
-			})
+			});
 			productosRelacionados.appendChild(divRelatedProducts);
-			
+
 			// Atributos y clases //
 			divinfoP.classList.add('divInfoP');
 			divinfoTitle.classList.add('divinfoTitle');
 			divinfoImages.classList.add('divinfoImages');
 			divPrice.classList.add('divPrice');
-			divCategory.classList.add('divCategory');
+			divBtnCarrito.classList.add('divBtnCarrito');
 			divSoldCount.classList.add('divSoldCount');
 			h1infoTitle.classList.add('h1infoTitle');
 			pPrice.classList.add('pPrice');
 			pDescription.classList.add('pDescription');
 			pCategory.classList.add('pCategory');
 			pSoldCount.classList.add('pSoldCount');
+			btnAddCarrito.classList.add('btnAddCarrito');
+			btnAddCarrito.addEventListener('click', () => {
+				let productosCarrito = JSON.parse(localStorage.getItem('productosCarrito'));
+				if (productosCarrito.includes(data.id)) {
+					alert('Ya esta en el carrito mi rey');
+				} else {
+					productosCarrito.push(data.id);
+					localStorage.setItem('productosCarrito', JSON.stringify(productosCarrito));
+				}
+			});
 
 			// Contenido de cada elemento //
 			h1infoTitle.innerHTML = data.name;
@@ -78,15 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
 			pDescription.innerHTML = '<b>Descripción:</b> <br>' + data.description;
 			pCategory.innerHTML = ' ';
 			pSoldCount.innerHTML = '<b>Vendidos:</b>   ' + data.soldCount;
+			btnAddCarrito.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+      <path d="M12.5 17h-6.5v-14h-2"></path>
+      <path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5"></path>
+      <path d="M16 19h6"></path>
+      <path d="M19 16v6"></path>
+   </svg>`;
 
 			// AppendChild's //
 			divinfoTitle.appendChild(h1infoTitle);
 			divPrice.appendChild(pPrice);
 			divinfoP.appendChild(pDescription);
-			divCategory.appendChild(pCategory);
+			divBtnCarrito.appendChild(btnAddCarrito);
 			divSoldCount.appendChild(pSoldCount);
 			infoProductos.appendChild(divinfoTitle);
-			infoProductos.appendChild(divCategory);
+			infoProductos.appendChild(divBtnCarrito);
 			infoProductos.appendChild(divPrice);
 			infoProductos.appendChild(divSoldCount);
 			infoProductos.appendChild(divimgInfo);
@@ -123,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				// Atributos y clases //
 				image.data = 'gitlab.svg';
 				image.type = 'image/svg+xml';
-				image.onload = e => ResetearColores();
+				image.onload = (e) => ResetearColores();
 				pTitle.classList.add('comment-title');
 				divCard.classList.add('cards');
 				divCardLoad.classList.add('tarjeta_load');
@@ -189,7 +207,7 @@ function agregarComentario() {
 	// Atributos y clases //
 	image.data = 'gitlab.svg';
 	image.type = 'image/svg+xml';
-	image.onload = e => ResetearColores();
+	image.onload = (e) => ResetearColores();
 	pTitle.classList.add('comment-title');
 	divCard.classList.add('cards');
 	divCardLoad.classList.add('tarjeta_load');
@@ -208,17 +226,16 @@ function agregarComentario() {
 	// Borrar inputs //
 	document.getElementById('add-comment__input').value = '';
 	puntajes.forEach((element) => (element.checked = false));
-
 }
 
 function ResetearColores() {
 	let colores = ['#ffa7a7', '#ffa7fb', '#fff9a7', '#a7b0ff', '#b1ffa7', '#a7ffff'];
 	let contador = 0;
-		Array.from(document.getElementsByTagName('object')).forEach((element) => {
-			if (contador > colores.length - 1) {
-				contador = 0;
-			}
-			element.contentDocument.getElementsByTagName('svg')[0].style.color = colores[contador];
-			contador++;
-		});
+	Array.from(document.getElementsByTagName('object')).forEach((element) => {
+		if (contador > colores.length - 1) {
+			contador = 0;
+		}
+		element.contentDocument.getElementsByTagName('svg')[0].style.color = colores[contador];
+		contador++;
+	});
 }

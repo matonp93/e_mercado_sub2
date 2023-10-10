@@ -1,77 +1,204 @@
 <!DOCTYPE html>
 <html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>eMercado - Todo lo que busques está aquí</title>
+		<link
+			href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+			rel="stylesheet" />
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/font-awesome.min.css" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+		<link href="css/styles.css" rel="stylesheet" />
+		<link href="stylecart.css" rel="stylesheet" />
+		<link rel="icon" href="favicon.ico" />
+	</head>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link rel="icon" href="favicon.ico">
-</head>
+	<body>
+		<nav class="navbar navbar-expand-md p-1">
+			<div class="container">
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="categories.html">Categorías</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="sell.html">Vender</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item dropdown">
+							<button
+								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center boton-dropdown"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false">
+								<span id="user-info"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-lg-end">
+								<li><a class="dropdown-item" id="irAPerfil" href="#">Ver perfil</a></li>
+								<li><a class="dropdown-item" id="deslogear" href="#">Salir</a></li>
+							</ul>
+						</li>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-          <li class="nav-item dropdown">
-            <button class="btn dropdown-toggle boton-dropdown shadow-none btncito" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <span id="user-info"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-lg-end">
-            <li><a class="dropdown-item " id="irAPerfil" href="#">Ver perfil</a></li>
-            <li><a class="dropdown-item" id="irCarrito" href="#">Mi carrito</a></li>
-            <li><a class="dropdown-item " id="deslogear" href="#">Salir</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
-</body>
+						<li class="nav-item dropdown">
+							<button
+								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center boton-dropdown"
+								style="gap: 5px"
+								id="bd-theme"
+								type="button"
+								aria-expanded="false"
+								data-bs-toggle="dropdown"
+								data-bs-display="static"
+								aria-label="Tema">
+								<i class="bi bi-palette"></i>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="bd-theme-text">
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
+										value="Oscuro"
+										id="Oscuro"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Oscuro"
+										>Tema oscuro <i class="bi bi-moon"></i
+									></label>
+								</li>
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
+										value="Claro"
+										id="Claro"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Claro"
+										>Tema claro <i class="bi bi-brightness-high"></i
+									></label>
+								</li>
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
+										value="Sistema"
+										id="Sistema"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Sistema"
+										>Tema del sistema <i class="bi bi-pc-display"></i
+									></label>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<button class="btn shadow-none" type="button" id="carrito">
+								<i class="bi bi-cart4 text-white"></i>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
+		<main>
+			<h1 class="cartTitle">Carrito de compras</h1>
+			<div id="cartItems">
+				<h2 class="cartTitle">Articulos a comprar</h2>
+			</div>
+
+			<hr />
+
+			<h2 class="Envio">Tipo de envío</h2>
+			<div class="wrapper">
+				<div class="card">
+					<input class="input" type="radio" name="card" value="basic" />
+					<span class="check"></span>
+					<label class="label">
+						<div class="title">STANDARD</div>
+						<div class="price">
+							12~15 días
+							<span class="span">(5%)</span>
+						</div>
+					</label>
+				</div>
+				<div class="card">
+					<input class="input" type="radio" name="card" value="standart" />
+					<span class="check"></span>
+					<label class="label">
+						<div class="title">EXPRESS</div>
+						<div class="price">
+							5~8 días
+							<span class="span">(7%)</span>
+						</div>
+					</label>
+				</div>
+				<div class="card">
+					<input class="input" type="radio" name="card" value="premium" />
+					<span class="check"></span>
+					<label class="label">
+						<div class="title">PREMIUM</div>
+						<div class="price">
+							2~5 días
+							<span class="span">(15%)</span>
+						</div>
+					</label>
+				</div>
+			</div>
+			<h3 style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
+			<div class="inputGroup">
+				<input type="text" required="" autocomplete="off" />
+				<label for="name">Calle</label>
+			</div>
+
+			<div class="inputGroup">
+				<input type="text" required="" autocomplete="off" />
+				<label for="name">Número</label>
+			</div>
+			<div class="inputGroup">
+				<input type="text" required="" autocomplete="off" />
+				<label for="name">Esquina</label>
+			</div>
+		</main>
+
+		<footer class="text-muted">
+			<div class="container">
+				<p class="float-end">
+					<a href="#">Volver arriba</a>
+				</p>
+				<p>
+					Este sitio forma parte de
+					<a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+				</p>
+			</div>
+		</footer>
+		<div id="spinner-wrapper">
+			<div class="lds-ring">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/init.js"></script>
+		<script src="js/cart.js"></script>
+	</body>
 </html>

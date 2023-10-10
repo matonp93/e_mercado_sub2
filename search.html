@@ -12,12 +12,15 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
 		<link href="css/font-awesome.min.css" rel="stylesheet" />
 		<link href="css/styles.css" rel="stylesheet" />
-		<link rel="stylesheet" href="css/productosDark.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+		<link rel="stylesheet" href="css/productos.css" />
 		<link rel="icon" href="favicon.ico" />
 	</head>
 
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+		<nav class="navbar navbar-expand-md p-1">
 			<div class="container">
 				<button
 					class="navbar-toggler"
@@ -30,7 +33,7 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav w-100 justify-content-between">
+					<ul class="navbar-nav">
 						<li class="nav-item">
 							<a class="nav-link" href="index.html">Inicio</a>
 						</li>
@@ -40,10 +43,11 @@
 						<li class="nav-item">
 							<a class="nav-link" href="sell.html">Vender</a>
 						</li>
-						<li class="nav-item"></li>
+					</ul>
+					<ul class="navbar-nav ms-auto">
 						<li class="nav-item dropdown">
 							<button
-								class="btn dropdown-toggle boton-dropdown shadow-none btncito"
+								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center boton-dropdown"
 								type="button"
 								data-bs-toggle="dropdown"
 								aria-expanded="false">
@@ -51,16 +55,72 @@
 							</button>
 							<ul class="dropdown-menu dropdown-menu-lg-end">
 								<li><a class="dropdown-item" id="irAPerfil" href="#">Ver perfil</a></li>
-								<li><a class="dropdown-item" id="irCarrito" href="#">Mi carrito</a></li>
 								<li><a class="dropdown-item" id="deslogear" href="#">Salir</a></li>
 							</ul>
+						</li>
+
+						<li class="nav-item dropdown">
+							<button
+								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center boton-dropdown"
+								style="gap: 5px"
+								id="bd-theme"
+								type="button"
+								aria-expanded="false"
+								data-bs-toggle="dropdown"
+								data-bs-display="static"
+								aria-label="Tema">
+								<i class="bi bi-palette"></i>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="bd-theme-text">
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
+										value="Oscuro"
+										id="Oscuro"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Oscuro"
+										>Tema oscuro <i class="bi bi-moon"></i
+									></label>
+								</li>
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
+										value="Claro"
+										id="Claro"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Claro"
+										>Tema claro <i class="bi bi-brightness-high"></i
+									></label>
+								</li>
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
+										value="Sistema"
+										id="Sistema"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Sistema"
+										>Tema del sistema <i class="bi bi-pc-display"></i
+									></label>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<button class="btn shadow-none" type="button" id="carrito">
+								<i class="bi bi-cart4 text-white"></i>
+							</button>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<main>
-			<div class="input-group mb-3" id="searchdiv">
+			<div class="input-group mb-3" id="searchdiv" hidden>
 				<input
 					type="text"
 					id="searchinput"
@@ -86,6 +146,7 @@
 					</svg>
 				</button>
 			</div>
+			<button id="test">Test</button>
 			<container id="products"> </container>
 		</main>
 		<footer class="text-muted">
