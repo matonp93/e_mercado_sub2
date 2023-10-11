@@ -123,61 +123,71 @@
 				<h1 class="cartTitle">Carrito de compras</h1>
 				<div id="cartItems">
 					<h2 class="cartTitle">Articulos a comprar</h2>
+					<table id="tableItems"></table>
 				</div>
 			</section>
 
-			<hr />
-
-			<h2 class="Envio">Tipo de envío</h2>
-			<div class="wrapper">
-				<div class="card">
-					<input class="input" type="radio" name="card" value="basic" />
-					<span class="check"></span>
-					<label class="label">
-						<div class="title">STANDARD</div>
-						<div class="price">
-							12~15 días
-							<span class="span">(5%)</span>
+			<section class="envio-section">
+				<div class="tipoDeEnvio">
+					<h2 class="subtitle Envio">Tipo de envío</h2>
+					<div class="wrapper">
+						<div class="card">
+							<input class="input" type="radio" name="card" value="basic" />
+							<span class="check"></span>
+							<label class="label">
+								<div class="title">STANDARD</div>
+								<div class="price">
+									12~15 días
+									<span class="span">(5%)</span>
+								</div>
+							</label>
 						</div>
-					</label>
-				</div>
-				<div class="card">
-					<input class="input" type="radio" name="card" value="standart" />
-					<span class="check"></span>
-					<label class="label">
-						<div class="title">EXPRESS</div>
-						<div class="price">
-							5~8 días
-							<span class="span">(7%)</span>
+						<div class="card">
+							<input class="input" type="radio" name="card" value="standart" />
+							<span class="check"></span>
+							<label class="label">
+								<div class="title">EXPRESS</div>
+								<div class="price">
+									5~8 días
+									<span class="span">(7%)</span>
+								</div>
+							</label>
 						</div>
-					</label>
-				</div>
-				<div class="card">
-					<input class="input" type="radio" name="card" value="premium" />
-					<span class="check"></span>
-					<label class="label">
-						<div class="title">PREMIUM</div>
-						<div class="price">
-							2~5 días
-							<span class="span">(15%)</span>
+						<div class="card">
+							<input class="input" type="radio" name="card" value="premium" />
+							<span class="check"></span>
+							<label class="label">
+								<div class="title">PREMIUM</div>
+								<div class="price">
+									2~5 días
+									<span class="span">(15%)</span>
+								</div>
+							</label>
 						</div>
-					</label>
+					</div>
+					<h3 class="subtitle" style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
+					<div class="inputGroup">
+						<input type="text" required="" autocomplete="off" />
+						<label for="name">Calle</label>
+					</div>
+					<div class="inputGroup">
+						<input type="text" required="" autocomplete="off" />
+						<label for="name">Número</label>
+					</div>
+					<div class="inputGroup">
+						<input type="text" required="" autocomplete="off" />
+						<label for="name">Esquina</label>
+					</div>
 				</div>
-			</div>
-			<h3 style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
-			<div class="inputGroup">
-				<input type="text" required="" autocomplete="off" />
-				<label for="name">Calle</label>
-			</div>
-
-			<div class="inputGroup">
-				<input type="text" required="" autocomplete="off" />
-				<label for="name">Número</label>
-			</div>
-			<div class="inputGroup">
-				<input type="text" required="" autocomplete="off" />
-				<label for="name">Esquina</label>
-			</div>
+				<div class="map-tipo">
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d774440.9834695624!2d-56.50090110410801!3d-34.22402939550177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2suy!4v1697025863106!5m2!1ses-419!2suy"
+						style="border: 0"
+						allowfullscreen=""
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"></iframe>
+				</div>
+			</section>
 		</main>
 
 		<footer class="text-muted">
