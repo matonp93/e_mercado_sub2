@@ -167,25 +167,22 @@
 					</div>
 					<h3 class="subtitle" style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
 					<div class="inputGroup">
-						<input type="text" required="" autocomplete="off" />
-						<label for="name">Calle</label>
+						<input id="autocomplete" type="text" required="" autocomplete="off" />
 					</div>
 					<div class="inputGroup">
-						<input type="text" required="" autocomplete="off" />
-						<label for="name">Número</label>
+						<input id="inputcalle" type="text" required="" placeholder=" " autocomplete="off" readonly/>
+						<label for="inputcalle">Calle</label>
 					</div>
 					<div class="inputGroup">
-						<input type="text" required="" autocomplete="off" />
-						<label for="name">Esquina</label>
+						<input id="inputnumero" type="text" required="" placeholder=" " autocomplete="off" readonly/>
+						<label for="inputnumero">Numero</label>
+					</div>
+					<div class="inputGroup">
+						<input id="inputesquina" type="text" required="" placeholder=" " autocomplete="off"/>
+						<label for="inputnumero">Esquina</label>
 					</div>
 				</div>
-				<div class="map-tipo">
-					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d774440.9834695624!2d-56.50090110410801!3d-34.22402939550177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2suy!4v1697025863106!5m2!1ses-419!2suy"
-						style="border: 0"
-						allowfullscreen=""
-						loading="lazy"
-						referrerpolicy="no-referrer-when-downgrade"></iframe>
+				<div id="map">
 				</div>
 			</section>
 		</main>
@@ -212,5 +209,8 @@
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/init.js"></script>
 		<script src="js/cart.js"></script>
+		<script async
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAApEaQUDpG-QydzEhRT33QcLoc4LlpHe4&libraries=places&callback=initAutocomplete">
+		</script>
 	</body>
 </html>
