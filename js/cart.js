@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const url = CART_INFO_URL + '25801' + EXT_TYPE;
-    const cartItems = document.getElementById('cartItems');
-    cartItems.classList.add("cartItems");
+    const tableItems = document.getElementById('tableItems');
+    tableItems.classList.add('tableItems');
+
     getJSONData(url)
     .then(response =>{
         response.data.articles.forEach(element => {
@@ -20,13 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function mostrarProducto(name, image, currency, unitCost, count, eliminar){
         // Creación de elementos HTML //
-        let itemCart = document.createElement('div');
+        let row = document.createElement("tr");
+        //let itemCart = document.createElement('div');
+        let tdTitlePriceDiv = document.createElement("td");
         let titlePriceDiv = document.createElement('div');
+
+        let tdImgCart = document.createElement("td");
         let imgCart = document.createElement('img');
+
+        let tdNameCart = document.createElement("td");
         let nameCart = document.createElement('p');
+
+        let tdPriceCart = document.createElement("td");
         let priceCart = document.createElement('p');
+
+        let tdCantCart = document.createElement("td");
         let cantCart = document.createElement('input');
+
+        let tdSubtotalCart= document.createElement("td");
         let subtotalCart = document.createElement('p');
+
+        let tdBtnBorrar = document.createElement("td");
         let btnBorrar = document.createElement("button");
         
         imgCart.setAttribute('src', image);
@@ -49,23 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
         subtotalCart.innerHTML += currency + " " + unitCost * count;
     
         // Atributos y clases //
-        itemCart.classList.add('divCart');
+        //itemCart.classList.add('divCart');
         titlePriceDiv.classList.add('divPrice');
-        imgCart.classList.add('imaga');
+        tdImgCart.classList.add('tdImage');
+        imgCart.classList.add('image')
         nameCart.classList.add('pName');
         priceCart.classList.add('pPrice');
         cantCart.classList.add('pCant');
         subtotalCart.classList.add('pSubtotal');
-        btnBorrar.classList.add("btnBorrar");
+        btnBorrar.classList.add('btnBorrar');
+
         // AppendChild's //
         titlePriceDiv.appendChild(nameCart);
         titlePriceDiv.appendChild(priceCart);
-        itemCart.appendChild(imgCart);
-        itemCart.appendChild(titlePriceDiv);
-        itemCart.appendChild(cantCart);
-        itemCart.appendChild(subtotalCart);
-        itemCart.appendChild(btnBorrar);
-        cartItems.appendChild(itemCart);
+        // itemCart.appendChild(imgCart);
+        // itemCart.appendChild(titlePriceDiv);
+        // itemCart.appendChild(cantCart);
+        // itemCart.appendChild(subtotalCart);
+        // itemCart.appendChild(btnBorrar);
+
+        tdTitlePriceDiv.appendChild(titlePriceDiv);
+        tdImgCart.appendChild(imgCart);
+        tdCantCart.appendChild(cantCart);
+        tdSubtotalCart.appendChild(subtotalCart);
+        tdBtnBorrar.appendChild(btnBorrar);
+
+        row.appendChild(tdImgCart);
+        row.appendChild(tdTitlePriceDiv);
+        row.appendChild(tdCantCart);
+        row.appendChild(tdSubtotalCart);
+        row.appendChild(tdBtnBorrar);
+
+        tableItems.appendChild(row);
     };
 });
  

@@ -1,27 +1,30 @@
-.imaga{
-  width: 20%;
+#cartItems{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.divCart{
-  display:flex;
+.image{
   width: 100%;
-  justify-content: space-between;
 }
-.cartItems{
-  display:flex;
-  flex-direction: column;
+
+.tdImage{
+  width: 25%;
+}
+
+.tableItems{
+  margin: auto;
   width: 50%;
-  align-items: center;
-  margin:auto
 }
+
+.pName{
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .pCant{
   width: 5rem;
-  height: 1rem;
-}
-.btnBorrar{
-  height: 2rem;
-  padding: 0px 15px;
-  
 }
 
 .wrapper {
