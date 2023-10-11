@@ -356,6 +356,7 @@ a.custom-card:hover {
 	outline: none;
 	padding: 5px 20px;
 	position: relative;
+	margin-top: 5%;
 }
 
 #button-addon2 {
@@ -368,6 +369,7 @@ a.custom-card:hover {
 	margin-right: 15px;
 	transition: 0.2s;
 	padding: 0;
+	margin-top: 5%;
 
 	&:hover {
 		background: transparent;
