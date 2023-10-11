@@ -5,6 +5,13 @@ body {
 	color: var(--textcolor);
 }
 
+.carrito{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 #cartItems {
 	display: flex;
 	flex-direction: column;
@@ -12,17 +19,23 @@ body {
 	justify-content: center;
 }
 
-.image {
-	width: 100%;
+.image{
+  width: 100%;
 }
 
-.tdImage {
-	width: 25%;
+.tdImage{
+  width: 175px;
+  min-width: 100px;
+  min-height: 50px;
 }
 
 .tableItems {
 	margin: auto;
-	width: 50%;
+  width: 50vw;
+}
+
+.divPrice{
+  margin-left: 10px;
 }
 
 .pName {
@@ -31,7 +44,12 @@ body {
 }
 
 .pCant {
-	width: 5rem;
+	width: 3rem;
+  margin-bottom: 15px;
+}
+
+.btnBorrar{
+  margin-bottom: 15px;
 }
 
 .wrapper {

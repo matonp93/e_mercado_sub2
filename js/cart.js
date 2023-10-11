@@ -20,24 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	listaDelCarrito.forEach((element) => {
 		getJSONData(PRODUCT_INFO_URL + element + EXT_TYPE).then((data) => {
 			let producto = data.data;
-			mostrarProducto(producto.name, producto.images[0], producto.currency, producto.cost, 1, true);
+			mostrarProducto(producto.name, producto.images[0], producto.currency, producto.cost, 1, producto.id, true);
 		});
 	});
 
-	function mostrarProducto(name, image, currency, unitCost, count, eliminar) {
+	function mostrarProducto(name, image, currency, unitCost, count, id, eliminar) {
 		// Creación de elementos HTML //
 		let row = document.createElement('tr');
-		//let itemCart = document.createElement('div');
 		let tdTitlePriceDiv = document.createElement('td');
 		let titlePriceDiv = document.createElement('div');
 
 		let tdImgCart = document.createElement('td');
 		let imgCart = document.createElement('img');
 
-		let tdNameCart = document.createElement('td');
 		let nameCart = document.createElement('p');
 
-		let tdPriceCart = document.createElement('td');
 		let priceCart = document.createElement('p');
 
 		let tdCantCart = document.createElement('td');
@@ -62,14 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		btnBorrar.addEventListener('click', () => {
 			btnBorrar.parentElement.parentElement.remove();
 			if (eliminar) {
-				listaDelCarrito.splice(listaDelCarrito.indexOf(name.parentElement), 1);
+				listaDelCarrito.splice(listaDelCarrito.indexOf(id), 1);
 				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
 			}
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
 		// Atributos y clases //
-		//itemCart.classList.add('divCart');
 		titlePriceDiv.classList.add('divPrice');
 		tdImgCart.classList.add('tdImage');
 		imgCart.classList.add('image');
@@ -82,12 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		// AppendChild's //
 		titlePriceDiv.appendChild(nameCart);
 		titlePriceDiv.appendChild(priceCart);
-		// itemCart.appendChild(imgCart);
-		// itemCart.appendChild(titlePriceDiv);
-		// itemCart.appendChild(cantCart);
-		// itemCart.appendChild(subtotalCart);
-		// itemCart.appendChild(btnBorrar);
-
 		tdTitlePriceDiv.appendChild(titlePriceDiv);
 		tdImgCart.appendChild(imgCart);
 		tdCantCart.appendChild(cantCart);
