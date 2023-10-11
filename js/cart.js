@@ -103,3 +103,55 @@ document.addEventListener('DOMContentLoaded', () => {
 		tableItems.appendChild(row);
 	}
 });
+
+function initAutocomplete(){
+	let arrayMarkers = new Array();
+	const inputcalle = document.getElementById("inputcalle");
+	const inputnumero = document.getElementById("inputnumero");
+	const inputesquina = document.getElementById("inputesquina");
+	let map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: -34.8225143, lng: -56.1970454},
+		zoom: 11
+	  });
+	let autocomplete = new google.maps.places.Autocomplete(
+		document.getElementById("autocomplete"));
+	autocomplete.setComponentRestrictions({
+		country: ["uy","ar","br"],
+	});		
+	autocomplete.setFields(['address_components', 'geometry']);
+	autocomplete.addListener('place_changed',()=>{
+		var place = autocomplete.getPlace();
+			if(!place.geometry){
+				document.getElementById("autocomplete").value = "";
+				document.getElementById("autocomplete").placeholder = "Ingrese un lugar válido";
+			} else{
+				if(Array.isArray(arrayMarkers) && arrayMarkers.length){
+					arrayMarkers.forEach(element => element.setMap(null));
+					arrayMarkers.length = 0;
+				}
+					map.setCenter(place.geometry.location);
+					map.setZoom(18);
+					arrayMarkers.push(new google.maps.Marker({
+						position: place.geometry.location,
+						map
+					}));			
+				for (const component of place.address_components) {
+					const componentType = component.types[0];
+					console.log(component)
+					switch(componentType){
+						case "street_number":
+							inputnumero.value = component.short_name;
+							break;
+						case "route":
+							inputcalle.value = component.short_name;
+							break;
+						case "street_address":
+							inputcalle.value = component.short_name;
+							break;
+					}
+				}
+				inputesquina.focus();
+			}
+	})
+}
+
