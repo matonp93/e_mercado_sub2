@@ -422,6 +422,7 @@ a.custom-card:hover {
 #cat-list-container img {
 	border: none;
 	border-radius: 5%;
+	background-color: transparent;
 }	
 	
 #cat-list-container h4 { 
