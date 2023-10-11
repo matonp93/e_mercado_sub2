@@ -12,7 +12,9 @@
 .navbar {
 	background-color: #651acf;
 }
-
+.navbar>.container{
+	padding: 0px 0px 0px 0px;
+}
 .navbar-toggler:focus {
 	color: transparent;
 }

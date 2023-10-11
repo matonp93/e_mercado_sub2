@@ -280,7 +280,7 @@ body {
 	color: #fd4;
 }
 
-input:checked ~ label {
+input:checked ~ label.fa-star {
 	color: #fd4;
 }
 
