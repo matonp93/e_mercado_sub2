@@ -19,6 +19,88 @@ body {
 	justify-content: center;
 }
 
+/* -- STYLE CARRITO -- */
+
+#cartItems {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background-color: #f8f9fa;
+	border: 1px solid #e1e1e1;
+	border-radius: 30px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item {
+	display: flex;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow: hidden;
+	background-color: white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item-image {
+	flex: 0 0 150px;
+  }
+  
+  .cart-item-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+  }
+  
+  .cart-item-details {
+	flex: 1;
+	padding: 15px;
+  }
+  
+  .cart-item-title {
+	font-weight: 600;
+	font-size: 18px;
+	margin-bottom: 5px;
+  }
+  
+  .cart-item-price {
+	font-size: 16px;
+  }
+  
+  .cart-item-quantity {
+	flex: 0 0 80px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+	background-color: #f8f9fa;
+  }
+  
+  .cart-item-quantity input[type="number"] {
+	width: 40px;
+	text-align: center;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+  }
+  
+  .cart-item-remove {
+	flex: 0 0 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #f8f9fa;
+	cursor: pointer;
+  }
+  
+  .cart-item-remove i {
+	color: #d9534f;
+	font-size: 24px;
+  }
+
+  /* ---------------------- */
+
 .image{
   width: 100%;
 }
@@ -46,6 +128,7 @@ body {
 .pCant {
 	width: 3rem;
   margin-bottom: 15px;
+  border-radius: 8px;
 }
 
 .btnBorrar{
