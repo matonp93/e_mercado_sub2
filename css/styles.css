@@ -414,10 +414,17 @@ a.custom-card:hover {
 
 #rangeFilterCountMin{
 	width: 80%;
+	@media (max-width: 520px) {
+		padding: 5%;
+	 }
 }
 
 #rangeFilterCountMax{
-	width: 80%;}
+	width: 80%;
+	@media (max-width: 520px) {
+		padding: 5%;
+	 }
+	}
 
 #cat-list-container img {
 	border: none;
@@ -434,7 +441,17 @@ a.custom-card:hover {
 	padding-left: 2%;
 }
 	
+#clearRangeFilter {
+	@media (max-width: 520px) {
+		padding: 4%;
+	 }
+}
 
+#rangeFilterCount {
+	@media (max-width: 520px) {
+		padding: 4%;
+	 }
+}
 
 /* SELL */
 
