@@ -284,7 +284,7 @@ body {
 	border-color: var(--primary);
 }
 
-/* Responsive Styles */
+            /* Responsive */
 
 @media screen and (max-width: 768px) {
 	.wrapper {
@@ -293,10 +293,9 @@ body {
 	.card {
 		width: 100%;
 	}
-	/* Add any other responsive styles as needed */
 }
 
-/* Tipo de envio */
+          /* Tipo de envio */
 
 .envio-section {
 	margin-top: 50px;
