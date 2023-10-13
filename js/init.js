@@ -121,7 +121,6 @@ function DiferenciarTema(value){
 };
 
 function cambiarTema(tema){
-	console.log(tema);
 	switch(tema){
 		case "Dark":
 			document.querySelectorAll("body *, body").forEach(element => element.setAttribute("data-theme","dark"));

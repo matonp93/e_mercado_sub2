@@ -102,7 +102,8 @@ function initAutocomplete(){
 	const inputesquina = document.getElementById("inputesquina");
 	let map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: -34.8225143, lng: -56.1970454},
-		zoom: 11
+		zoom: 11,
+		streetViewControl: false,
 	  });
 	let autocomplete = new google.maps.places.Autocomplete(
 		document.getElementById("autocomplete"));
@@ -114,6 +115,10 @@ function initAutocomplete(){
 		var place = autocomplete.getPlace();
 			if(!place.geometry){
 				document.getElementById("autocomplete").value = "";
+				inputcalle.value = "";
+				inputnumero.value = "";
+				inputesquina.value = "";
+				accesoDenegado();
 				document.getElementById("autocomplete").placeholder = "Ingrese un lugar válido";
 			} else{
 				if(Array.isArray(arrayMarkers) && arrayMarkers.length){
@@ -128,7 +133,6 @@ function initAutocomplete(){
 					}));			
 				for (const component of place.address_components) {
 					const componentType = component.types[0];
-					console.log(component)
 					switch(componentType){
 						case "street_number":
 							inputnumero.value = component.short_name;
@@ -145,4 +149,10 @@ function initAutocomplete(){
 			}
 	})
 }
-
+function accesoDenegado(){
+	const alerta = document.getElementById("alerta");
+	alerta.removeAttribute("hidden");
+	setTimeout(()=>{
+		alerta.setAttribute("hidden","true");
+	},3500)
+}
