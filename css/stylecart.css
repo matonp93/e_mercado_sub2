@@ -12,13 +12,6 @@ body {
   flex-direction: column;
 }
 
-#cartItems {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
 /* -- STYLE CARRITO -- */
 
 #cartItems {
@@ -27,7 +20,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	padding: 20px;
-	background-color: #f8f9fa;
+	background-color: var(--background2);
 	border: 1px solid #e1e1e1;
 	border-radius: 30px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -103,7 +96,7 @@ body {
 
 .image{
 	width: 100%;
-	border-radius: 2px;
+	border-radius: 5px 5px 2px 2px;
 }
 
 .tdImage{
@@ -112,17 +105,9 @@ body {
   min-height: 50px;
 }
 
-.tableItems{
-	border: collapse;
+.tableItems {
 	margin: auto;
-	width: 50vw;
-}
-
-.tableItems tr{
-	border-top: 15px solid #f8f9fa;
-	border-bottom: 15px solid #f8f9fa;
-	background-color: rgba(128, 128, 128, 0.171);
-	margin: 50px;
+  width: 50vw;
 }
 
 .divPrice{
@@ -132,31 +117,28 @@ body {
 .pName {
 	font-weight: bold;
 	font-size: 18px;
-	margin-top: 15px;
 }
 
 .pCant {
-	background-color: #9878c5;
-	width: 4.7rem;
-  	border-radius: 50px;
-  	border: 2px solid #aca8a8;
-	padding: 0 0 0 10px;
+	color: var(--background2);
+	background-color: var(--primary);
+	width: 3rem;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  border: 4px solid #aca8a8;
 }
 
 .btnBorrar{
-	background-color: #651acf;
-	border-radius: 6px;
-	border: 2px solid #aca8a8;
+	color: var(--background2);
+	background-color: var(--primary);
+	  margin-bottom: 15px;
+	border-radius: 3px;
+	border: 4px solid #aca8a8;
 	cursor: pointer;
-	color: #e1e1e1;
   }
-.btnBorrar:hover{
-	background-color: #9068c7;
-}
-
-.pSubtotal{
-	font-weight: bold;
-}
+  .btnBorrar:hover{
+	  background-color: #9068c7;
+  }
 
 .wrapper {
 	position: relative;
@@ -348,5 +330,14 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	
+	@media (width <= 590px) {
+		height: 350px;
+		width: 350px;
+	}
+	@media (width <= 425px) {
+		height: 300px;
+		width: 300px;
+	}
 }
 
