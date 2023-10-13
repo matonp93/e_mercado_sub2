@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		let priceCart = document.createElement('p');
 
-		let tdCantCart = document.createElement('td');
+		//let tdCantCart = document.createElement('td');
 		let cantCart = document.createElement('input');
 
 		let tdSubtotalCart = document.createElement('td');
@@ -80,13 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		titlePriceDiv.appendChild(priceCart);
 		tdTitlePriceDiv.appendChild(titlePriceDiv);
 		tdImgCart.appendChild(imgCart);
-		tdCantCart.appendChild(cantCart);
+		//tdCantCart.appendChild(cantCart);
 		tdSubtotalCart.appendChild(subtotalCart);
+		tdSubtotalCart.appendChild(cantCart);
 		tdBtnBorrar.appendChild(btnBorrar);
 
 		row.appendChild(tdImgCart);
 		row.appendChild(tdTitlePriceDiv);
-		row.appendChild(tdCantCart);
+		//row.appendChild(tdCantCart);
 		row.appendChild(tdSubtotalCart);
 		row.appendChild(tdBtnBorrar);
 
