@@ -67,6 +67,17 @@ body {
 	align-content: stretch;
 	justify-content: center;
 }
+
+#agregarAlCarrito{
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	margin: -10px 0;
+}
+
+#agregarAlCarrito p{
+	padding-top: 14px;
+}
 .divInfoP {
 	display: flex;
 	align-content: stretch;
@@ -280,7 +291,7 @@ body {
 	color: #fd4;
 }
 
-input:checked ~ label {
+input:checked ~ label.fa-star {
 	color: #fd4;
 }
 

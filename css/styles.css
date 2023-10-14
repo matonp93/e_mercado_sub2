@@ -12,7 +12,9 @@
 .navbar {
 	background-color: #651acf;
 }
-
+.navbar>.container{
+	padding: 0px 0px 0px 0px;
+}
 .navbar-toggler:focus {
 	color: transparent;
 }
@@ -136,8 +138,8 @@ body {
 }
 
 .img-jumbotron {
-	filter: drop-shadow(0px 1000px 0 var(--textcolor));
-	transform: translateY(-1000px);
+	filter: var(--filtervalue);
+	transform: var(--transformvalue);
 	@media (width <= 768px) {
 		max-width: 400px;
 	}
@@ -321,22 +323,18 @@ a.custom-card:hover {
 	position: relative;
 }
 .container-1 input#buscador {
-	height: 40px;
-	background: #faecf8;
-	border: none;
-	font-size: 10pt;
-	float: left;
-	color: #ba98bd;
-	padding-left: 15px;
-	padding-right: 8px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.521);
+	border-radius: 40px;
+	background-color: rgb(230, 230, 230);
+	color: rgb(29, 29, 29);
+	outline: none;
+	padding: 5px 20px;
+	position: relative;
 }
 .container-1 .icon {
 	position: absolute;
 	top: 50%;
-	margin-left: -250px;
+	margin-left: 200px;
 	margin-top: -10px;
 	z-index: 1;
 	color: #4f5b66;
@@ -356,6 +354,7 @@ a.custom-card:hover {
 	outline: none;
 	padding: 5px 20px;
 	position: relative;
+	margin-top: 5%;
 }
 
 #button-addon2 {
@@ -368,6 +367,7 @@ a.custom-card:hover {
 	margin-right: 15px;
 	transition: 0.2s;
 	padding: 0;
+	margin-top: 5%;
 
 	&:hover {
 		background: transparent;
@@ -394,6 +394,63 @@ a.custom-card:hover {
 	&:hover {
 		background-color: var(--background2);
 	}
+}
+
+#cat-list-container .list-group-item {
+	border-radius: 20px;
+	margin: 0.5%;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+	@media (max-width: 613px) {
+       width: 90%;
+    }
+	}
+
+#categoriesTitle {
+	color: var(--primary);
+    text-shadow: 0px 0px 2px rgb(54, 54, 54);
+    font-size: 350%;
+    font-weight: 600 ;
+}
+
+#rangeFilterCountMin{
+	width: 80%;
+	@media (max-width: 520px) {
+		padding: 5%;
+	 }
+}
+
+#rangeFilterCountMax{
+	width: 80%;
+	@media (max-width: 520px) {
+		padding: 5%;
+	 }
+	}
+
+#cat-list-container img {
+	border: none;
+	border-radius: 5%;
+	background-color: transparent;
+}	
+	
+#cat-list-container h4 { 
+	padding-top: 3%;
+	padding-left: 2%;
+}
+	
+#cat-list-container p {
+	padding-left: 2%;
+}
+	
+#clearRangeFilter {
+	@media (max-width: 520px) {
+		padding: 4%;
+	 }
+}
+
+#rangeFilterCount {
+	@media (max-width: 520px) {
+		padding: 4%;
+	 }
 }
 
 /* SELL */

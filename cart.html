@@ -13,7 +13,7 @@
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 		<link href="css/styles.css" rel="stylesheet" />
-		<link href="stylecart.css" rel="stylesheet" />
+		<link href="css/stylecart.css" rel="stylesheet" />
 		<link rel="icon" href="favicon.ico" />
 	</head>
 
@@ -119,63 +119,78 @@
 		</nav>
 
 		<main>
-			<h1 class="cartTitle">Carrito de compras</h1>
-			<div id="cartItems">
-				<h2 class="cartTitle">Articulos a comprar</h2>
-			</div>
-
-			<hr />
-
-			<h2 class="Envio">Tipo de envío</h2>
-			<div class="wrapper">
-				<div class="card">
-					<input class="input" type="radio" name="card" value="basic" />
-					<span class="check"></span>
-					<label class="label">
-						<div class="title">STANDARD</div>
-						<div class="price">
-							12~15 días
-							<span class="span">(5%)</span>
-						</div>
-					</label>
+			<section class="carrito">
+				<h1 class="cartTitle">Carrito de compras</h1>
+				<div id="cartItems">
+					<h2 class="cartTitle">Articulos a comprar</h2>	
+					<table id="tableItems"></table>
 				</div>
-				<div class="card">
-					<input class="input" type="radio" name="card" value="standart" />
-					<span class="check"></span>
-					<label class="label">
-						<div class="title">EXPRESS</div>
-						<div class="price">
-							5~8 días
-							<span class="span">(7%)</span>
-						</div>
-					</label>
-				</div>
-				<div class="card">
-					<input class="input" type="radio" name="card" value="premium" />
-					<span class="check"></span>
-					<label class="label">
-						<div class="title">PREMIUM</div>
-						<div class="price">
-							2~5 días
-							<span class="span">(15%)</span>
-						</div>
-					</label>
-				</div>
-			</div>
-			<h3 style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
-			<div class="inputGroup">
-				<input type="text" required="" autocomplete="off" />
-				<label for="name">Calle</label>
-			</div>
+			</section>
 
-			<div class="inputGroup">
-				<input type="text" required="" autocomplete="off" />
-				<label for="name">Número</label>
-			</div>
-			<div class="inputGroup">
-				<input type="text" required="" autocomplete="off" />
-				<label for="name">Esquina</label>
-			</div>
+			<section class="envio-section">
+				<div class="tipoDeEnvio">
+					<h2 class="subtitle Envio">Tipo de envío</h2>
+					<div class="wrapper">
+						<div class="card">
+							<input class="input" type="radio" name="card" value="basic" />
+							<span class="check"></span>
+							<label class="label">
+								<div class="title">STANDARD</div>
+								<div class="price">
+									12~15 días
+									<span class="span">(5%)</span>
+								</div>
+							</label>
+						</div>
+						<div class="card">
+							<input class="input" type="radio" name="card" value="standart" />
+							<span class="check"></span>
+							<label class="label">
+								<div class="title">EXPRESS</div>
+								<div class="price">
+									5~8 días
+									<span class="span">(7%)</span>
+								</div>
+							</label>
+						</div>
+						<div class="card">
+							<input class="input" type="radio" name="card" value="premium" />
+							<span class="check"></span>
+							<label class="label">
+								<div class="title">PREMIUM</div>
+								<div class="price">
+									2~5 días
+									<span class="span">(15%)</span>
+								</div>
+							</label>
+						</div>
+					</div>
+					<h3 class="subtitle" style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
+					<div id="alerta" hidden>
+						<p>Ingrese una <strong>dirección válida</strong></p>
+					</div>
+					<div class="inputGroup">
+						<input id="autocomplete" type="text" required="" autocomplete="off" />
+					</div>
+					<div class="inputGroup">
+						<input id="inputcalle" type="text" required="" placeholder=" " autocomplete="off" readonly/>
+						<label for="inputcalle">Calle</label>
+					</div>
+					<div class="inputGroup">
+						<input id="inputnumero" type="text" required="" placeholder=" " autocomplete="off" readonly/>
+						<label for="inputnumero">Numero</label>
+					</div>
+					<div class="inputGroup">
+						<input id="inputesquina" type="text" required="" placeholder=" " autocomplete="off"/>
+						<label for="inputnumero">Esquina</label>
+					</div>
+				</div>
+				<div id="map">
+				</div>
+			</section>
+			<section id="">
+
+			</section>
 		</main>
 
 		<footer class="text-muted">
@@ -200,5 +215,8 @@
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/init.js"></script>
 		<script src="js/cart.js"></script>
+		<script async
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAApEaQUDpG-QydzEhRT33QcLoc4LlpHe4&libraries=places&callback=initAutocomplete">
+		</script>
 	</body>
 </html>
