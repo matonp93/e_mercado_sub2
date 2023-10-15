@@ -111,8 +111,8 @@ body {
 }
 
 .tableItems tr{
-	border-bottom: 20px solid white;
-	background-color: #e1e1e1;
+	border-bottom: 20px solid var(--background2);
+	background-color: var(--background);
 }
 
 .divPrice{
