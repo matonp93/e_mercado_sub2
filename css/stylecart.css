@@ -96,7 +96,7 @@ body {
 
 .image{
 	width: 100%;
-	border-radius: 5px 5px 2px 2px;
+	border-radius: 2px;
 }
 
 .tdImage{
@@ -110,8 +110,13 @@ body {
   width: 50vw;
 }
 
+.tableItems tr{
+	border-bottom: 20px solid var(--background2);
+	background-color: var(--background);
+}
+
 .divPrice{
-  margin-left: 10px;
+  margin: 15px 0 0 15px;
 }
 
 .pName {
@@ -119,21 +124,24 @@ body {
 	font-size: 18px;
 }
 
+.pSubtotal{
+	font-weight: bold;
+}
+
 .pCant {
 	color: var(--background2);
 	background-color: var(--primary);
-	width: 3rem;
-  margin-bottom: 15px;
-  border-radius: 3px;
-  border: 4px solid #aca8a8;
+	width: 4rem;
+  	border-radius: 50px;
+ 	border: 2px solid #aca8a8;
+	padding: 0 0 0 10px;
 }
 
 .btnBorrar{
 	color: var(--background2);
 	background-color: var(--primary);
-	  margin-bottom: 15px;
-	border-radius: 3px;
-	border: 4px solid #aca8a8;
+	border-radius: 7px;
+	border: 2px solid #aca8a8;
 	cursor: pointer;
   }
   .btnBorrar:hover{
