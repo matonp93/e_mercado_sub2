@@ -333,16 +333,17 @@ body {
 }
 
 #map {
-	height: 500px;
-	width: 500px;
+	height: 350px;
+	width: 350px;
 	border-radius: 15px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	outline: 2px solid var(--textcolor);
 
 	@media (width <= 590px) {
-		height: 350px;
-		width: 350px;
+		height: 300px;
+		width: 300px;
 	}
 	@media (width <= 425px) {
 		height: 300px;
@@ -356,30 +357,84 @@ body {
 
 /* metodos de pago */
 
+.paymentSection {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.paymentSection button,
+.closePaymentForm {
+	font-size: 0.9rem;
+	background-color: var(--primary);
+	padding: 5px 10px;
+	border-radius: 20px;
+	border: none;
+	transition: all 0.2s;
+	text-transform: uppercase;
+	color: var(--background2);
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
 .modal {
+	font-size: 1rem;
 	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
-
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
+	position: relative;
+	box-sizing: border-box;
 	background: var(--background2);
 	color: var(--textcolor);
-	margin: 20% auto;
+	margin: 80px auto;
 	padding: 20px;
-	width: 60%;
+	width: 80%;
+	max-width: 461px;
 	border: 2px solid var(--primary);
 }
 
-.closePaymentForm {
+.option1 {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 }
 
 #paymentForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: start;
+	gap: 10px;
+}
+
+.campPaymentForm {
+	display: flex;
+	flex-direction: column;
+
+	@media (width <= 588px) {
+		width: 100%;
+	}
+}
+
+.campPaymentForm input {
+	border-radius: 10px;
+	border: none;
+	padding: 5px 10px;
+}
+
+/* CON GRID */
+/* #paymentForm {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 0.5fr 1fr 1fr 0.5fr 1fr 0.5fr;
@@ -416,3 +471,4 @@ body {
 	grid-column: 2;
 	text-align: center;
 }
+ */

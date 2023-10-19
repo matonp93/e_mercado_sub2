@@ -188,9 +188,10 @@
 				<div id="map"></div>
 			</section>
 			<!--Sección formas de pago -->
-			<h3>Formas de pago</h3>
-
-			<button onclick="openModal()">Seleccionar</button>
+			<div class="paymentSection">
+				<h3>Formas de pago</h3>
+				<button onclick="openModal()">Seleccionar</button>
+			</div>
 			<div id="paymentModal" class="modal">
 				<div class="modal-content">
 					<span class="close" onclick="closeModal()"></span>
@@ -200,18 +201,19 @@
 								Tarjeta de Crédito <input type="radio" id="option1" name="option" />
 							</label>
 						</div>
-
-						<div class="campPaymentForm">
-							<label for="accountNumber">Numero de Tarjeta:</label>
-							<input type="text" id="accountNumber" />
-						</div>
-						<div class="campPaymentForm">
-							<label for="secureCode">Código de Seguridad</label>
-							<input type="number" id="secureCode" />
-						</div>
-						<div class="campPaymentForm">
-							<label for="goThroug">Vencimiento</label>
-							<input type="text" id="goThroug" placeholder="mm/aa" />
+						<div class="option1">
+							<div class="campPaymentForm">
+								<label for="accountNumber">Numero de Tarjeta:</label>
+								<input type="text" id="accountNumber" />
+							</div>
+							<div class="campPaymentForm">
+								<label for="secureCode">Código de Seguridad</label>
+								<input type="number" id="secureCode" />
+							</div>
+							<div class="campPaymentForm">
+								<label for="goThroug">Vencimiento</label>
+								<input type="text" id="goThroug" placeholder="mm/aa" />
+							</div>
 						</div>
 						<div class="campPaymentForm">
 							<label for="option" id="paymentMethod">
@@ -223,6 +225,7 @@
 							<label for="numberAccount">Número de Cuenta </label>
 							<input type="text" id="numberAccount" />
 						</div>
+
 						<div class="campPaymentForm">
 							<button class="closePaymentForm" type="submit">Guardar</button>
 						</div>
