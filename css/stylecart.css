@@ -333,8 +333,8 @@ body {
 }
 
 #map {
-	height: 350px;
-	width: 350px;
+	height: 500px;
+	width: 500px;
 	border-radius: 15px;
 	display: flex;
 	align-items: center;
