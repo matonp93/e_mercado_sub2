@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		cantCart.value = count;
 		cantCart.addEventListener('change', () => {
 			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
+            subtotalFinal();
+            
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
@@ -70,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				listaDelCarrito.splice(listaDelCarrito.indexOf(id), 1);
 				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
 			}
+            subtotalFinal();
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
@@ -102,6 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		tableItems.appendChild(row);
 	}
 });
+
+window.addEventListener("load", () =>{
+    subtotalFinal();
+})
 
 function initAutocomplete() {
 	let arrayMarkers = new Array();
@@ -191,3 +198,28 @@ document.getElementById('paymentForm').addEventListener('submit', function (even
 
 	closeModal();
 });
+
+
+function subtotalFinal() {
+    let subtotalProd = document.querySelectorAll('.pSubtotal');
+    let suma = 0;
+
+    subtotalProd.forEach((element) => {
+        let value = parseInt(element.textContent.split(' ')[1]);
+        
+		if (element.textContent.split(' ')[0] === "UYU"){
+			precioEnDolar = value / 40;
+		}
+		else {
+			precioEnDolar = value
+		}
+
+        suma += precioEnDolar;
+    });
+
+    let subtotalCostos = document.getElementById("subtotalCostos");
+    subtotalCostos.innerHTML ="USD "+suma;
+    
+}
+
+
