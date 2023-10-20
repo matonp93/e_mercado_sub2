@@ -20,7 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	listaDelCarrito.forEach((element) => {
 		getJSONData(PRODUCT_INFO_URL + element + EXT_TYPE).then((data) => {
 			let producto = data.data;
-			mostrarProducto(producto.name, producto.images[0], producto.currency, producto.cost, 1, producto.id, true);
+			mostrarProducto(
+				producto.name,
+				producto.images[0],
+				producto.currency,
+				producto.cost,
+				1,
+				producto.id,
+				true
+			);
 		});
 	});
 
@@ -54,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		cantCart.value = count;
 		cantCart.addEventListener('change', () => {
 			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
+            subtotalFinal();
+            
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
@@ -62,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				listaDelCarrito.splice(listaDelCarrito.indexOf(id), 1);
 				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
 			}
+            subtotalFinal();
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
@@ -95,64 +106,120 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 });
 
-function initAutocomplete(){
+window.addEventListener("load", () =>{
+    subtotalFinal();
+})
+
+function initAutocomplete() {
 	let arrayMarkers = new Array();
-	const inputcalle = document.getElementById("inputcalle");
-	const inputnumero = document.getElementById("inputnumero");
-	const inputesquina = document.getElementById("inputesquina");
+	const inputcalle = document.getElementById('inputcalle');
+	const inputnumero = document.getElementById('inputnumero');
+	const inputesquina = document.getElementById('inputesquina');
 	let map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: -34.8225143, lng: -56.1970454},
+		center: { lat: -34.8225143, lng: -56.1970454 },
 		zoom: 11,
 		streetViewControl: false,
-	  });
-	let autocomplete = new google.maps.places.Autocomplete(
-		document.getElementById("autocomplete"));
+	});
+	let autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 	autocomplete.setComponentRestrictions({
-		country: ["uy","ar","br"],
-	});		
+		country: ['uy', 'ar', 'br'],
+	});
 	autocomplete.setFields(['address_components', 'geometry']);
-	autocomplete.addListener('place_changed',()=>{
+	autocomplete.addListener('place_changed', () => {
 		var place = autocomplete.getPlace();
-			if(!place.geometry){
-				document.getElementById("autocomplete").value = "";
-				inputcalle.value = "";
-				inputnumero.value = "";
-				inputesquina.value = "";
-				accesoDenegado();
-				document.getElementById("autocomplete").placeholder = "Ingrese un lugar válido";
-			} else{
-				if(Array.isArray(arrayMarkers) && arrayMarkers.length){
-					arrayMarkers.forEach(element => element.setMap(null));
-					arrayMarkers.length = 0;
-				}
-					map.setCenter(place.geometry.location);
-					map.setZoom(18);
-					arrayMarkers.push(new google.maps.Marker({
-						position: place.geometry.location,
-						map
-					}));			
-				for (const component of place.address_components) {
-					const componentType = component.types[0];
-					switch(componentType){
-						case "street_number":
-							inputnumero.value = component.short_name;
-							break;
-						case "route":
-							inputcalle.value = component.short_name;
-							break;
-						case "street_address":
-							inputcalle.value = component.short_name;
-							break;
-					}
-				}
-				inputesquina.focus();
+		if (!place.geometry) {
+			document.getElementById('autocomplete').value = '';
+			inputcalle.value = '';
+			inputnumero.value = '';
+			inputesquina.value = '';
+			accesoDenegado();
+			document.getElementById('autocomplete').placeholder = 'Ingrese un lugar válido';
+		} else {
+			if (Array.isArray(arrayMarkers) && arrayMarkers.length) {
+				arrayMarkers.forEach((element) => element.setMap(null));
+				arrayMarkers.length = 0;
 			}
-	})
+			map.setCenter(place.geometry.location);
+			map.setZoom(18);
+			arrayMarkers.push(
+				new google.maps.Marker({
+					position: place.geometry.location,
+					map,
+				})
+			);
+			for (const component of place.address_components) {
+				const componentType = component.types[0];
+				switch (componentType) {
+					case 'street_number':
+						inputnumero.value = component.short_name;
+						break;
+					case 'route':
+						inputcalle.value = component.short_name;
+						break;
+					case 'street_address':
+						inputcalle.value = component.short_name;
+						break;
+				}
+			}
+			inputesquina.focus();
+		}
+	});
 }
-function accesoDenegado(){
-	const alerta = document.getElementById("alerta");
-	alerta.removeAttribute("hidden");
-	setTimeout(()=>{
-		alerta.setAttribute("hidden","true");
-	},3500)
+function accesoDenegado() {
+	const alerta = document.getElementById('alerta');
+	alerta.removeAttribute('hidden');
+	setTimeout(() => {
+		alerta.setAttribute('hidden', 'true');
+	}, 3500);
 }
+
+// Modal de Pago//
+
+//Función para abrir el modal//
+
+function openModal() {
+	document.getElementById('paymentModal').style.display = 'block';
+}
+
+//Función para cerrar el modal//
+function closeModal() {
+	document.getElementById('paymentModal').style.display = 'none';
+}
+
+//Funcion para manejar el envío del formulario//
+document.getElementById('paymentForm').addEventListener('submit', function (event) {
+	event.preventDefault();
+
+	let paymentMethod = document.getElementById('paymentMethod').value;
+	let accountNumber = document.getElementById('accountNumber').value;
+	let secureCode = document.getElementById('secureCode').value;
+	let goThroug = document.getElementById('goThroug').value;
+	let numberAccount = document.getElementById('numberAccount').value;
+
+	closeModal();
+});
+
+
+function subtotalFinal() {
+    let subtotalProd = document.querySelectorAll('.pSubtotal');
+    let suma = 0;
+
+    subtotalProd.forEach((element) => {
+        let value = parseInt(element.textContent.split(' ')[1]);
+        
+		if (element.textContent.split(' ')[0] === "UYU"){
+			precioEnDolar = value / 40;
+		}
+		else {
+			precioEnDolar = value
+		}
+
+        suma += precioEnDolar;
+    });
+
+    let subtotalCostos = document.getElementById("subtotalCostos");
+    subtotalCostos.innerHTML ="USD "+suma;
+    
+}
+
+
