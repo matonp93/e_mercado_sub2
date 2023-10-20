@@ -207,7 +207,14 @@ function subtotalFinal() {
     subtotalProd.forEach((element) => {
         let value = parseInt(element.textContent.split(' ')[1]);
         
-        suma += value;
+		if (element.textContent.split(' ')[0] === "UYU"){
+			precioEnDolar = value / 40;
+		}
+		else {
+			precioEnDolar = value
+		}
+
+        suma += precioEnDolar;
     });
 
     let subtotalCostos = document.getElementById("subtotalCostos");
