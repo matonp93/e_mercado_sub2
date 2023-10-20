@@ -219,4 +219,21 @@ function subtotalFinal() {
     
 }
 
+//calculando envío
 
+let costEnvio = document.getElementById("costoEnvio");
+let envioBasico= document.getElementById("basic");
+let envioStandar= document.getElementById("standar");
+let envioPremium= document.getElementById("premium");
+
+envioBasico.addEventListener("click", () => {
+costEnvio.innerHTML= parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.05
+});
+
+envioStandar.addEventListener("click", () => {
+	costEnvio.innerHTML= parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.07
+});
+
+envioPremium.addEventListener("click", () => {
+	costEnvio.innerHTML= parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.15
+});
