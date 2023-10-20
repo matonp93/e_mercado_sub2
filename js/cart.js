@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		cantCart.addEventListener('change', () => {
 			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
             subtotalFinal();
-            
+            envio();
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
 			}
             subtotalFinal();
+			envio();
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
@@ -104,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		tableItems.appendChild(row);
 		subtotalFinal();
+		envio();
 	};
 });
 
@@ -159,16 +161,17 @@ function initAutocomplete() {
 				}
 			}
 			inputesquina.focus();
-		}
+		};
 	});
-}
+};
+
 function accesoDenegado() {
 	const alerta = document.getElementById('alerta');
 	alerta.removeAttribute('hidden');
 	setTimeout(() => {
 		alerta.setAttribute('hidden', 'true');
 	}, 3500);
-}
+};
 
 // Modal de Pago//
 
@@ -176,12 +179,12 @@ function accesoDenegado() {
 
 function openModal() {
 	document.getElementById('paymentModal').style.display = 'block';
-}
+};
 
 //Función para cerrar el modal//
 function closeModal() {
 	document.getElementById('paymentModal').style.display = 'none';
-}
+};
 
 //Funcion para manejar el envío del formulario//
 document.getElementById('paymentForm').addEventListener('submit', function (event) {
@@ -208,32 +211,45 @@ function subtotalFinal() {
 			precioEnDolar = value / 40;
 		}
 		else {
-			precioEnDolar = value
-		}
+			precioEnDolar = value;
+		};
 
         suma += precioEnDolar;
     });
 
     let subtotalCostos = document.getElementById("subtotalCostos");
-    subtotalCostos.innerHTML ="USD "+suma;
+    subtotalCostos.innerHTML ="USD " + suma;
     
 }
 
 //calculando envío
 
 let costEnvio = document.getElementById("costoEnvio");
-let envioBasico= document.getElementById("basic");
-let envioStandar= document.getElementById("standar");
-let envioPremium= document.getElementById("premium");
+let envioBasico = document.getElementById("basic");
+let envioStandar = document.getElementById("standar");
+let envioPremium = document.getElementById("premium");
 
 envioBasico.addEventListener("click", () => {
-costEnvio.innerHTML= parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.05
+	costEnvio.innerHTML = parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.05;
 });
 
 envioStandar.addEventListener("click", () => {
-	costEnvio.innerHTML= parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.07
+	costEnvio.innerHTML = parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.07;
 });
 
 envioPremium.addEventListener("click", () => {
-	costEnvio.innerHTML= parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.15
+	costEnvio.innerHTML = parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.15;
 });
+
+function envio(){
+	let tipoEnvios = Array.from(document.getElementsByName("card"));
+	tipoEnvios.forEach(element => {
+		if (element.checked && tipoEnvios.indexOf(element) === 0){
+			costEnvio.innerHTML = parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.05;
+		} else if (element.checked && tipoEnvios.indexOf(element) === 1){
+			costEnvio.innerHTML = parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.07;
+		} else if (element.checked && tipoEnvios.indexOf(element) === 2){
+			costEnvio.innerHTML = parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.15;
+		};
+	});
+};
