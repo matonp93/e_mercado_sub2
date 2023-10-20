@@ -217,7 +217,7 @@ function subtotalFinal() {
     });
 
     let subtotalCostos = document.getElementById("subtotalCostos");
-    subtotalCostos.innerHTML = suma;
+    subtotalCostos.innerHTML ="USD "+suma;
     
 }
 
