@@ -104,17 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		tableItems.appendChild(row);
 	}
-    
-    
-    //subtotalFinal();
+});
+
 window.addEventListener("load", () =>{
     subtotalFinal();
 })
-
-});
-
-
-
 
 function initAutocomplete() {
 	let arrayMarkers = new Array();
