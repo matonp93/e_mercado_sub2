@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		cantCart.value = count;
 		cantCart.addEventListener('change', () => {
 			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
+            subtotalFinal();
+            
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
@@ -70,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				listaDelCarrito.splice(listaDelCarrito.indexOf(id), 1);
 				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
 			}
+            subtotalFinal();
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
@@ -101,7 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		tableItems.appendChild(row);
 	}
+    
+    
+    //subtotalFinal();
+window.addEventListener("load", () =>{
+    subtotalFinal();
+})
+
 });
+
+
+
 
 function initAutocomplete() {
 	let arrayMarkers = new Array();
@@ -191,3 +204,21 @@ document.getElementById('paymentForm').addEventListener('submit', function (even
 
 	closeModal();
 });
+
+
+function subtotalFinal() {
+    let subtotalProd = document.querySelectorAll('.pSubtotal');
+    let suma = 0;
+
+    subtotalProd.forEach((element) => {
+        let value = parseInt(element.textContent.split(' ')[1]);
+        
+        suma += value;
+    });
+
+    let subtotalCostos = document.getElementById("subtotalCostos");
+    subtotalCostos.innerHTML = suma;
+    
+}
+
+
