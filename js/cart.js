@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		cantCart.addEventListener('change', () => {
 			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
             subtotalFinal();
-            
+            envio();
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
 			}
             subtotalFinal();
+			envio();
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
@@ -104,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		tableItems.appendChild(row);
 		subtotalFinal();
+		envio();
 	};
 });
 
