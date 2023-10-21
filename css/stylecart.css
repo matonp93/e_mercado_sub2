@@ -476,31 +476,55 @@ body {
  .costototal-section{
 	display: flex;
 	flex-direction: column;
-	align-items: normal;
 	padding: 20px;
-	background-color: var(--background2);
-	border: 1px solid #e1e1e1;
-	border-radius: 30px;
 	z-index: -1;
-	background-color: transparent;
+	background-color: var(--background);
 	margin-top: 1%;
-	margin-left: 32%;
-	margin-right: 32%;
 	border: 2px solid var(--primary);
 	border-radius: 20px;
-	box-shadow: none;
+	margin-left: 15%;
+	margin-right: 15%;
+	@media (min-width:1024px){
+		position: fixed;
+		top: 20%;
+		right: 2%;
+		margin: auto;
+		z-index: 0;
+		width: 15%;
+		height: fit-content;
+	}
+	& #costos div{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: baseline;
+		@media (min-width:1024px){
+			flex-direction: column;
+		}
+		& *{
+			flex:1;
+			margin-bottom: 10px;
+		}
+	}
+	& p{
+		text-align: right;
+	}
+	& hr{
+		color: var(--primary);
+	}
+	& h1{
+		text-align: left;
+		display:block;
+		margin-bottom: 20px;
+		@media(max-width:768px){
+			text-align: center;
+		}
+	}
 }
-.costototal-section hr{
-	color: var(--primary);
+html:not([data-scroll='0']) .costototal-section{
+	z-index: -1;
 }
-.costototal-section #costos div{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: baseline;
-}
-.costototal-section h1{
-	text-align: left;
-	display:block;
-}
+
+
+
 
