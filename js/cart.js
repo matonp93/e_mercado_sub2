@@ -222,4 +222,58 @@ function subtotalFinal() {
     
 }
 
+function finalizarCompra(){
+    const finalizarCompraBtn = document.getElementById("finalizarCompraBtn");
+    finalizarCompraBtn.addEventListener('click', () => {
+        const inputCalle = document.getElementById('inputcalle');
+        const inputNumero = document.getElementById('inputnumero');
+        const inputEsquina = document.getElementById('inputesquina');
+        const formaEnvio = document.querySelector('input[name="card"]:checked');
+        const cantidadInputs = document.querySelectorAll('.pCant');
+        const formaPago = document.querySelector('input[name="option"]:checked');
+        const camposPago = document.querySelectorAll('.pagoCampo');
+        
+        if (inputCalle.value.trim() === '' || inputNumero.value.trim() === '' || inputEsquina.value.trim() === '') {
+			inputCalle.style.borderColor = 'red';
+			inputNumero.style.borderColor = 'red';
+			inputEsquina.style.borderColor = 'red';
+            return;
+        } else {
+			inputCalle.style.borderColor = '';
+			inputNumero.style.borderColor = '';
+			inputEsquina.style.borderColor = ''; 
+		}
+        if (!formaEnvio) {
+			alert('Debes seleccionar una forma de envío.');
+            return;
+        }
+        for (const cantidadInput of cantidadInputs) {
+            if (parseInt(cantidadInput.value) <= 0) {
+                alert('La cantidad para cada artículo debe ser mayor a 0.');
+                return;
+            }
+        }
+        if (!formaPago) {
+			alert('Debes seleccionar una forma de pago.');
+            return;
+        }
+        for (const campoPago of camposPago) {
+            if (campoPago.value.trim() === '') {
+                alert('Los campos de pago no pueden estar vacíos.');
+                return;
+            }
+        }
+		const mensaje = document.getElementById('mensajeFinalizadoId');
+		if (mensaje.style.display === 'none' || mensaje.style.display === ''){
+			mensaje.style.display = 'block';
+			setTimeout(() => {
+				mensaje.style.display = 'none';
+			}, 5000);
+		}
+        console.log("compra finalizada");
+    });
+};
+
+
+
 
