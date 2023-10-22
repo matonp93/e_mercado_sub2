@@ -490,9 +490,13 @@ body {
 		top: 20%;
 		right: 2%;
 		margin: auto;
-		z-index: 3;
+		z-index: 1;
 		width: 15%;
 		height: fit-content;
+		transition: 0.3s;
+	}
+	&:hover{
+		z-index: 3;
 	}
 	& .div{
 		display: flex;
@@ -532,8 +536,8 @@ body {
 		cursor: pointer;
 	}
 }
-html:not([data-scroll='0']) .costototal-section{
-	z-index: 1;
+html:is([data-scroll='0']) .costototal-section{
+	z-index: 3;
 }
 
 
