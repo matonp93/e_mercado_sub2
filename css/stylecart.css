@@ -340,6 +340,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	outline: 2px solid var(--textcolor);
+	z-index: 2;
 
 	@media (width <= 590px) {
 		height: 300px;
@@ -489,11 +490,11 @@ body {
 		top: 20%;
 		right: 2%;
 		margin: auto;
-		z-index: 0;
+		z-index: 3;
 		width: 15%;
 		height: fit-content;
 	}
-	& #costos div{
+	& .div{
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -520,10 +521,22 @@ body {
 			text-align: center;
 		}
 	}
+	& .divbtn{
+		justify-content: center;
+		display: flex;
+		align-items: center
+	}
+	& #finalizarcompra{
+		background-color: var(--primary);
+		color: var(--textcolor2);
+		cursor: pointer;
+	}
 }
 html:not([data-scroll='0']) .costototal-section{
-	z-index: -1;
+	z-index: 1;
 }
+
+
 
 
 
