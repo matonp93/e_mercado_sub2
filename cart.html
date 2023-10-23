@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-scroll="0">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -136,7 +136,7 @@
 					<h2 class="subtitle Envio">Tipo de envío</h2>
 					<div class="wrapper">
 						<div class="card">
-							<input class="input" type="radio" name="card" id= "basic" value="basic" />
+							<input class="input" type="radio" name="card" id= "basic" value="basic" checked/>
 							<span class="check"></span>
 							<label class="label">
 								<div class="title">STANDARD</div>
@@ -195,18 +195,21 @@
 			<section class="costototal-section">
 				<div id="costos">
 					<h1 class="subtitle">Resumen de compra<hr></h1>
-					<div>
+					<div class="div">
 						<h5>Productos</h5>
 						<p id="subtotalCostos"></p>
 					</div>
-					<div>
+					<div class="div">
 						<h5>Envío</h5>
 						<p id="costoEnvio"></p>
 					</div>
 					<hr>
-					<div>
+					<div class="div">
 						<h2>Total</h2>
 						<p id="totalCostos">USD (placeholder)</p>
+					</div>
+					<div class="divbtn">
+						<button id="finalizarcompra" class="btn">Finalizar compra</button>
 					</div>
 				</div>
 			</section>
