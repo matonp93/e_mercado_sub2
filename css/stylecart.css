@@ -538,6 +538,31 @@ body {
 }
 html:is([data-scroll='0']) .costototal-section{
 	z-index: 3;
+}
+
+.mensajeFinalizado {
+    font-size: 22px;
+    background-color: #51CC6C;
+    color: white;
+    border: 2px solid #2d8d19;
+    border-radius:10px ;
+    width: 24%;
+    padding: 5px;
+    text-align: center;
+    margin-left: 39%;
+    margin-top: 5px;
+    position: fixed;
+    z-index: 9999;
+}
+#check {
+    padding-right: 6px;
+}
+#mensajeFinalizadoId{
+    display: none;
+}
+
+
+
 .error {
     color: red;
     display: none;
