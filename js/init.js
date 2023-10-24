@@ -131,3 +131,6 @@ function cambiarTema(tema){
 	}
 };
 
+document.addEventListener('DOMContentLoaded', function() {
+    finalizarCompra(); 
+});
