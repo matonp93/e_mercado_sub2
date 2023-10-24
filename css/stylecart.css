@@ -340,8 +340,6 @@ body {
 	align-items: center;
 	justify-content: center;
 	outline: 2px solid var(--textcolor);
-	z-index: 2;
-
 	@media (width <= 590px) {
 		height: 300px;
 		width: 300px;
@@ -474,38 +472,33 @@ body {
 }
  */
 
- .costototal-section{
-	display: flex;
-	flex-direction: column;
-	padding: 20px;
-	z-index: -1;
-	background-color: var(--background);
-	margin-top: 1%;
-	border: 2px solid var(--primary);
-	border-radius: 20px;
-	margin-left: 15%;
-	margin-right: 15%;
-	@media (min-width:1024px){
-		position: fixed;
-		top: 20%;
-		right: 2%;
-		margin: auto;
-		z-index: 1;
-		width: 15%;
-		height: fit-content;
-		transition: 0.3s;
+ #costototal-position{
+	border: none;
+	position: fixed;
+	bottom: 0.5%;
+	right: 0.5%;
+	margin: auto;
+	z-index: 1;
+	width: 15%;
+	height: fit-content;
+	& .accordion-item{
+		background-color: var(--background);
+		border: 2px solid var(--primary);
+		border-radius: 5px;
 	}
-	&:hover{
-		z-index: 3;
+	& .accordion-button{
+		background-color: var(--background2);
+		color: var(--textcolor);
+	}
+	& .accordion-button:focus{
+		border-color: transparent;
+		box-shadow: none;
 	}
 	& .div{
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-between;
 		align-items: baseline;
-		@media (min-width:1024px){
-			flex-direction: column;
-		}
 		& *{
 			flex:1;
 			margin-bottom: 10px;
@@ -517,14 +510,6 @@ body {
 	& hr{
 		color: var(--primary);
 	}
-	& h1{
-		text-align: left;
-		display:block;
-		margin-bottom: 20px;
-		@media(max-width:768px){
-			text-align: center;
-		}
-	}
 	& .divbtn{
 		justify-content: center;
 		display: flex;
@@ -535,6 +520,12 @@ body {
 		color: var(--textcolor2);
 		cursor: pointer;
 	}
+}
+.subtitle{
+color: var(--textcolor);
+text-align: left;
+display:block;
+text-align: center;
 }
 html:is([data-scroll='0']) .costototal-section{
 	z-index: 3;
