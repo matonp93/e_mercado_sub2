@@ -481,6 +481,9 @@ body {
 	z-index: 1;
 	width: 15%;
 	height: fit-content;
+	@media (width<1200px) {
+		display: none;
+	}
 	& .accordion-item{
 		background-color: var(--background);
 		border: 2px solid var(--primary);
@@ -509,6 +512,58 @@ body {
 	}
 	& hr{
 		color: var(--primary);
+	}
+	& .divbtn{
+		justify-content: center;
+		display: flex;
+		align-items: center
+	}
+	& #finalizarcompra{
+		background-color: var(--primary);
+		color: var(--textcolor2);
+		cursor: pointer;
+	}
+}
+.costototal-section2{
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	z-index: -1;
+	background-color: var(--background);
+	margin-top: 1%;
+	border: 2px solid var(--primary);
+	border-radius: 20px;
+	margin-left: 15%;
+	margin-right: 15%;
+	@media (min-width:1200px) {
+		display: none;
+	}
+	&:hover{
+		z-index: 3;
+	}
+	& .div{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: baseline;
+		@media (min-width:1024px){
+			flex-direction: column;
+		}
+		& *{
+			flex:1;
+			margin-bottom: 10px;
+		}
+	}
+	& p{
+		text-align: right;
+	}
+	& hr{
+		color: var(--primary);
+	}
+	& h1{
+		text-align: left;
+		display:block;
+		margin-bottom: 20px;
 	}
 	& .divbtn{
 		justify-content: center;
