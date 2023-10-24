@@ -235,9 +235,17 @@ function finalizarCompra(){
         const camposPago = document.querySelectorAll('.pagoCampo');
         
         if (inputCalle.value.trim() === '' || inputNumero.value.trim() === '' || inputEsquina.value.trim() === '') {
+			autocomplete.style.borderColor = 'red';
 			inputCalle.style.borderColor = 'red';
 			inputNumero.style.borderColor = 'red';
 			inputEsquina.style.borderColor = 'red';
+			setTimeout(() => {
+				autocomplete.style.borderColor = '';
+				inputCalle.style.borderColor = '';
+				inputNumero.style.borderColor = '';
+				inputEsquina.style.borderColor = '';
+		
+			}, 10000);
 			accesoDenegado();
             return;
         } else {
