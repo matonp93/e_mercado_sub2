@@ -174,6 +174,13 @@ function accesoDenegado() {
 		alerta.setAttribute('hidden', 'true');
 	}, 10000);
 };
+function completeFormaPago() {
+	const alerta = document.getElementById('alertaPago');
+	alerta.removeAttribute('hidden');
+	setTimeout(() => {
+		alerta.setAttribute('hidden', 'true');
+	}, 10000);
+};
 
 // Modal de Pago//
 
@@ -223,16 +230,17 @@ function subtotalFinal() {
     subtotalCostos.innerHTML ="USD " + suma;
     
 }
+
 function finalizarCompra(){
     const finalizarCompraBtn = document.getElementById("finalizarcompra");
     finalizarCompraBtn.addEventListener('click', () => {
         const inputCalle = document.getElementById('inputcalle');
         const inputNumero = document.getElementById('inputnumero');
         const inputEsquina = document.getElementById('inputesquina');
-        const formaEnvio = document.querySelector('input[name="card"]:checked');
         const cantidadInputs = document.querySelectorAll('.pCant');
         const formaPago = document.querySelector('input[name="option"]:checked');
         const camposPago = document.querySelectorAll('.pagoCampo');
+		const h3FormaPago = document.getElementById('formaPago');
         
         if (inputCalle.value.trim() === '' || inputNumero.value.trim() === '' || inputEsquina.value.trim() === '') {
 			autocomplete.style.borderColor = 'red';
@@ -244,7 +252,6 @@ function finalizarCompra(){
 				inputCalle.style.borderColor = '';
 				inputNumero.style.borderColor = '';
 				inputEsquina.style.borderColor = '';
-		
 			}, 10000);
 			accesoDenegado();
             return;
@@ -253,20 +260,19 @@ function finalizarCompra(){
 			inputNumero.style.borderColor = '';
 			inputEsquina.style.borderColor = ''; 
 		}
-        if (!formaEnvio) {
-			alert('Debes seleccionar una forma de envío.');
-            return;
-        }
         for (const cantidadInput of cantidadInputs) {
             if (parseInt(cantidadInput.value) <= 0) {
                 alert('La cantidad para cada artículo debe ser mayor a 0.');
                 return;
             }
         }
-        if (!formaPago) {
-			alert('Debes seleccionar una forma de pago.');
-            return;
-        }
+		if (!formaPago) {
+            h3FormaPago.classList.add('error');
+			completeFormaPago();
+			return;
+        } else {
+			h3FormaPago.classList.remove('error'); 
+		}
         for (const campoPago of camposPago) {
             if (campoPago.value.trim() === '') {
                 alert('Los campos de pago no pueden estar vacíos.');

@@ -560,13 +560,14 @@ html:is([data-scroll='0']) .costototal-section{
 #mensajeFinalizadoId{
     display: none;
 }
-
-
-
 .error {
-    color: red;
-    display: none;
+    border: 2px solid;
+	border-radius: 10px;
+	padding: 4px;
+	color: white;
+	border-color: red;
 }
+
 
 
 
