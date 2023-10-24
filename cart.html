@@ -171,7 +171,7 @@
 					</div>
 					<hr>
 					<h3 class="subtitle" style="margin-top: 1em; margin-bottom: 1em">Dirección de envío</h3>
-					<div id="alerta" hidden>
+					<div id="alerta" class="alertas" hidden>
 						<p>Ingrese una <strong>dirección válida</strong></p>
 					</div>
 					<div class="inputGroup">
@@ -244,11 +244,11 @@
 		</section>
 			<!--Sección formas de pago -->
 			<div class="paymentSection">
+				<div id="alertaPago" class="alertas" hidden>
+					<p>Ingrese un <strong>metodo de pago</strong></p>
+				</div>
 				<h3 id="formaPago">Formas de pago</h3>
 				<button onclick="openModal()">Seleccionar</button>
-			</div>
-			<div id="alertaPago" hidden>
-				<p>Ingrese un <strong>metodo de pago</strong></p>
 			</div>
 			<div id="paymentModal" class="modal">
 				<div class="modal-content">
