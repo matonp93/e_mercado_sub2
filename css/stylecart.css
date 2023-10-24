@@ -350,7 +350,7 @@ body {
 	}
 }
 
-#alerta {
+.alertas {
 	color: #d9534f;
 }
 
@@ -427,6 +427,7 @@ body {
 }
 
 .campPaymentForm input {
+	background-color: var(--background);
 	border-radius: 10px;
 	border: none;
 	padding: 5px 10px;

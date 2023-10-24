@@ -172,14 +172,14 @@ function accesoDenegado() {
 	alerta.removeAttribute('hidden');
 	setTimeout(() => {
 		alerta.setAttribute('hidden', 'true');
-	}, 10000);
+	}, 7000);
 };
 function completeFormaPago() {
 	const alerta = document.getElementById('alertaPago');
 	alerta.removeAttribute('hidden');
 	setTimeout(() => {
 		alerta.setAttribute('hidden', 'true');
-	}, 10000);
+	}, 7000);
 };
 
 // Modal de Pago//
@@ -234,6 +234,7 @@ function subtotalFinal() {
 function finalizarCompra(){
     const finalizarCompraBtn = document.getElementById("finalizarcompra");
     finalizarCompraBtn.addEventListener('click', () => {
+		const autocomplete = document.getElementById('autocomplete');
         const inputCalle = document.getElementById('inputcalle');
         const inputNumero = document.getElementById('inputnumero');
         const inputEsquina = document.getElementById('inputesquina');
@@ -242,24 +243,26 @@ function finalizarCompra(){
         const camposPago = document.querySelectorAll('.pagoCampo');
 		const h3FormaPago = document.getElementById('formaPago');
         
-        if (inputCalle.value.trim() === '' || inputNumero.value.trim() === '' || inputEsquina.value.trim() === '') {
+		if (autocomplete.value.trim() === ''){
 			autocomplete.style.borderColor = 'red';
-			inputCalle.style.borderColor = 'red';
-			inputNumero.style.borderColor = 'red';
-			inputEsquina.style.borderColor = 'red';
-			setTimeout(() => {
-				autocomplete.style.borderColor = '';
-				inputCalle.style.borderColor = '';
-				inputNumero.style.borderColor = '';
-				inputEsquina.style.borderColor = '';
-			}, 10000);
 			accesoDenegado();
-            return;
-        } else {
-			inputCalle.style.borderColor = '';
-			inputNumero.style.borderColor = '';
-			inputEsquina.style.borderColor = ''; 
-		}
+			setTimeout(() => {autocomplete.style.borderColor = ''},7000);
+		}else{autocomplete.style.borderColor = ''}
+		if (inputCalle.value.trim() === ''){
+			inputCalle.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {inputCalle.style.borderColor = ''},7000);
+		}else{inputCalle.style.borderColor = ''}
+		if (inputNumero.value.trim() === ''){
+			inputNumero.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {inputNumero.style.borderColor = ''},7000);
+		}else{ inputNumero.style.borderColor = ''}
+		if (inputEsquina.value.trim() === ''){
+			inputEsquina.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {inputEsquina.style.borderColor = ''},7000);
+		}else{inputEsquina.style.borderColor = ''}
         for (const cantidadInput of cantidadInputs) {
             if (parseInt(cantidadInput.value) <= 0) {
                 alert('La cantidad para cada artículo debe ser mayor a 0.');
@@ -269,6 +272,7 @@ function finalizarCompra(){
 		if (!formaPago) {
             h3FormaPago.classList.add('error');
 			completeFormaPago();
+			setTimeout(() => {h3FormaPago.classList.remove('error')},7000);
 			return;
         } else {
 			h3FormaPago.classList.remove('error'); 
