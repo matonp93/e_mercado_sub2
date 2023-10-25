@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		tableItems.appendChild(row);
 		subtotalFinal();
 		envio();
+		TotalE();
 	};
 });
 document.addEventListener('scroll', () => {
@@ -255,3 +256,18 @@ function envio(){
 		};
 	});
 };
+
+// ------- Total ------- //
+function TotalE() {
+	
+	let costoEnvio = document.getElementById("costoEnvio").innerHTML.split("")[1];
+	let subtotalCostos = document.getElementById("subtotalCostos").innerHTML.split("")[1];
+  
+	let totalCosto = subtotalCostos*1 + costoEnvio*1;
+
+	console.log(totalCosto);
+  
+	let totalCostosE = document.getElementById("totalCostos");
+	totalCostosE.innerHTML = "USD " + totalCosto.toFixed(2);
+
+  }
