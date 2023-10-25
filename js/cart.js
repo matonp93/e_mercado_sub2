@@ -227,9 +227,8 @@ function subtotalFinal() {
         suma += precioEnDolar;
     });
 
-    let subtotalCostos = document.getElementById("subtotalCostos");
-    subtotalCostos.innerHTML ="USD " + suma;
-    
+    let subtotalCostos = Array.from(document.querySelectorAll("#subtotalCostos")).find(element => element.offsetParent);
+    subtotalCostos.innerHTML ="USD " + suma;   
 }
 
 function finalizarCompra(){
@@ -296,32 +295,27 @@ function finalizarCompra(){
 };
 //calculando envío
 
-let costEnvio = document.getElementById("costoEnvio");
+let costEnvio = Array.from(document.querySelectorAll("#costoEnvio")).find(element => element.offsetParent);
 let envioBasico = document.getElementById("basic");
 let envioStandar = document.getElementById("standar");
 let envioPremium = document.getElementById("premium");
 
-envioBasico.addEventListener("click", () => {
-	costEnvio.innerHTML = "USD "+parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.05;
-});
+envioBasico.addEventListener("click", envio);
 
-envioStandar.addEventListener("click", () => {
-	costEnvio.innerHTML = "USD "+parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.07;
-});
+envioStandar.addEventListener("click", envio);
 
-envioPremium.addEventListener("click", () => {
-	costEnvio.innerHTML = "USD "+parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.15;
-});
+envioPremium.addEventListener("click", envio);
 
 function envio(){
 	let tipoEnvios = Array.from(document.getElementsByName("card"));
+	let subtotalCostos = Array.from(document.querySelectorAll("#subtotalCostos")).find(element => element.offsetParent).innerHTML.split(" ")[1];
 	tipoEnvios.forEach(element => {
 		if (element.checked && tipoEnvios.indexOf(element) === 0){
-			costEnvio.innerHTML = "USD "+parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.05;
+			costEnvio.innerHTML = "USD "+(parseInt(subtotalCostos) * 0.05).toFixed(2);
 		} else if (element.checked && tipoEnvios.indexOf(element) === 1){
-			costEnvio.innerHTML = "USD "+parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.07;
+			costEnvio.innerHTML = "USD "+(parseInt(subtotalCostos) * 0.07).toFixed(2);
 		} else if (element.checked && tipoEnvios.indexOf(element) === 2){
-			costEnvio.innerHTML = "USD "+parseInt(subtotalCostos.innerHTML.split(' ')[1]) * 0.15;
+			costEnvio.innerHTML = "USD "+(parseInt(subtotalCostos) * 0.15).toFixed(2);
 		};
 	});
 };
@@ -329,14 +323,10 @@ function envio(){
 // ------- Total ------- //
 function TotalE() {
 	
-	let costoEnvio = document.getElementById("costoEnvio").innerHTML.split("")[1];
-	let subtotalCostos = document.getElementById("subtotalCostos").innerHTML.split("")[1];
-  
+	let costoEnvio = Array.from(document.querySelectorAll("#costoEnvio")).find(element => element.offsetParent).innerHTML.split(" ")[1];
+	let subtotalCostos = Array.from(document.querySelectorAll("#subtotalCostos")).find(element => element.offsetParent).innerHTML.split(" ")[1];
 	let totalCosto = subtotalCostos*1 + costoEnvio*1;
-
-	console.log(totalCosto);
-  
-	let totalCostosE = document.getElementById("totalCostos");
+	let totalCostosE = Array.from(document.querySelectorAll("#totalCostos")).find(element => element.offsetParent);
 	totalCostosE.innerHTML = "USD " + totalCosto.toFixed(2);
 
   }
