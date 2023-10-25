@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
             subtotalFinal();
             envio();
+			TotalE();
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
@@ -74,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
             subtotalFinal();
 			envio();
+			TotalE();
 		});
 		subtotalCart.innerHTML += currency + ' ' + unitCost * count;
 
@@ -232,8 +234,9 @@ function subtotalFinal() {
 }
 
 function finalizarCompra(){
-    const finalizarCompraBtn = document.getElementById("finalizarcompra");
-    finalizarCompraBtn.addEventListener('click', () => {
+    const finalizarCompraBtn = document.querySelectorAll("#finalizarcompra");
+	
+    finalizarCompraBtn.forEach(element => element.addEventListener('click', () => {
 		const autocomplete = document.getElementById('autocomplete');
         const inputCalle = document.getElementById('inputcalle');
         const inputNumero = document.getElementById('inputnumero');
@@ -291,7 +294,7 @@ function finalizarCompra(){
 			}, 5000);
 		}
         console.log("compra finalizada");
-    });
+    }));
 };
 //calculando envío
 
