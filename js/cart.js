@@ -173,7 +173,14 @@ function accesoDenegado() {
 	alerta.removeAttribute('hidden');
 	setTimeout(() => {
 		alerta.setAttribute('hidden', 'true');
-	}, 3500);
+	}, 7000);
+};
+function completeFormaPago() {
+	const alerta = document.getElementById('alertaPago');
+	alerta.removeAttribute('hidden');
+	setTimeout(() => {
+		alerta.setAttribute('hidden', 'true');
+	}, 7000);
 };
 
 // Modal de Pago//
@@ -225,6 +232,68 @@ function subtotalFinal() {
     
 }
 
+function finalizarCompra(){
+    const finalizarCompraBtn = document.getElementById("finalizarcompra");
+    finalizarCompraBtn.addEventListener('click', () => {
+		const autocomplete = document.getElementById('autocomplete');
+        const inputCalle = document.getElementById('inputcalle');
+        const inputNumero = document.getElementById('inputnumero');
+        const inputEsquina = document.getElementById('inputesquina');
+        const cantidadInputs = document.querySelectorAll('.pCant');
+        const formaPago = document.querySelector('input[name="option"]:checked');
+        const camposPago = document.querySelectorAll('.pagoCampo');
+		const h3FormaPago = document.getElementById('formaPago');
+        
+		if (autocomplete.value.trim() === ''){
+			autocomplete.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {autocomplete.style.borderColor = ''},7000);
+		}else{autocomplete.style.borderColor = ''}
+		if (inputCalle.value.trim() === ''){
+			inputCalle.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {inputCalle.style.borderColor = ''},7000);
+		}else{inputCalle.style.borderColor = ''}
+		if (inputNumero.value.trim() === ''){
+			inputNumero.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {inputNumero.style.borderColor = ''},7000);
+		}else{ inputNumero.style.borderColor = ''}
+		if (inputEsquina.value.trim() === ''){
+			inputEsquina.style.borderColor = 'red';
+			accesoDenegado();
+			setTimeout(() => {inputEsquina.style.borderColor = ''},7000);
+		}else{inputEsquina.style.borderColor = ''}
+        for (const cantidadInput of cantidadInputs) {
+            if (parseInt(cantidadInput.value) <= 0) {
+                alert('La cantidad para cada artículo debe ser mayor a 0.');
+                return;
+            }
+        }
+		if (!formaPago) {
+            h3FormaPago.classList.add('error');
+			completeFormaPago();
+			setTimeout(() => {h3FormaPago.classList.remove('error')},7000);
+			return;
+        } else {
+			h3FormaPago.classList.remove('error'); 
+		}
+        for (const campoPago of camposPago) {
+            if (campoPago.value.trim() === '') {
+                alert('Los campos de pago no pueden estar vacíos.');
+                return;
+            }
+        }
+		const mensaje = document.getElementById('mensajeFinalizadoId');
+		if (mensaje.style.display === 'none' || mensaje.style.display === ''){
+			mensaje.style.display = 'block';
+			setTimeout(() => {
+				mensaje.style.display = 'none';
+			}, 5000);
+		}
+        console.log("compra finalizada");
+    });
+};
 //calculando envío
 
 let costEnvio = document.getElementById("costoEnvio");
