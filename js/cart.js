@@ -187,6 +187,30 @@ function completeFormaPago() {
 
 // Modal de Pago//
 
+for (let element of document.getElementsByName("option")){
+	let camposDePago = document.getElementsByName("camposDePago");
+
+	element.addEventListener("click", () => {
+		if (document.getElementsByName("option")[0].checked){
+			camposDePago[3].value = "";
+			camposDePago[3].disabled = "true";
+			camposDePago[3].classList.remove("pagoCampo");
+			for (let i = 0; i < 3; i++){
+				camposDePago[i].classList.add("pagoCampo");
+				camposDePago[i].removeAttribute("disabled");
+			};
+		} else if (document.getElementsByName("option")[1].checked){
+			for (let i = 0; i < 3; i++){
+				camposDePago[i].value = "";
+				camposDePago[i].disabled = "true";
+				camposDePago[i].classList.remove("pagoCampo");
+			};
+			camposDePago[3].classList.add("pagoCampo");
+			camposDePago[3].removeAttribute("disabled");
+		};
+	});
+};
+
 //Función para abrir el modal//
 
 function openModal() {
@@ -230,7 +254,7 @@ function subtotalFinal() {
     });
 
     let subtotalCostos = Array.from(document.querySelectorAll("#subtotalCostos")).find(element => element.offsetParent);
-    subtotalCostos.innerHTML ="USD " + suma;   
+    subtotalCostos.innerHTML = "USD " + suma;   
 }
 
 function finalizarCompra(){
@@ -250,28 +274,33 @@ function finalizarCompra(){
 			autocomplete.style.borderColor = 'red';
 			accesoDenegado();
 			setTimeout(() => {autocomplete.style.borderColor = ''},7000);
-		}else{autocomplete.style.borderColor = ''}
+		} else {autocomplete.style.borderColor = ''};
+
 		if (inputCalle.value.trim() === ''){
 			inputCalle.style.borderColor = 'red';
 			accesoDenegado();
 			setTimeout(() => {inputCalle.style.borderColor = ''},7000);
-		}else{inputCalle.style.borderColor = ''}
+		} else {inputCalle.style.borderColor = ''};
+
 		if (inputNumero.value.trim() === ''){
 			inputNumero.style.borderColor = 'red';
 			accesoDenegado();
 			setTimeout(() => {inputNumero.style.borderColor = ''},7000);
-		}else{ inputNumero.style.borderColor = ''}
+		} else { inputNumero.style.borderColor = ''};
+
 		if (inputEsquina.value.trim() === ''){
 			inputEsquina.style.borderColor = 'red';
 			accesoDenegado();
 			setTimeout(() => {inputEsquina.style.borderColor = ''},7000);
-		}else{inputEsquina.style.borderColor = ''}
+		} else {inputEsquina.style.borderColor = ''};
+
         for (const cantidadInput of cantidadInputs) {
             if (parseInt(cantidadInput.value) <= 0) {
                 alert('La cantidad para cada artículo debe ser mayor a 0.');
                 return;
-            }
-        }
+            };
+        };
+		
 		if (!formaPago) {
             h3FormaPago.classList.add('error');
 			completeFormaPago();
@@ -279,21 +308,24 @@ function finalizarCompra(){
 			return;
         } else {
 			h3FormaPago.classList.remove('error'); 
-		}
+		};
+
         for (const campoPago of camposPago) {
             if (campoPago.value.trim() === '') {
                 alert('Los campos de pago no pueden estar vacíos.');
                 return;
-            }
-        }
+            };
+        };
+
 		const mensaje = document.getElementById('mensajeFinalizadoId');
-		if (mensaje.style.display === 'none' || mensaje.style.display === ''){
-			mensaje.style.display = 'block';
-			setTimeout(() => {
-				mensaje.style.display = 'none';
-			}, 5000);
-		}
-        console.log("compra finalizada");
+		const camposDeDireccion = Array.from(document.getElementsByName("camposDireccion"))
+		if ((mensaje.style.display === 'none' || mensaje.style.display === '') && 
+			(camposDeDireccion.every(element => element.value != ""))){
+				mensaje.style.display = 'block';
+				setTimeout(() => {
+					mensaje.style.display = 'none';
+				}, 5000);
+		};
     }));
 };
 //calculando envío
@@ -313,12 +345,13 @@ function envio(){
 	let tipoEnvios = Array.from(document.getElementsByName("card"));
 	let subtotalCostos = Array.from(document.querySelectorAll("#subtotalCostos")).find(element => element.offsetParent).innerHTML.split(" ")[1];
 	tipoEnvios.forEach(element => {
+		element.addEventListener("click", TotalE);
 		if (element.checked && tipoEnvios.indexOf(element) === 0){
-			costEnvio.innerHTML = "USD "+(parseInt(subtotalCostos) * 0.05).toFixed(2);
+			costEnvio.innerHTML = "USD " + (parseInt(subtotalCostos) * 0.05).toFixed(2);
 		} else if (element.checked && tipoEnvios.indexOf(element) === 1){
-			costEnvio.innerHTML = "USD "+(parseInt(subtotalCostos) * 0.07).toFixed(2);
+			costEnvio.innerHTML = "USD " + (parseInt(subtotalCostos) * 0.07).toFixed(2);
 		} else if (element.checked && tipoEnvios.indexOf(element) === 2){
-			costEnvio.innerHTML = "USD "+(parseInt(subtotalCostos) * 0.15).toFixed(2);
+			costEnvio.innerHTML = "USD " + (parseInt(subtotalCostos) * 0.15).toFixed(2);
 		};
 	});
 };

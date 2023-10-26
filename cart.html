@@ -175,18 +175,18 @@
 						<p>Ingrese una <strong>dirección válida</strong></p>
 					</div>
 					<div class="inputGroup">
-						<input id="autocomplete" type="text" required="" autocomplete="off" />
+						<input id="autocomplete" type="text" required="" autocomplete="off" name="camposDireccion"/>
 					</div>
 					<div class="inputGroup">
-						<input id="inputcalle" type="text" required="" placeholder=" " autocomplete="off" />
+						<input id="inputcalle" type="text" required="" placeholder=" " autocomplete="off" name="camposDireccion" />
 						<label for="inputcalle">Calle</label>
 					</div>
 					<div class="inputGroup">
-						<input id="inputnumero" type="text" required="" placeholder=" " autocomplete="off" />
+						<input id="inputnumero" type="text" required="" placeholder=" " autocomplete="off" name="camposDireccion" />
 						<label for="inputnumero">Numero</label>
 					</div>
 					<div class="inputGroup">
-						<input id="inputesquina" type="text" required="" placeholder=" " autocomplete="off" />
+						<input id="inputesquina" type="text" required="" placeholder=" " autocomplete="off" name="camposDireccion" />
 						<label for="inputnumero">Esquina</label>
 					</div>
 				</div>
@@ -262,15 +262,15 @@
 						<div class="option1">
 							<div class="campPaymentForm">
 								<label for="accountNumber">Numero de Tarjeta:</label>
-								<input type="text" id="accountNumber" />
+								<input type="text" id="accountNumber" class="pagoCampo" name="camposDePago"/>
 							</div>
 							<div class="campPaymentForm">
 								<label for="secureCode">Código de Seguridad</label>
-								<input type="number" id="secureCode" />
+								<input type="number" id="secureCode" class="pagoCampo" name="camposDePago"/>
 							</div>
 							<div class="campPaymentForm">
 								<label for="goThroug">Vencimiento</label>
-								<input type="text" id="goThroug" placeholder="mm/aa" />
+								<input type="text" id="goThroug" placeholder="mm/aa" class="pagoCampo" name="camposDePago"/>
 							</div>
 						</div>
 						<div class="campPaymentForm">
@@ -281,7 +281,7 @@
 
 						<div class="campPaymentForm">
 							<label for="numberAccount">Número de Cuenta </label>
-							<input type="text" id="numberAccount" />
+							<input type="text" id="numberAccount" class="pagoCampo" name="camposDePago"/>
 						</div>
 
 						<div class="campPaymentForm">
