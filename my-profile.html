@@ -134,7 +134,7 @@
 		<main>
 			<div class="container">
 				<h1>Perfil</h1>
-				<form>
+				<form id="profileForm">
 					<div class="form-group">
 						<label for="nombre">Nombre*</label>
 						<input type="text" class="form-control" id="nombre" required>
@@ -153,7 +153,7 @@
 					</div>
 					<div class="form-group">
 						<label for="usuario">Usuario</label>
-						<input type="text" class="form-control" id="usuario" >
+						<input type="text" class="form-control" id="usuario" required>
 					</div>
 					<div class="form-group">
 						<label for="email">E-mail*</label>
@@ -165,12 +165,12 @@
 					</div>
 					<div class="form-group">
 						<label for="imagenPerfil">Imagen de Perfil</label>
-						<input type="file" class="form-control-file" id="imagenPerfil" accept="image/png, image/jpeg">
+						<input type="file" class="form-control-file" id="imagenSelector" accept="image/png, image/jpg, image/jpeg" required>
 					</div>
 					<div class="form-group">
-						<img id="imagenMostrada" src="" alt="Imagen de perfil por defecto" class="img-fluid">
+						<img id="imagenPlaceholder" src="" alt="Imagen de perfil por defecto" class="img-fluid">
 					</div>
-					<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+					<button id="profileFormButton" type="submit" class="btn btn-primary">Guardar Cambios</button>
 				</form>
 			</div>
 		</main>
