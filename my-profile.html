@@ -133,9 +133,45 @@
 		</nav>
 		<main>
 			<div class="container">
-				<div class="alert alert-danger text-center" role="alert">
-					<h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-				</div>
+				<h1>Perfil</h1>
+				<form>
+					<div class="form-group">
+						<label for="nombre">Nombre*</label>
+						<input type="text" class="form-control" id="nombre" required>
+					</div>
+					<div class="form-group">
+						<label for="segundoNombre">Segundo Nombre</label>
+						<input type="text" class="form-control" id="segundoNombre">
+					</div>
+					<div class="form-group">
+						<label for="apellido">Apellido*</label>
+						<input type="text" class="form-control" id="apellido" required>
+					</div>
+					<div class="form-group">
+						<label for="segundoApellido">Segundo Apellido</label>
+						<input type="text" class="form-control" id="segundoApellido" >
+					</div>
+					<div class="form-group">
+						<label for="usuario">Usuario</label>
+						<input type="text" class="form-control" id="usuario" >
+					</div>
+					<div class="form-group">
+						<label for="email">E-mail*</label>
+						<input type="email" class="form-control" id="email" required>
+					</div>
+					<div class="form-group">
+						<label for="telefono">Teléfono de Contacto</label>
+						<input type="tel" class="form-control" id="telefono">
+					</div>
+					<div class="form-group">
+						<label for="imagenPerfil">Imagen de Perfil</label>
+						<input type="file" class="form-control-file" id="imagenPerfil" accept="image/png, image/jpeg">
+					</div>
+					<div class="form-group">
+						<img id="imagenMostrada" src="" alt="Imagen de perfil por defecto" class="img-fluid">
+					</div>
+					<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+				</form>
 			</div>
 		</main>
 		<footer class="text-muted">
