@@ -5,6 +5,7 @@ const nombre = document.getElementById('nombre'),
   usuario = document.getElementById('usuario'),
   email = document.getElementById('email'),
   telefono = document.getElementById('telefono'),
+  direccion = document.getElementById('direccion'),
   imagenSelector = document.getElementById('imagenSelector'),
   imagenPlaceholder = document.getElementById('imagenPlaceholder'),
   profileForm = document.getElementById('profileForm'),
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     user.usuario = usuario.value;
     user.email = email.value;
     user.telefono = telefono.value;
+    user.direccion = direccion.value;
     if (imageText) {
       user.image = imageText;
     }
@@ -78,6 +80,7 @@ function getUserInfo() {
     usuario.value = user.usuario;
     email.value = user.email;
     telefono.value = user.telefono;
+    direccion.value = user.direccion;
     if (user.image){
         imagenPlaceholder.src = user.image;
     } else {
