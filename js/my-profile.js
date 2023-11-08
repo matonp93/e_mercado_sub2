@@ -64,6 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   profileFormButton.addEventListener('click', () => {
     alertResult.removeAttribute('hidden');
+    setTimeout(() => {
+        alertResult.setAttribute('hidden', true);
+    }, 5000);
   });
 });
 
@@ -77,7 +80,11 @@ function getUserInfo() {
     usuario.value = user.usuario;
     email.value = user.email;
     telefono.value = user.telefono;
-    imagenPlaceholder.src = user.image;
     direccion.value = user.direccion;
-  }
-}
+    if (user.image){
+        imagenPlaceholder.src = user.image;
+    } else {
+        imagenPlaceholder.src = "/e_mercado_sub2/img/img_perfil.png";
+    };
+  };
+};
