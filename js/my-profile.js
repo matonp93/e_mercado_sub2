@@ -84,7 +84,7 @@ function getUserInfo() {
     if (user.image){
         imagenPlaceholder.src = user.image;
     } else {
-        imagenPlaceholder.src = "/e_mercado_sub2/img/img_perfil.png";
+        imagenPlaceholder.src = "/img/img_perfil.png";
     };
   };
 };
