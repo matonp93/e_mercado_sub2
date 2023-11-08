@@ -51,8 +51,12 @@ function salir() {
 	location.href = 'login.html';
 } //Se encarga de limpiar el localStorage y nos redirecciona a la pagina login.html
 
-function verPerfil() {
-	location.href = 'my-profile.html';
+function verPerfil() { 
+	if (localStorage.email === "invitado"){ // Comprueba si esta ingresado como invitado
+		location.href = 'login.html';
+	} else {
+		location.href = 'my-profile.html';
+	};
 } // Nos redirecciona a la pagina my-profile.html
 
 document.addEventListener('DOMContentLoaded', ()=> {
@@ -87,7 +91,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 // Modo Oscuro
 
-function DiferenciarTema(value){
+function DiferenciarTema(value){ // Funcion para detectar el tema elegido por el usuario
 	switch(value){
 		case "Oscuro":
 			document.getElementById("Oscuro").checked = true;
@@ -104,13 +108,13 @@ function DiferenciarTema(value){
 					cambiarTema("Dark");
 				} else {
 					cambiarTema("Light");
-				}
-			  }else {
+				};
+			} else {
 				alert("Tu sistema no tiene un tema predefinido");
 				document.getElementById("Oscuro").checked = true;
 				localStorage.setItem("preferencia", "Oscuro");
 				cambiarTema("Dark");
-			  }
+			};
 			break;
 		default:
 			document.getElementById("Oscuro").checked = true;
@@ -120,7 +124,7 @@ function DiferenciarTema(value){
 	};
 };
 
-function cambiarTema(tema){
+function cambiarTema(tema){ // Funcion que cambia el tema de la pagina
 	switch(tema){
 		case "Dark":
 			document.querySelectorAll("body *, body").forEach(element => element.setAttribute("data-theme","dark"));
@@ -128,6 +132,6 @@ function cambiarTema(tema){
 		case "Light":
 			document.querySelectorAll("body *, body").forEach(element => element.removeAttribute("data-theme"));
 			break;
-	}
+	};
 };
 
