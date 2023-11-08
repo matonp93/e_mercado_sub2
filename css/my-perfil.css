@@ -71,3 +71,17 @@ h1#title {
   opacity: 0;
   position: absolute;
 }
+
+#profileFormButton {
+  background-color: var(--primary);
+  color: var(--textcolor2);
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  transition: opacity 0.2s;
+  text-transform: uppercase;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
