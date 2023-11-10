@@ -52,6 +52,25 @@ nav a {
 	text-decoration: none;
 }
 
+
+#dropdownCarrito{
+	width: 200px;
+}
+
+.containerCarrito {
+	display: flex;
+	flex-direction: row;
+	clear: right;
+}
+
+.imgCarrito {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Fin Navbar */
+
+
 .bd-placeholder-img {
 	font-size: 1.125rem;
 	text-anchor: middle;
