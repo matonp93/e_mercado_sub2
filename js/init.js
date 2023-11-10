@@ -10,7 +10,7 @@ const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
 const btnCarrito = document.getElementById('carrito');
-let suma = 0;
+let sumaNavbar = 0;
 
 let showSpinner = function () {
 	document.getElementById('spinner-wrapper').style.display = 'block';
@@ -142,16 +142,36 @@ function productosNavbar(element) {
 
 	let tituloDiv = document.createElement('div');
 	let titulo = document.createElement('p');
+	let botonEliminar = document.createElement('i');
+	botonEliminar.classList.add('bi', 'bi-trash3-fill');
+	botonEliminar.addEventListener("click", (e) =>{
+		e.target.parentNode.parentNode.remove();
+		if (element.currency === "USD") {
+			sumaNavbar -= parseInt(element.cost);
+			
+		}
+		else {
+			sumaNavbar -= element.cost / 40;
+		}	
+		let arrayProducts = JSON.parse(localStorage.productosCarrito);
+		let indice = arrayProducts.indexOf(element.id);
+		arrayProducts.splice(indice, 1);
+		localStorage.productosCarrito = JSON.stringify(arrayProducts);
+		
+		subtotalNavbar();
+	})
+
+	botonEliminar.classList.add('botonEliminar');
 	tituloDiv.classList.add('tituloCarrito');
 	titulo.innerHTML += element.name + ' <br>';
 	tituloDiv.appendChild(titulo);
+	tituloDiv.appendChild(botonEliminar);
 
-	let precioDiv = document.createElement('p');
+	let precioDiv = document.createElement('div');
 	let p = document.createElement('p');
 	p.classList.add('precioInd');
 	p.innerHTML += element.currency + ' ' + element.cost;
 	precioDiv.appendChild(p);
-
 
 	let containerDiv = document.createElement('div');
 	containerDiv.classList.add('containerCarrito');
@@ -159,18 +179,18 @@ function productosNavbar(element) {
 	containerDiv.appendChild(tituloDiv);
 	containerDiv.appendChild(precioDiv);
 	
+
 	let productoNavbar = document.getElementById("productoNavbar");
 	productoNavbar.appendChild(containerDiv);
 
 	
 	if (element.currency === "USD") {
-		suma += parseInt(element.cost);
+		sumaNavbar += parseInt(element.cost);
 		
 	}
 	else {
-		suma += element.cost / 40;
-	}
-	console.log(suma);
+		sumaNavbar += element.cost / 40;
+	}	
 	
 }
 
@@ -178,7 +198,7 @@ function subtotalNavbar (){
 	
 	let subtotalNavbar = document.getElementById("subtotalNavbar");
 	
-	subtotalNavbar.innerHTML = suma.toFixed(2);
+	subtotalNavbar.innerHTML = "USD " + sumaNavbar.toFixed(2);
 } 
 
 function carritoNavbar() {
