@@ -47,7 +47,7 @@
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item dropdown">
 							<button
-								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center boton-dropdown"
+								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle boton-dropdown"
 								type="button"
 								data-bs-toggle="dropdown"
 								aria-expanded="false">
@@ -59,9 +59,9 @@
 							</ul>
 						</li>
 
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown ">
 							<button
-								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle d-flex align-items-center boton-dropdown"
+								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle boton-dropdown"
 								style="gap: 5px"
 								id="bd-theme"
 								type="button"
@@ -72,18 +72,6 @@
 								<i class="bi bi-palette"></i>
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="bd-theme-text">
-								<li>
-									<input
-										type="radio"
-										class="btn-check dropdown-item"
-										name="Tema"
-										value="Oscuro"
-										id="Oscuro"
-										autocomplete="off" />
-									<label class="btn checkedefect dropdown-item" for="Oscuro"
-										>Tema oscuro <i class="bi bi-moon"></i
-									></label>
-								</li>
 								<li>
 									<input
 										type="radio"
@@ -101,6 +89,18 @@
 										type="radio"
 										class="btn-check dropdown-item"
 										name="Tema"
+										value="Oscuro"
+										id="Oscuro"
+										autocomplete="off" />
+									<label class="btn checkedefect dropdown-item" for="Oscuro"
+										>Tema oscuro <i class="bi bi-moon"></i
+									></label>
+								</li>
+								<li>
+									<input
+										type="radio"
+										class="btn-check dropdown-item"
+										name="Tema"
 										value="Sistema"
 										id="Sistema"
 										autocomplete="off" />
@@ -110,10 +110,17 @@
 								</li>
 							</ul>
 						</li>
-						<li class="nav-item">
-							<button class="btn shadow-none" type="button" id="carrito">
+						<li class="nav-item dropdown">
+							<button class="btn shadow-none btn-sm py-2 px-0 px-lg-2 dropdown-toggle boton-dropdown" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
 								<i class="bi bi-cart4 text-white"></i>
 							</button>
+							<ul class="dropdown-menu dropdown-menu-end" id="dropdownCarrito">
+								<div class="dropdown-item-text container" id="productoNavbar"></div>
+								<div class="dropdown-divider"></div>
+								<div class="dropdown-item-text">Subtotal del carrito:</div>
+								<div class="dropdown-item-text"><span id="subtotalNavbar"></span></div>
+								<div class="dropdown-item"><button id="carrito">Ver Carrito</button></div>
+							</ul>
 						</li>
 					</ul>
 				</div>
