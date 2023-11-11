@@ -174,7 +174,8 @@ function agregarComentario() {
 	let divDescription = document.createElement('div');
 	let pTitle = document.createElement('p');
 	let pDescription = document.createElement('p');
-	let image = document.createElement('object');
+	let image;
+	
 
 	// Nombre del user //
 	let user = localStorage.getItem('email');
@@ -208,9 +209,18 @@ function agregarComentario() {
 	}
 
 	// Atributos y clases //
+	
+	if(localStorage.users && JSON.parse(localStorage.users).find(x => x.email === localStorage.email) && Object.hasOwn(JSON.parse(localStorage.users).find(x => x.email === localStorage.email),'image')){
+     image = document.createElement("img");
+	 image.classList.add("imagenPerfil");
+	 image.src = JSON.parse(localStorage.users).find(x => x.email = localStorage.email).image;
+	}else{
+	image = document.createElement('object')
 	image.data = 'gitlab.svg';
 	image.type = 'image/svg+xml';
 	image.onload = (e) => ResetearColores();
+    }
+
 	pTitle.classList.add('comment-title');
 	divCard.classList.add('cards');
 	divCardLoad.classList.add('tarjeta_load');
@@ -219,7 +229,7 @@ function agregarComentario() {
 	pDescription.innerHTML = comentario;
 
 	// AppendChild's //
-	divDescription.appendChild(pTitle);
+	divDescription.appendChild(pTitle);	
 	divDescription.appendChild(pDescription);
 	divCardLoad.appendChild(image);
 	divCard.appendChild(divCardLoad);
@@ -231,14 +241,15 @@ function agregarComentario() {
 	puntajes.forEach((element) => (element.checked = false));
 }
 
-function ResetearColores() {
+
+ function ResetearColores() {
 	let colores = ['#ffa7a7', '#ffa7fb', '#fff9a7', '#a7b0ff', '#b1ffa7', '#a7ffff'];
 	let contador = 0;
 	Array.from(document.getElementsByTagName('object')).forEach((element) => {
 		if (contador > colores.length - 1) {
-			contador = 0;
+		contador = 0;
 		}
 		element.contentDocument.getElementsByTagName('svg')[0].style.color = colores[contador];
 		contador++;
 	});
-}
+ }

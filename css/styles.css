@@ -52,6 +52,66 @@ nav a {
 	text-decoration: none;
 }
 
+
+#dropdownCarrito {
+	width: 300px;
+	padding: 10px;
+  }
+  
+  .dropdown-item-text {
+	color: white;
+	font-size: 12px;
+	padding-left: 10px;
+	margin-top: 0;
+  }
+
+  .botonDiv{
+	width: 130px;
+  }
+
+  .btnEliminar{
+	bottom: 100%;
+	right: 10px;
+	margin-top: 32px;
+    margin-left: 48px;
+    margin-right: 4px;
+  }
+  .tituloCarrito{
+	margin-right: 7px;
+    margin-top: 17px;
+    margin-left: -45px;
+    width: 145px;
+  }
+  .tituloInd{
+	width: 100%;
+  }
+
+  .divPrecio{
+	width: 46px;
+	margin-left: -26px;
+    margin-right: 1px;
+  }
+  .precioInd{
+	margin-top: 17px;;
+	margin-left: 40px;
+  }
+  .containerCarrito {
+	display: flex;
+	flex-direction: row;
+	align-items: center; 
+  }
+  .imgDiv{
+	width: 100%;
+  }
+  .imgCarrito {
+	width: 100px;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 5px;
+	}	
+/* Fin Navbar */
+
+
 .bd-placeholder-img {
 	font-size: 1.125rem;
 	text-anchor: middle;
