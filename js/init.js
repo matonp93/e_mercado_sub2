@@ -139,15 +139,19 @@ function cambiarTema(tema){ // Funcion que cambia el tema de la pagina
 function productosNavbar(element) {
 	
 	let imgDiv = document.createElement('div');
+	imgDiv.classList.add('imgDiv');
 	let imagen = document.createElement('img');
 	imagen.setAttribute('src', element.images[0]);
 	imagen.classList.add('imgCarrito');
 	imgDiv.appendChild(imagen);
 
+	let botonDiv = document.createElement('div');
+	botonDiv.classList.add('botonDiv');
 	let tituloDiv = document.createElement('div');
 	let titulo = document.createElement('p');
-	let botonEliminar = document.createElement('i');
-	botonEliminar.classList.add('bi', 'bi-trash3-fill');
+	let botonEliminar = document.createElement('button');
+	botonEliminar.innerHTML='X';
+	botonEliminar.classList.add('btnEliminar');
 	botonEliminar.addEventListener("click", (e) =>{
 		e.target.parentNode.parentNode.remove();
 		if (element.currency === "USD") {
@@ -168,10 +172,13 @@ function productosNavbar(element) {
 	botonEliminar.classList.add('botonEliminar');
 	tituloDiv.classList.add('tituloCarrito');
 	titulo.innerHTML += element.name + ' <br>';
+	titulo.classList.add('tituloInd');
 	tituloDiv.appendChild(titulo);
-	tituloDiv.appendChild(botonEliminar);
+	botonDiv.appendChild(botonEliminar);
+	
 
 	let precioDiv = document.createElement('div');
+	precioDiv.classList.add('divPrecio');
 	let p = document.createElement('p');
 	p.classList.add('precioInd');
 	p.innerHTML += element.currency + ' ' + element.cost;
@@ -179,9 +186,11 @@ function productosNavbar(element) {
 
 	let containerDiv = document.createElement('div');
 	containerDiv.classList.add('containerCarrito');
+	imgDiv.appendChild(imagen);
 	containerDiv.appendChild(imgDiv);
 	containerDiv.appendChild(tituloDiv);
 	containerDiv.appendChild(precioDiv);
+	containerDiv.appendChild(botonDiv);
 	
 
 	let productoNavbar = document.getElementById("productoNavbar");
