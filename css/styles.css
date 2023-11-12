@@ -56,7 +56,12 @@ nav a {
 #dropdownCarrito {
 	width: 300px;
 	padding: 10px;
+	box-sizing: content-box;
+	& *{
+		box-sizing: content-box;
+	}
   }
+
   
   .dropdown-item-text {
 	color: white;
