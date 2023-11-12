@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	btnVerPerfil.addEventListener('click', () => {
 		verPerfil();
 	});
-	if (!(document.location.pathname==='/cart.html')){
+	if (!(document.location.pathname.includes('/cart.html'))){
 	btnCarrito.addEventListener('click', () => {
 	location.href = 'cart.html';
 })}
@@ -223,7 +223,7 @@ function carritoNavbar() {
 		);
 
 }
-if (!(document.location.pathname==='/cart.html')){
+if (!(document.location.pathname.includes('/cart.html'))){
 	carritoNavbar();
 	setTimeout(() => {
 		subtotalNavbar();
