@@ -67,10 +67,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	btnVerPerfil.addEventListener('click', () => {
 		verPerfil();
 	});
-
+	if (!(document.location.pathname==='/cart.html')){
 	btnCarrito.addEventListener('click', () => {
 	location.href = 'cart.html';
-})
+})}
 
 	modoOscuroBtn.forEach(radio =>{
 		radio.addEventListener('click', () => {
@@ -150,10 +150,10 @@ function productosNavbar(element) {
 	let tituloDiv = document.createElement('div');
 	let titulo = document.createElement('p');
 	let botonEliminar = document.createElement('button');
-	botonEliminar.innerHTML='X';
+	botonEliminar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
 	botonEliminar.classList.add('btnEliminar');
 	botonEliminar.addEventListener("click", (e) =>{
-		e.target.parentNode.parentNode.remove();
+		containerDiv.remove();
 		if (element.currency === "USD") {
 			sumaNavbar -= parseInt(element.cost);
 			
@@ -223,11 +223,13 @@ function carritoNavbar() {
 		);
 
 }
+if (!(document.location.pathname==='/cart.html')){
+	carritoNavbar();
+	setTimeout(() => {
+		subtotalNavbar();
+	}, 1000);
+}
 
-carritoNavbar();
-setTimeout(() => {
-	subtotalNavbar();
-}, 1000);
 
 
 
