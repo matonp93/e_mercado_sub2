@@ -108,7 +108,7 @@ function contentProducts(element) {
 function listadoProductos() {
 	fetch(PRODUCTS_URL + localStorage.getItem('catID') + EXT_TYPE)
 		.then((response) => response.json())
-		.then((data) => data.products.forEach((element) => contentProducts(element)));
+		.then((data) => data.forEach((element) => contentProducts(element)));
 }
 
 function setCardId(id) {

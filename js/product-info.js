@@ -9,8 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	let localStorageValue = localStorage.getItem('cardId');
 
 	// FECTH PARA INFO DEL PRODUCTO //
-	fetch(PRODUCT_INFO_URL + localStorageValue + EXT_TYPE)
+	fetch(PRODUCT_INFO_URL + localStorageValue)
 		.then((response) => response.json())
+		.then(data => data[0])
 		.then((data) => {
 			// Creación de elementos HTML //
 			let divinfoTitle = document.createElement('div');
@@ -25,10 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			let pCategory = document.createElement('p');
 			let pSoldCount = document.createElement('p');
 			let btnAddCarrito = document.createElement('button');
-
 			// Array de imagenes //
 			let divimgInfo = document.createElement('div');
-			data.images.forEach((image) => {
+			data.images.split(',').forEach((image) => {
 				let imginfo = document.createElement('img');
 				imginfo.setAttribute('src', image);
 				divimgInfo.classList.add('divImgInfo');
@@ -38,19 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Array de productos relacionados //
 			let divRelatedProducts = document.createElement('div');
 			divRelatedProducts.classList.add('relatedProducts');
-			data.relatedProducts.forEach((element) => {
+			data.relatedProducts.split(',').forEach((element) => {
+				fetch(PRODUCT_INFO_URL + element)
+				.then(response => response.json())
+				.then(data => data[0])
+				.then(data => {
+
 				let divProductoRelacionado = document.createElement('div');
 				let imageProductoRelacionado = document.createElement('img');
 				let nameProductoRelacionado = document.createElement('p');
-
 				// Atributos y clases //
 				divProductoRelacionado.classList.add('divRelated');
 				imageProductoRelacionado.classList.add('imageRelated');
 				nameProductoRelacionado.classList.add('pRelated');
-				imageProductoRelacionado.setAttribute('src', element.image);
-				nameProductoRelacionado.innerHTML += element.name;
+				imageProductoRelacionado.setAttribute('src', data.images.split(",")[0]);
+				nameProductoRelacionado.innerHTML += data.name;
 				divProductoRelacionado.addEventListener('click', () => {
-					localStorage.setItem('cardId', element.id);
+					localStorage.setItem('cardId', data.id);
 					location.href = 'product-info.html';
 				});
 				divProductoRelacionado.appendChild(imageProductoRelacionado);
@@ -80,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					productosCarrito.push(data.id);
 					localStorage.setItem('productosCarrito', JSON.stringify(productosCarrito));
 				}
+			});
 			});
 
 			// Contenido de cada elemento //
@@ -115,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 	// FETCH PARA COMENTARIOS DEL PRODUCTO //
-	fetch(PRODUCT_INFO_COMMENTS_URL + localStorageValue + EXT_TYPE)
+	fetch(PRODUCT_INFO_COMMENTS_URL + localStorageValue)
 		.then((response) => response.json())
 		.then((data) => {
 			data.forEach((element) => {
