@@ -137,11 +137,10 @@ function cambiarTema(tema){ // Funcion que cambia el tema de la pagina
 
 
 function productosNavbar(element) {
-	
 	let imgDiv = document.createElement('div');
 	imgDiv.classList.add('imgDiv');
 	let imagen = document.createElement('img');
-	imagen.setAttribute('src', element.images[0]);
+	imagen.setAttribute('src', element.images.split(",")[0]);
 	imagen.classList.add('imgCarrito');
 	imgDiv.appendChild(imagen);
 
@@ -219,6 +218,7 @@ function carritoNavbar() {
 	prods.forEach((element) =>
 	fetch(PRODUCT_INFO_URL + element + EXT_TYPE)
 		.then((response) => response.json())
+		.then(data => data[0])
 		.then((data) =>  productosNavbar(data))
 		);
 

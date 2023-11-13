@@ -1,28 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-	const url = CART_INFO_URL + '25801' + EXT_TYPE;
 	const tableItems = document.getElementById('tableItems');
 	tableItems.classList.add('tableItems');
-
-	getJSONData(url).then((response) => {
-		response.data.articles.forEach((element) => {
-			mostrarProducto(
-				element.name,
-				element.image,
-				element.currency,
-				element.unitCost,
-				element.count,
-				false
-			);
-		});
-	});
 
 	let listaDelCarrito = JSON.parse(localStorage.getItem('productosCarrito'));
 	listaDelCarrito.forEach((element) => {
 		getJSONData(PRODUCT_INFO_URL + element + EXT_TYPE).then((data) => {
-			let producto = data.data;
+			let producto = data.data[0];
+			console.log(producto);
 			mostrarProducto(
 				producto.name,
-				producto.images[0],
+				producto.images.split(",")[0],
 				producto.currency,
 				producto.cost,
 				1,

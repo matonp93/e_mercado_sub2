@@ -57,7 +57,7 @@ function initialApiGetData(){
 		response.data.forEach(element =>{
 			getJSONData(PRODUCTS_URL + element.id + EXT_TYPE)
 			.then(response =>{
-				response.data.products.forEach(element =>{
+				response.data.forEach(element =>{
 					contentProducts(element);
 				})
 			})
@@ -66,6 +66,7 @@ function initialApiGetData(){
 }
 
 function contentProducts(element) {
+	console.log(element);
 	let h3 = document.createElement('h3');
 	h3.innerHTML += element.name + ' <br>';
 	h3.classList.add('tituloProducto');
