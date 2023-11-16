@@ -1,5 +1,7 @@
 # e_mercado_sub2
 
+Instalador de MYSQL: https://dev.mysql.com/downloads/installer/
+
 INSTRUCCIONES DE USO: 
 En VisualStudioCode, con MySQL instalado y la base de datos subida (ecommercesubgrupo2.sql)
 1) Cambiar la direccion de la terminal ejecutando "cd api" en la terminal
