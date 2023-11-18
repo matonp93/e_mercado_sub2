@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnInvitado = document.getElementById("btnInvitado");
     const alertaDenegado = document.getElementById("alerta");
     const btnDenegado = document.getElementById("btnDenegado");
+    const btnRegister = document.getElementById("btnRegister");
 
     function accesoDenegado(){
         alertaDenegado.classList.remove("hidden");
@@ -47,4 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
    function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
     }
+
+    btnRegister.addEventListener("click", () => {
+            location.href = "register.html";
+    });
 })
