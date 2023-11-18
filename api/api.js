@@ -1,6 +1,8 @@
 const express = require("express"); // Importa ExpressJS. Más info de Express en =>https://expressjs.com/es/starter/hello-world.html
 const app = express(); // Crea una instancia de ExpressJS
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const sha256 = require("sha256");
 const connection = require('./persistencia/connection'); // requiere la variable connection del archivo connection.js
 const port = 3000;
 
@@ -92,9 +94,39 @@ app.get("/comments/:id",(req,res)=>{
     })
 });
 
+app.post("/register",(req,res)=>{
+    connection.query(`INSERT INTO USERS(email, username, password) VALUES ("${req.body.email}","${req.body.username}","${sha256(req.body.password)}")`,(err,result)=>{
+        if (err) throw err;
+        res.send(result);
+    })
+})
 
+app.post("/login",checkUser,(req,res)=>{ 
+    let token = generateAccessToken(req.body.email, req.body.password);
+    res.json(token);
+});
 
+function checkUser(req,res,next){
+    connection.query(`SELECT * FROM Users WHERE password="${sha256(req.body.password)}" AND email="${req.body.email}"`,(err, result)=>{
+        if (err) throw err;
+            if (result.length == "1"){
+                next();
+            }else{
+                res.sendStatus(404);
+            }
+        })
+    }
 
+    function generateAccessToken (email, password) {
+    const payload = {
+      email: email,
+      password: password
+    };
+    const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
+    const options = { expiresIn: '3h' };
+  
+    return jwt.sign(payload, secret, options);
+  }
 
 
 

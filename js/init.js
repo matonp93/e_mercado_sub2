@@ -1,4 +1,5 @@
 const CATEGORIES_URL = 'http://localhost:3000/categories';
+const REGISTER_URL = 'http://localhost:3000/register';
 const PUBLISH_PRODUCT_URL = 'https://japceibal.github.io/emercado-api/sell/publish.json';
 const PRODUCTS_URL = 'http://localhost:3000/products/';
 const PRODUCT_INFO_URL = 'http://localhost:3000/productinfo/';
