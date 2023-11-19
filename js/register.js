@@ -36,6 +36,9 @@ function validarFormulario() {
         checkTerminos.style.borderColor = 'red';
         return false;
     }
+    if ((email.value.trim() === '') || (username.value.trim() === '') || (password.value.trim() === '') || (confirmPassword.value.trim() === '') || (confirmPassword.value !== password.value) || (!checkTerminos.checked)){
+        return false
+    }else{ return true}
     return true;
 }
 
@@ -71,9 +74,12 @@ fetch("http://localhost:3000/register", requestOptions)
 }
 
 form.addEventListener("submit", function(event) {
-    event.preventDefault();
-   enviarSolicitud();
+    if (validarFormulario()){
+        event.preventDefault();
+        enviarSolicitud();
+    }else{
+        event.preventDefault();
+    }
 });
 
-const registrarse = document.getElementById('btnRegister');
-registrarse.addEventListener('click', validarFormulario);
+
