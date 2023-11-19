@@ -14,27 +14,35 @@ function validarFormulario() {
 
     if (email.value.trim() === '') {
         email.style.borderColor = 'red';
+        return false;
     }
 
     if (username.value.trim() === '') {
         username.style.borderColor = 'red';
+        return false;
     }
 
     if (password.value.trim() === '') {
         password.style.borderColor = 'red';
+        return false;
     }
 
     if (confirmPassword.value.trim() === '' || confirmPassword.value !== password.value) {
         confirmPassword.style.borderColor = 'red';
+        return false;
     }
 
     if (!checkTerminos.checked) {
         checkTerminos.style.borderColor = 'red';
+        return false;
     }
+    return true;
 }
 
 function enviarSolicitud(){ 
-validarFormulario();
+if (!validarFormulario()){
+    return;
+};
 
 const myHeaders = new Headers();
 myHeaders.append("Content-Type",
