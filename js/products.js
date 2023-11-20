@@ -13,13 +13,6 @@ const buscador = document.getElementById('buscador');
 
 // PAGINA
 document.addEventListener('DOMContentLoaded', () => {
-	function comprobarLogin() {
-		return localStorage.getItem('email') != null && localStorage.getItem('password') != null;
-	}
-	if (!comprobarLogin()) {
-		location.href = 'login.html';
-	}
-
 	tituloYDescripcion();
 	listadoProductos();
 

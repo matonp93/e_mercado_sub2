@@ -20,7 +20,7 @@ function validarFormulario() {
         username.style.borderColor = 'red';
     }
 
-    if (password.value.trim() === '') {
+    if (password.value.trim() === '' || password.value.length<6) {
         password.style.borderColor = 'red';
     }
 
@@ -31,7 +31,7 @@ function validarFormulario() {
     if (!checkTerminos.checked) {
         checkTerminos.style.borderColor = 'red';
     }
-    if ((email.value.trim() === '') || (username.value.trim() === '') || (password.value.trim() === '') || (confirmPassword.value.trim() === '') || (confirmPassword.value !== password.value) || (!checkTerminos.checked)){
+    if ((email.value.trim() === '') || password.value.length<6 ||(username.value.trim() === '') || (password.value.trim() === '') || (confirmPassword.value.trim() === '') || (confirmPassword.value !== password.value) || (!checkTerminos.checked)){
         return false
     }else{ return true}
 }

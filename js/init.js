@@ -6,12 +6,24 @@ const PRODUCT_INFO_URL = 'http://localhost:3000/productinfo/';
 const PRODUCT_INFO_COMMENTS_URL = 'http://localhost:3000/comments/';
 const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
 const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
+const VERIFY_TOKEN_URL = 'http://localhost:3000/verify';
+const USERNAME_URL = 'http://localhost:3000/username/';
 const EXT_TYPE = '';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
 const btnCarrito = document.getElementById('carrito');
 let sumaNavbar = 0;
+
+	function comprobarLogin(){
+		fetch(VERIFY_TOKEN_URL,{
+			headers: { "Content-Type": "application/json; charset=utf-8",
+			"authorization":  "Bearer "+localStorage.token}
+		  })
+		  .then(response => response.json())
+		  .then(data => usernameNavbar(data))
+		  .catch(error => console.log(error));
+	}
 
 let showSpinner = function () {
 	document.getElementById('spinner-wrapper').style.display = 'block';
@@ -47,8 +59,7 @@ let getJSONData = function (url) {
 };
 
 function salir() {
-	localStorage.removeItem("email");
-	localStorage.removeItem("password");
+	localStorage.removeItem("token");
 	location.href = 'login.html';
 } //Se encarga de limpiar el localStorage y nos redirecciona a la pagina login.html
 
@@ -61,6 +72,11 @@ function verPerfil() {
 } // Nos redirecciona a la pagina my-profile.html
 
 document.addEventListener('DOMContentLoaded', ()=> {
+	if (localStorage.token != "invitado"){
+		comprobarLogin()
+	}
+		else {document.getElementById('user-info').textContent = "invitado"}
+
 	btnSalir.addEventListener('click', () => {
 		salir();
 	});
@@ -83,12 +99,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	if (localStorage.getItem("productosCarrito") == null){
 		localStorage.setItem("productosCarrito", JSON.stringify([]));
 	}
-
-	//Pone el nombre del usuario en el dropdown del navbar
-	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
-		
+	
 	DiferenciarTema(localStorage.getItem("preferencia"));
 });
+
+// Trae el username de la base de datos y lo pone en el navbar
+function usernameNavbar(email){
+	fetch(USERNAME_URL + email)
+	.then(response => response.json())
+	.then(data => document.getElementById('user-info').textContent = data[0].username);
+}
 
 // Modo Oscuro
 

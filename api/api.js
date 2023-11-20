@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const sha256 = require("sha256");
 const connection = require('./persistencia/connection'); // requiere la variable connection del archivo connection.js
 const port = 3000;
+const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
 
 app.use(express.json()); // Permite que el servidor analice el cuerpo de las peticiones como JSON
 app.use(cors({
@@ -101,6 +102,20 @@ app.post("/register",(req,res)=>{
     })
 })
 
+app.get("/username/:email",(req,res)=>{
+    connection.query(`SELECT username FROM USERS WHERE email="${req.params.email}"`,(err,result)=>{
+        if (err) throw err;
+        res.send(result);
+    })
+})
+
+app.get("/verify",authenticateToken,(req,res)=>{
+    if(req.user){
+        res.json(req.user.email);
+    }else
+    res.send(400);
+})
+
 app.post("/login",checkUser,(req,res)=>{ 
     let token = generateAccessToken(req.body.email, req.body.password);
     res.json(token);
@@ -117,15 +132,38 @@ function checkUser(req,res,next){
         })
     }
 
-    function generateAccessToken (email, password) {
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+        if (!token) {
+          return res.sendStatus(401);
+    }
+        const result = verifyAccessToken(token);
+      
+        if (!result.success) {
+          return res.status(403).json({ error: result.error });
+    }
+        req.user = result.data;
+        next();
+      }
+
+function generateAccessToken (email, password) {
     const payload = {
       email: email,
       password: password
     };
-    const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
+    
     const options = { expiresIn: '3h' };
-  
     return jwt.sign(payload, secret, options);
+  }
+
+function verifyAccessToken(token) {
+    try {
+      const decoded = jwt.verify(token, secret);
+      return { success: true, data: decoded };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
   }
 
 
