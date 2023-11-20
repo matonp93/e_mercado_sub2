@@ -101,3 +101,11 @@ body {
   bottom: 0;
   right: 0;
 }
+
+input {
+  border: 1px solid #ccc !important; 
+}
+
+input.error {
+  border-color: red !important; 
+}
