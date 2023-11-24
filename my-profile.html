@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta 
+      http-equiv="Content-Type" 
+      content="text/html; charset=UTF-8" 
+    />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    
     <title>eMercado - Todo lo que busques está aquí</title>
+    
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
       rel="stylesheet"
     />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+
+    <link 
+      href="css/bootstrap.min.css" 
+      rel="stylesheet" 
+    />
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="css/colors.css" rel="stylesheet" />
-    <link href="css/my-perfil.css" rel="stylesheet" />
-    <link rel="icon" href="favicon.ico" />
+
+    <link 
+      href="css/styles.css" 
+      rel="stylesheet" 
+    />
+
+    <link 
+      href="css/colors.css" 
+      rel="stylesheet" 
+    />
+
+    <link 
+      href="css/my-perfil.css" 
+      rel="stylesheet" 
+    />
+    
+    <link 
+      rel="icon" 
+      href="favicon.ico" 
+    />
 
     <style>
       .bd-placeholder-img {
@@ -40,9 +66,13 @@
   </head>
 
   <body>
+         
+    <!-----  Barra de navegación + Items Barra  ----->
+
     <nav class="navbar navbar-expand-md p-1">
 			<div class="container">
-				<button
+				
+        <button
 					class="navbar-toggler"
 					type="button"
 					data-bs-toggle="collapse"
@@ -52,7 +82,8 @@
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarNav">
+				
+        <div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item">
 							<a class="nav-link" href="index.html">Inicio</a>
@@ -66,21 +97,26 @@
 					</ul>
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item dropdown">
-							<button
+							
+              <button
 								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle boton-dropdown"
 								type="button"
 								data-bs-toggle="dropdown"
 								aria-expanded="false">
 								<span id="user-info"></span>
 							</button>
+
 							<ul class="dropdown-menu dropdown-menu-lg-end">
 								<li><a class="dropdown-item" id="irAPerfil" href="#">Ver perfil</a></li>
 								<li><a class="dropdown-item" id="deslogear" href="#">Salir</a></li>
 							</ul>
 						</li>
 
-						<li class="nav-item dropdown ">
-							<button
+            <!-----  LightMode // DarkMode  ----->
+						
+            <li class="nav-item dropdown ">
+							
+              <button
 								class="btn shadow-none btn-sm btn-link nav-link py-2 px-0 px-lg-2 dropdown-toggle boton-dropdown"
 								style="gap: 5px"
 								id="bd-theme"
@@ -91,7 +127,8 @@
 								aria-label="Tema">
 								<i class="bi bi-palette"></i>
 							</button>
-							<ul class="dropdown-menu" aria-labelledby="bd-theme-text">
+							
+              <ul class="dropdown-menu" aria-labelledby="bd-theme-text">
 								<li>
 									<input
 										type="radio"
@@ -100,11 +137,13 @@
 										value="Claro"
 										id="Claro"
 										autocomplete="off" />
-									<label class="btn checkedefect dropdown-item" for="Claro"
+									
+                    <label class="btn checkedefect dropdown-item" for="Claro"
 										>Tema claro <i class="bi bi-brightness-high"></i
 									></label>
 								</li>
-								<li>
+								
+                <li>
 									<input
 										type="radio"
 										class="btn-check dropdown-item"
@@ -114,9 +153,10 @@
 										autocomplete="off" />
 									<label class="btn checkedefect dropdown-item" for="Oscuro"
 										>Tema oscuro <i class="bi bi-moon"></i
-									></label>
+								 ></label>
 								</li>
-								<li>
+								
+                <li>
 									<input
 										type="radio"
 										class="btn-check dropdown-item"
@@ -130,6 +170,9 @@
 								</li>
 							</ul>
 						</li>
+
+           <!-----  Botón de Carrito en NavBar  ----->  
+
 						<li class="nav-item dropdown">
 							<button class="btn shadow-none btn-sm py-2 px-0 px-lg-2 dropdown-toggle boton-dropdown" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static">
 								<i class="bi bi-cart4 text-white"></i>
@@ -138,19 +181,28 @@
 								<div class="dropdown-item-text container" id="productoNavbar"></div>
 								<div class="dropdown-divider"></div>
 								<div class="dropdown-item-text" id="subtotalDiv">Subtotal del carrito: <span id="subtotalNavbar"></span></div>
-								<div class="dropdown-item" id="verCarritoDiv"><button id="carrito">Ver carrito</button></div>
+								<div class="dropdown-item"id="verCarritoDiv"><button id="carrito">Ver carrito</button></div>
 							</ul>
 						</li>
+
 					</ul>
 				</div>
 			</div>
 		</nav>
+
+        <!-----  Página del Perfil  ----->
+
     <main>
       <div class="containerMyPerfil">
-        <div id="alertResult" class="alert alert-success" role="alert" hidden>
-          Cambios gurdados correctamente!
-        </div>
-        <h1 id="title">Perfil</h1>
+        <div 
+          id="alertResult" 
+          class="alert alert-success" 
+          role="alert" hidden> Cambios gurdados correctamente!</div>
+
+        <h1 id="title"> Perfil </h1>
+        
+         <!---  Formulario para datos Perfil  --->
+
         <form id="profileForm">
           <div class="perfilImageCamp">
             <img
@@ -159,6 +211,7 @@
               alt="Imagen de perfil por defecto"
               class="img-fluid"
             />
+            
             <div class="choseImage">
               <input
                 type="file"
@@ -167,9 +220,10 @@
                 id="imagenSelector"
                 accept="image/png, image/jpg, image/jpeg"
                 value=""
-              />
+            />
             </div>
           </div>
+
           <div class="form-group perfilCamp">
             <input
               type="text"
@@ -232,12 +286,18 @@
               id="direccion"
             />
           </div>
-          <button id="profileFormButton" type="submit" class="btn btn-primary">
-            Guardar Cambios
+
+          <button 
+            id="profileFormButton" 
+            type="submit" 
+            class="btn btn-primary"> Guardar Cambios
           </button>
         </form>
       </div>
     </main>
+
+    <!-----  Pie de página JaP + Scripts ----->
+
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">

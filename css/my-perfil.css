@@ -11,7 +11,7 @@ h1#title {
   display: flex;
   gap: 20px;
 
-  @media (width <= 600px) {
+  @media (width <= 769px) {
     flex-direction: column;
     gap: 20px;
   }
