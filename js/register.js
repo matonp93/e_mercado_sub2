@@ -3,38 +3,51 @@ const email = document.getElementById('email');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
-const checkTerminos =document.getElementById('checkTerminos');
 
 function validarFormulario() {
-    email.style.borderColor = '';
-    username.style.borderColor = '';
-    password.style.borderColor = '';
-    confirmPassword.style.borderColor = '';
-    checkTerminos.style.borderColor = '';
+    console.log('Entrando en validarFormulario');
 
     if (email.value.trim() === '') {
-        email.style.borderColor = 'red';
+        email.classList.add('error');
+        setTimeout(() => { email.classList.remove('error') }, 7000);
     }
 
     if (username.value.trim() === '') {
-        username.style.borderColor = 'red';
+        username.classList.add('error');
+        setTimeout(() => { username.classList.remove('error') }, 7000);
     }
 
-    if (password.value.trim() === '' || password.value.length<6) {
-        password.style.borderColor = 'red';
+    if (password.value.trim() === '') {
+        password.classList.add('error');
+        setTimeout(() => { password.classList.remove('error') }, 7000);
     }
 
     if (confirmPassword.value.trim() === '' || confirmPassword.value !== password.value) {
-        confirmPassword.style.borderColor = 'red';
+        confirmPassword.classList.add('error');
+        setTimeout(() => { confirmPassword.classList.remove('error') }, 7000);
     }
 
-    if (!checkTerminos.checked) {
-        checkTerminos.style.borderColor = 'red';
+    if (
+        (email.value.trim() === '') ||
+        (username.value.trim() === '') ||
+        (password.value.trim() === '') ||
+        (confirmPassword.value.trim() === '') ||
+        (confirmPassword.value !== password.value)
+    ) {
+        console.log('Formulario validado');
+        return false;
+    } else {
+        return true;
     }
-    if ((email.value.trim() === '') || password.value.length<6 ||(username.value.trim() === '') || (password.value.trim() === '') || (confirmPassword.value.trim() === '') || (confirmPassword.value !== password.value) || (!checkTerminos.checked)){
-        return false
-    }else{ return true}
 }
+
+form.addEventListener("submit", function (event) {
+    if (!validarFormulario()) {
+        event.preventDefault();
+    } else {
+        enviarSolicitud();
+    }
+});
 
 function enviarSolicitud(){ 
 
@@ -56,7 +69,6 @@ const requestOptions = {
     body: raw,
     redirect: 'follow'
 };
-
 
 fetch("http://localhost:3000/register", requestOptions)
 .then(response => response.text())
