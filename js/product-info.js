@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				divProductoRelacionado.appendChild(imageProductoRelacionado);
 				divProductoRelacionado.appendChild(nameProductoRelacionado);
 				divRelatedProducts.appendChild(divProductoRelacionado);
-			});
+			})});
 			productosRelacionados.appendChild(divRelatedProducts);
 
 			// Atributos y clases //
@@ -77,14 +77,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			pSoldCount.classList.add('pSoldCount');
 			btnAddCarrito.classList.add('btnAddCarrito');
 			btnAddCarrito.addEventListener('click', () => {
-				let productosCarrito = JSON.parse(localStorage.getItem('productosCarrito'));
-				if (productosCarrito.includes(data.id)) {
-					alert('Ya esta en el carrito mi rey');
-				} else {
-					productosCarrito.push(data.id);
-					localStorage.setItem('productosCarrito', JSON.stringify(productosCarrito));
-				}
-			});
+				fetch(
+					USERS_CART, {
+					  headers: { "Content-Type": "application/json; charset=utf-8",
+					  "authorization":  "Bearer "+localStorage.token },
+					  method: 'POST',
+					  body: JSON.stringify({
+						"productid": localStorageValue
+					  })
+					})
+					.then(response => response.json())
+					.then(data => console.log(data))
+					.catch(error => console.log(error))
 			});
 
 			// Contenido de cada elemento //

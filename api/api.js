@@ -3,14 +3,18 @@ const app = express(); // Crea una instancia de ExpressJS
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const sha256 = require("sha256");
+const fs = require('fs');
 const connection = require('./persistencia/connection'); // requiere la variable connection del archivo connection.js
 const port = 3000;
 const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
-
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
 app.use(express.json()); // Permite que el servidor analice el cuerpo de las peticiones como JSON
 app.use(cors({
     origin: '*'
 }));
+app.use('/images',express.static('images'));
 
 app.get("/", (req,res) =>{
     res.send("Api online");
@@ -141,7 +145,7 @@ function authenticateToken(req, res, next) {
         const result = verifyAccessToken(token);
       
         if (!result.success) {
-          return res.status(403).json({ error: result.error });
+          return res.status(403).json("token expirado");
     }
         req.user = result.data;
         next();
@@ -166,8 +170,28 @@ function verifyAccessToken(token) {
     }
   }
 
+app.get("/users",authenticateToken,(req,res)=>{
+    connection.query(`SELECT * FROM Users WHERE email="${req.user.email}" AND password="${sha256(req.user.password)}"`,(err, result)=>{
+        if (err) throw err;
+        res.json(result);
+    })
+})
+app.put("/users",authenticateToken,(req,res)=>{
+    let user = req.body;
+    let imageBuffer = Buffer.from(user.image, "base64");
+    fs.writeFileSync(`./images/${req.body.username}.png`,imageBuffer);
+    connection.query(`UPDATE Users SET username="${user.username}",name="${user.name}",secondname="${user.secondname}",surname="${user.surname}",secondsurname="${user.secondsurname}",phone="${user.phone}",address="${user.address}",image="${user.username}.png" where email="${req.user.email}"`,(err,result)=>{
+        if (err) throw err;
+        res.json(result);
+    })
+})
 
-
+app.post("/usercart",authenticateToken,(req,res)=>{
+    connection.query(`INSERT INTO users_products(emailUser, idProduct) values("${req.user.email}","${req.body.productid}")`,(err,result)=>{
+        if (err) throw err;
+        res.json(result);
+    })
+})
 
 
 

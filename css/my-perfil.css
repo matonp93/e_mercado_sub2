@@ -31,6 +31,9 @@ h1#title {
   border-bottom: 2px solid var(--textcolor);
   outline: none;
 }
+.form-control[readonly]{
+  background-color: var(--background);
+}
 
 .form-control:focus {
   color: var(--textcolor);

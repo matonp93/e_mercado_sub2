@@ -8,20 +8,25 @@ const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
 const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
 const VERIFY_TOKEN_URL = 'http://localhost:3000/verify';
 const USERNAME_URL = 'http://localhost:3000/username/';
+const USERS_URL = 'http://localhost:3000/users'
+const USERS_CART = 'http://localhost:3000/usercart'
 const EXT_TYPE = '';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
 const btnCarrito = document.getElementById('carrito');
 let sumaNavbar = 0;
-
 	function comprobarLogin(){
 		fetch(VERIFY_TOKEN_URL,{
 			headers: { "Content-Type": "application/json; charset=utf-8",
 			"authorization":  "Bearer "+localStorage.token}
 		  })
 		  .then(response => response.json())
-		  .then(data => usernameNavbar(data))
+		  .then(data => {
+			if(!(data == "token expirado")){
+				usernameNavbar(data);
+			}else{location.href = "login.html"}
+		  })
 		  .catch(error => console.log(error));
 	}
 
@@ -64,11 +69,7 @@ function salir() {
 } //Se encarga de limpiar el localStorage y nos redirecciona a la pagina login.html
 
 function verPerfil() { 
-	if (localStorage.email === "invitado"){ // Comprueba si esta ingresado como invitado
-		location.href = 'login.html';
-	} else {
-		location.href = 'my-profile.html';
-	};
+	location.href = "my-profile.html";
 } // Nos redirecciona a la pagina my-profile.html
 
 document.addEventListener('DOMContentLoaded', ()=> {
