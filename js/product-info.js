@@ -87,7 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					  })
 					})
 					.then(response => response.json())
-					.then(data => console.log(data))
+					.then(data => {
+						if(data == "Entrada duplicada"){
+							alert("Este producto ya se encuentra en el carrito");
+						}
+					})
 					.catch(error => console.log(error))
 			});
 

@@ -4,12 +4,11 @@ const PUBLISH_PRODUCT_URL = 'https://japceibal.github.io/emercado-api/sell/publi
 const PRODUCTS_URL = 'http://localhost:3000/products/';
 const PRODUCT_INFO_URL = 'http://localhost:3000/productinfo/';
 const PRODUCT_INFO_COMMENTS_URL = 'http://localhost:3000/comments/';
-const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
 const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
 const VERIFY_TOKEN_URL = 'http://localhost:3000/verify';
 const USERNAME_URL = 'http://localhost:3000/username/';
 const USERS_URL = 'http://localhost:3000/users'
-const USERS_CART = 'http://localhost:3000/usercart'
+const USERS_CART = 'http://localhost:3000/cart'
 const EXT_TYPE = '';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	if (localStorage.token != "invitado"){
 		comprobarLogin()
 	}
-		else {document.getElementById('user-info').textContent = "invitado"}
+	else {document.getElementById('user-info').textContent = "invitado"}
 
 	btnSalir.addEventListener('click', () => {
 		salir();
@@ -236,14 +235,20 @@ function subtotalNavbar (){
 } 
 
 function carritoNavbar() {
-	let prods = JSON.parse(localStorage.productosCarrito);
-	prods.forEach((element) =>
-	fetch(PRODUCT_INFO_URL + element + EXT_TYPE)
-		.then((response) => response.json())
-		.then(data => data[0])
-		.then((data) =>  productosNavbar(data))
-		);
-
+	fetch(USERS_CART,{
+		headers: { "Content-Type": "application/json; charset=utf-8",
+		"authorization":  "Bearer "+localStorage.token}
+	  })
+	  .then(response => response.json())
+	  .then(data => {
+		data.forEach(element =>{
+			fetch(PRODUCT_INFO_URL + element.idProduct)
+			.then((response) => response.json())
+			.then(data => data[0])
+			.then((data) =>  productosNavbar(data))
+		})
+	  })
+	  .catch(error => console.log(error));
 }
 if (!(document.location.pathname.includes('/cart.html'))){
 	carritoNavbar();

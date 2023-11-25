@@ -186,9 +186,20 @@ app.put("/users",authenticateToken,(req,res)=>{
     })
 })
 
-app.post("/usercart",authenticateToken,(req,res)=>{
-    connection.query(`INSERT INTO users_products(emailUser, idProduct) values("${req.user.email}","${req.body.productid}")`,(err,result)=>{
-        if (err) throw err;
+app.post("/cart",authenticateToken,(req,res)=>{
+     connection.query(`INSERT INTO users_products(emailUser, idProduct) values("${req.user.email}","${req.body.productid}")`,(err,result)=>{
+        if (err){
+            if(err.errno == "1062"){
+                res.json("Entrada duplicada");
+            }
+        };
+        res.json(result);
+    })
+})
+
+app.get("/cart",authenticateToken,(req,res)=>{
+    connection.query(`SELECT * FROM users_products where emailUser="${req.user.email}"`,(err,result)=>{
+        if(err) throw err;
         res.json(result);
     })
 })
