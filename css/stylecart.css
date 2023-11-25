@@ -94,41 +94,89 @@ body {
 }
 
 /* ---------------------- */
-
+.rowC{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	@media (width <= 958px) {
+		flex-direction: column;
+		font-size: smaller;
+	}
+}
 .image {
 	width: 100%;
-	border-radius: 2px;
+	border-radius: 10px;
 }
 
 .tdImage {
-	width: 175px;
-	min-width: 100px;
-	min-height: 50px;
+	flex: 1;
+    display: flex;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+	@media (width <= 958px) {
+		width: 65%;
+	}
 }
 
 .tableItems {
 	margin: auto;
 	width: 50vw;
 }
+.SubtotalCart{
+	flex: 1;
+	justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    margin: 10px;
+}
 
-.tableItems tr {
-	border-bottom: 20px solid var(--background2);
+.tdbtnBorrar{
+	flex: 1;
+	justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    margin: 10px;
+}
+
+.tableItems div {
+	margin: 10px;
+	border-radius: 10px ;
 	background-color: var(--background);
+	@media (width <= 958px) {
+		align-items: center;
+	}
 }
 
 .divPrice {
-	margin: 15px 0 0 15px;
+	flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    margin: 10px;
 }
 
 .pName {
 	font-weight: bold;
 	font-size: 18px;
+	@media (width <= 958px) {
+		margin: 0;
+		}
 }
 
 .pSubtotal {
 	font-weight: bold;
 }
 
+.pPrice{
+	@media (width <= 958px) {
+		display: none!important;
+		}
+}
 .pCant {
 	color: var(--background2);
 	background-color: var(--primary);

@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 //VARIABLES A CAMBIAR
 let host = 'localhost',
   user = 'root',
-  password = '123456',
+  password = 'mati123.',
   database = 'eCommerceSubgrupo2',
   port = 3306; // (DATOS DE CONEXIÓN A MYSQL)
 //

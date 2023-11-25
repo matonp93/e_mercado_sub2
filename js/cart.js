@@ -21,24 +21,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function mostrarProducto(name, image, currency, unitCost, count, id, eliminar) {
 		// Creación de elementos HTML //
-		let row = document.createElement('tr');
-		let tdTitlePriceDiv = document.createElement('td');
+		let row = document.createElement('div');
+		row.classList.add('rowC');
 		let titlePriceDiv = document.createElement('div');
 
-		let tdImgCart = document.createElement('td');
+		let tdImgCart = document.createElement('div');
 		let imgCart = document.createElement('img');
 
 		let nameCart = document.createElement('p');
 
 		let priceCart = document.createElement('p');
 
-		//let tdCantCart = document.createElement('td');
+		let tdCantCart = document.createElement('div');
 		let cantCart = document.createElement('input');
 
-		let tdSubtotalCart = document.createElement('td');
+		let tdSubtotalCart = document.createElement('div');
 		let subtotalCart = document.createElement('p');
 
-		let tdBtnBorrar = document.createElement('td');
+		let tdBtnBorrar = document.createElement('div');
 		let btnBorrar = document.createElement('button');
 
 		imgCart.setAttribute('src', image);
@@ -75,11 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		cantCart.classList.add('pCant');
 		subtotalCart.classList.add('pSubtotal');
 		btnBorrar.classList.add('btnBorrar');
+		tdSubtotalCart.classList.add('SubtotalCart');
+		tdBtnBorrar.classList.add('tdbtnBorrar');
 
 		// AppendChild's //
 		titlePriceDiv.appendChild(nameCart);
 		titlePriceDiv.appendChild(priceCart);
-		tdTitlePriceDiv.appendChild(titlePriceDiv);
+		
 		tdImgCart.appendChild(imgCart);
 		//tdCantCart.appendChild(cantCart);
 		tdSubtotalCart.appendChild(subtotalCart);
@@ -87,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		tdBtnBorrar.appendChild(btnBorrar);
 
 		row.appendChild(tdImgCart);
-		row.appendChild(tdTitlePriceDiv);
+		row.appendChild(titlePriceDiv);
 		//row.appendChild(tdCantCart);
 		row.appendChild(tdSubtotalCart);
 		row.appendChild(tdBtnBorrar);
