@@ -76,13 +76,4 @@ fetch("http://localhost:3000/register", requestOptions)
 .catch(error => console.log('error', error));
 }
 
-form.addEventListener("submit", function(event) {
-    if (validarFormulario()){
-        event.preventDefault();
-        enviarSolicitud();
-    }else{
-        event.preventDefault();
-    }
-});
-
 
