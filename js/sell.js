@@ -4,8 +4,8 @@ let comissionPercentage = 0.13;
 let MONEY_SYMBOL = "$";
 let DOLLAR_CURRENCY = "Dólares (USD)";
 let PESO_CURRENCY = "Pesos Uruguayos (UYU)";
-let DOLLAR_SYMBOL = "USD ";
-let PESO_SYMBOL = "UYU ";
+let DOLLAR_SYMBOL = "USD";
+let PESO_SYMBOL = "UYU";
 let PERCENTAGE_SYMBOL = '%';
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
@@ -66,14 +66,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         updateTotalCosts();
     });
 
-
     //Configuraciones para el elemento que sube archivos
-    let dzoptions = {
-        url:"/",
-        autoQueue: false
-    };
-    let myDropzone = new Dropzone("div#file-upload", dzoptions);    
-
 
     //Se obtiene el formulario de publicación de producto
     let sellForm = document.getElementById("sell-info");
@@ -88,7 +81,12 @@ document.addEventListener("DOMContentLoaded", function(e){
         let productNameInput = document.getElementById("productName");
         let productCategory = document.getElementById("productCategory");
         let productCost = document.getElementById("productCostInput");
+        let productDesc = document.getElementById("productDescription");
+        let imagesInput = document.getElementById("file-input");
+        let files = imagesInput.files;
+        let images = new Array();
         let infoMissing = false;
+        let categoryId = 0;
 
         //Quito las clases que marcan como inválidos
         productNameInput.classList.remove('is-invalid');
@@ -120,30 +118,73 @@ document.addEventListener("DOMContentLoaded", function(e){
         
         if(!infoMissing)
         {
-            //Aquí ingresa si pasó los controles, irá a enviar
-            //la solicitud para crear la publicación.
-
-            getJSONData(PUBLISH_PRODUCT_URL).then(function(resultObj){
-                let msgToShowHTML = document.getElementById("resultSpan");
-                let msgToShow = "";
-    
-                //Si la publicación fue exitosa, devolverá mensaje de éxito,
-                //de lo contrario, devolverá mensaje de error.
-                //FUNCIONALIDAD NO IMPLEMENTADA
-                if (resultObj.status === 'ok')
-                {
-                    msgToShow = MSG;
-                    document.getElementById("alertResult").classList.add('alert-primary');
+            switch(productCategory.value){
+                case "Autos":
+                    categoryId = 101;
+                break;
+                case "Juguetes":
+                    categoryId = 102;
+                break;
+                case "Muebles":
+                    categoryId = 103;
+                break;
+                case "Herramientas":
+                    categoryId = 104;
+                break;
+                case "Computadoras":
+                    categoryId = 105;
+                break;
+                case "Vestimenta":
+                    categoryId = 106;
+                break;
+                case "Electrodomésticos":
+                    categoryId = 107;
+                break;
+                case "Deporte":
+                    categoryId = 108;
+                break;
+                case "Celulares":
+                    categoryId = 109;
+                break;
+            }
+            Object.keys(files).forEach(i => {
+                const file = files[i];
+                const reader = new FileReader();
+                reader.addEventListener("load", (e) => {
+                    let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+                    if ((encoded.length % 4) > 0) {
+                      encoded += '='.repeat(4 - (encoded.length % 4));
+                    }
+                    images.push(encoded);
+                })
+                reader.readAsDataURL(file);
+              })
+              console.log(images);
+            fetch(PRODUCTS_URL + categoryId, {
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                method: 'POST',
+                body: JSON.stringify({
+                  "name": productNameInput.value,
+                  "description": productDesc.value,
+                  "cost": productCost.value,
+                  "currency": MONEY_SYMBOL,
+                  "soldCount" : 0,
+                })
+            }).then(response => response.json())
+            .then(data =>{
+                for(let i = 0; i<images.length; i++){
+                    fetch(PRODUCTIMG_URL,{
+                        headers: { "Content-Type": "application/json; charset=utf-8" },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        "name": (productNameInput.value+i.toString()).replaceAll(" ","_"),
+                        "image": images[i],
+                        "productid": data
+                    })
+                    })
                 }
-                else if (resultObj.status === 'error')
-                {
-                    msgToShow = MSG;
-                    document.getElementById("alertResult").classList.add('alert-primary');
-                }
-    
-                msgToShowHTML.innerHTML = msgToShow;
-                document.getElementById("alertResult").classList.add("show");
-            });
+            
+            })
         }
     });
 });

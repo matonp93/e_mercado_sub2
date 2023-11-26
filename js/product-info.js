@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let divimgInfo = document.createElement('div');
 			data.images.split(',').forEach((image) => {
 				let imginfo = document.createElement('img');
-				imginfo.setAttribute('src', image);
+				imginfo.setAttribute('src', "http://localhost:3000/"+image);
 				divimgInfo.classList.add('divImgInfo');
 				divimgInfo.appendChild(imginfo);
 			});
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				divProductoRelacionado.classList.add('divRelated');
 				imageProductoRelacionado.classList.add('imageRelated');
 				nameProductoRelacionado.classList.add('pRelated');
-				imageProductoRelacionado.setAttribute('src', data.images.split(",")[0]);
+				imageProductoRelacionado.setAttribute('src', "http://localhost:3000/"+data.images.split(",")[0]);
 				nameProductoRelacionado.innerHTML += data.name;
 				divProductoRelacionado.addEventListener('click', () => {
 					localStorage.setItem('cardId', data.id);

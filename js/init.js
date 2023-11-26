@@ -1,14 +1,13 @@
 const CATEGORIES_URL = 'http://localhost:3000/categories';
 const REGISTER_URL = 'http://localhost:3000/register';
-const PUBLISH_PRODUCT_URL = 'https://japceibal.github.io/emercado-api/sell/publish.json';
 const PRODUCTS_URL = 'http://localhost:3000/products/';
 const PRODUCT_INFO_URL = 'http://localhost:3000/productinfo/';
 const PRODUCT_INFO_COMMENTS_URL = 'http://localhost:3000/comments/';
-const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
 const VERIFY_TOKEN_URL = 'http://localhost:3000/verify';
 const USERNAME_URL = 'http://localhost:3000/username/';
 const USERS_URL = 'http://localhost:3000/users'
 const USERS_CART = 'http://localhost:3000/cart/'
+const PRODUCTIMG_URL = 'http://localhost:3000/productimage/'
 const EXT_TYPE = '';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
@@ -161,7 +160,7 @@ function productosNavbar(element) {
 	let imgDiv = document.createElement('div');
 	imgDiv.classList.add('imgDiv');
 	let imagen = document.createElement('img');
-	imagen.setAttribute('src', element.images.split(",")[0]);
+	imagen.setAttribute('src', "http://localhost:3000/"+element.images.split(",")[0]);
 	imagen.classList.add('imgCarrito');
 	imgDiv.appendChild(imagen);
 

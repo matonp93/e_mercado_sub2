@@ -61,7 +61,7 @@ function contentProducts(element) {
 	let p2Div = document.createElement('div');
 	p2Div.classList.add('p2div');
 	let image = document.createElement('img');
-	image.setAttribute('src', element.image);
+	image.setAttribute('src', "http://localhost:3000/"+element.image);
 	imgDiv.appendChild(image);
 	h3Div.appendChild(h3);
 	//h3Div.appendChild(h2);

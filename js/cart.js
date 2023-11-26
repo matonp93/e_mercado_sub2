@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		let tdBtnBorrar = document.createElement('div');
 		let btnBorrar = document.createElement('button');
 
-		imgCart.setAttribute('src', image);
+		imgCart.setAttribute('src',"http://localhost:3000/" +image);
 		nameCart.innerHTML += name;
 		priceCart.innerHTML += currency + ' ' + unitCost;
 		cantCart.setAttribute('type', 'number');

@@ -8,13 +8,13 @@ const connection = require('./persistencia/connection'); // requiere la variable
 const port = 3000;
 const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
 const bodyParser = require('body-parser');
-app.use(bodyParser.json({limit: '100mb'}));
-app.use(bodyParser.urlencoded({limit: '100mb', extended: true}));
-app.use(express.json()); // Permite que el servidor analice el cuerpo de las peticiones como JSON
+app.use(bodyParser.json({limit: '500mb'}));
+app.use(bodyParser.urlencoded({limit: '500mb', extended: true}));// Permite que el servidor analice el cuerpo de las peticiones como JSON
 app.use(cors({
     origin: '*'
 }));
 app.use('/images',express.static('images'));
+app.use('/img',express.static('img'));
 
 app.get("/", (req,res) =>{
     res.send("Api online");
@@ -69,26 +69,46 @@ app.get("/products/:categoryid",(req,res) =>{
     })
 });
 
-app.post("/products/:categoryid", (req, res) => {
-     connection.query(`INSERT INTO Products VALUES (${req.body.id},"${req.body.name}","${req.body.description}",${req.body.cost},"${req.body.currency}",${req.body.soldCount})`, (err,result)=>{
-     if (err) res.sendStatus(err);
-      res.send(result);
-    })
-    connection.query(`INSERT INTO Category_Product VALUES (${req.params.categoryid},${req.body.id})`,(err,result)=>{
-        if (err) throw err;
-    })
-    req.body.images.forEach(element => {
-        connection.query(`INSERT INTO ProductImages VALUES (${req.body.id},"${element}")`,(err,result)=>{
-            if (err) throw err;
-        })
+app.post("/products/:categoryid", async (req, res) => {
+    let relatedproducts = await randomrelatedproducts(req.params.categoryid);
+    connection.getConnection((err,connection)=>{
+        connection.query(`INSERT INTO Products(name, description, cost, currency, soldCount) VALUES ("${req.body.name}","${req.body.description}",${req.body.cost},"${req.body.currency}",${req.body.soldCount})`, (err,result)=>{
+            if (err){
+                res.sendStatus(err)}
+                else{
+                   connection.query("SELECT LAST_INSERT_ID()",(err,result)=>{
+                       connection.query(`INSERT INTO Category_Product VALUES (${req.params.categoryid},${Object.values(result[0]).join(",")})`,(err,result)=>{
+                           if (err) throw err;
+                       })
+                       relatedproducts.forEach(element => {
+                           connection.query(`INSERT INTO relatedProducts VALUES (${Object.values(result[0]).join(",")},${element.id})`,(err,result)=>{
+                               if (err) throw err;
+                           })
+                       })
+                       res.json(Object.values(result[0]).join(","));
+                   })
+                   
+                }
+           })
+    connection.release();
     });
-    req.body.relatedProducts.forEach(element => {
-        connection.query(`INSERT INTO relatedProducts VALUES (${req.body.id},${element.id})`,(err,result)=>{
+    app.post("/productimage",(req,res)=>{
+        let imageBuffer = Buffer.from(req.body.image, "base64");
+        fs.writeFileSync(`./img/${req.body.name}.png`,imageBuffer);
+        connection.query(`INSERT INTO ProductImages VALUES (${req.body.productid},"img/${req.body.name}.png")`,(err,result)=>{
             if (err) throw err;
+            res.json(result);
         })
     })
 });
-
+function randomrelatedproducts(categoryid){
+    return new Promise((resolve,reject)=>{
+        connection.query(`select id from productbycategory where idcategory=${categoryid} order by rand() limit 0,2`,(err,result)=>{
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
+}
 app.get("/productinfo/:id",(req,res)=>{
     connection.query(`SELECT * FROM ProductInfo WHERE id=${req.params.id}`, (err,result)=>{
         if(err) throw err;
