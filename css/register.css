@@ -58,11 +58,11 @@ h1 {
 }
 
 input {
-  border: 1px solid #ccc !important; 
+  border: 1px solid #dab0ac00 !important; 
 }
 
 input.error {
-  border-color: red !important; 
+  border-bottom: 1px solid red !important;
 }
 .underline {
   position: absolute;
@@ -185,11 +185,12 @@ input.error {
     position: relative;
     padding: 10px 22px;
     border-radius: 12px;
+    margin-top: 10px;
     border: none;
     color: #fff;
     cursor: pointer;
     background-color: #7d2ae8;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
   }
   
   .button-reg:active {
@@ -222,7 +223,7 @@ input.error {
     background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
       10% 10%, 18% 18%;
     background-position: 50% 120%;
-    animation: greentopBubbles 0.6s ease;
+    animation: greentopBubbles 0.7s ease;
   }
   
   @keyframes greentopBubbles {
