@@ -3,13 +3,18 @@ const app = express(); // Crea una instancia de ExpressJS
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const sha256 = require("sha256");
+const fs = require('fs');
 const connection = require('./persistencia/connection'); // requiere la variable connection del archivo connection.js
 const port = 3000;
-
-app.use(express.json()); // Permite que el servidor analice el cuerpo de las peticiones como JSON
+const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '500mb'}));
+app.use(bodyParser.urlencoded({limit: '500mb', extended: true}));// Permite que el servidor analice el cuerpo de las peticiones como JSON
 app.use(cors({
     origin: '*'
 }));
+app.use('/images',express.static('images'));
+app.use('/img',express.static('img'));
 
 app.get("/", (req,res) =>{
     res.send("Api online");
@@ -39,39 +44,71 @@ app.post("/categories", (req, res) => {
 });
 
 app.get("/products",(req,res) =>{
-    connection.query('SELECT * from ProductByCategory',(err, rows)=>{
+    let filters = "";
+    if(req.query.filters){
+        filters = req.query.filters;
+    }else{
+        filters = " order by soldCount desc";
+    }
+    connection.query('SELECT * from ProductByCategory'+filters,(err, rows)=>{
         if (err) throw err;
         res.send(rows);
     })
 });
 
 app.get("/products/:categoryid",(req,res) =>{
-    connection.query(`SELECT * FROM ProductByCategory WHERE idCategory=${req.params.categoryid}`,(err, rows)=>{
+    let filters = "";
+    if(req.query.filters){
+        filters = req.query.filters;
+    }else{
+        filters = " order by soldCount desc";
+    }
+    connection.query(`SELECT * FROM ProductByCategory WHERE idCategory="${req.params.categoryid}"`+filters,(err, rows)=>{
         if (err) throw err;
         res.send(rows);
     })
 });
 
-app.post("/products/:categoryid", (req, res) => {
-     connection.query(`INSERT INTO Products VALUES (${req.body.id},"${req.body.name}","${req.body.description}",${req.body.cost},"${req.body.currency}",${req.body.soldCount})`, (err,result)=>{
-     if (err) res.sendStatus(err);
-      res.send(result);
-    })
-    connection.query(`INSERT INTO Category_Product VALUES (${req.params.categoryid},${req.body.id})`,(err,result)=>{
-        if (err) throw err;
-    })
-    req.body.images.forEach(element => {
-        connection.query(`INSERT INTO ProductImages VALUES (${req.body.id},"${element}")`,(err,result)=>{
-            if (err) throw err;
-        })
+app.post("/products/:categoryid", async (req, res) => {
+    let relatedproducts = await randomrelatedproducts(req.params.categoryid);
+    connection.getConnection((err,connection)=>{
+        connection.query(`INSERT INTO Products(name, description, cost, currency, soldCount) VALUES ("${req.body.name}","${req.body.description}",${req.body.cost},"${req.body.currency}",${req.body.soldCount})`, (err,result)=>{
+            if (err){
+                res.sendStatus(err)}
+                else{
+                   connection.query("SELECT LAST_INSERT_ID()",(err,result)=>{
+                       connection.query(`INSERT INTO Category_Product VALUES (${req.params.categoryid},${Object.values(result[0]).join(",")})`,(err,result)=>{
+                           if (err) throw err;
+                       })
+                       relatedproducts.forEach(element => {
+                           connection.query(`INSERT INTO relatedProducts VALUES (${Object.values(result[0]).join(",")},${element.id})`,(err,result)=>{
+                               if (err) throw err;
+                           })
+                       })
+                       res.json(Object.values(result[0]).join(","));
+                   })
+                   
+                }
+           })
+    connection.release();
     });
-    req.body.relatedProducts.forEach(element => {
-        connection.query(`INSERT INTO relatedProducts VALUES (${req.body.id},${element.id})`,(err,result)=>{
+    app.post("/productimage",(req,res)=>{
+        let imageBuffer = Buffer.from(req.body.image, "base64");
+        fs.writeFileSync(`./img/${req.body.name}.png`,imageBuffer);
+        connection.query(`INSERT INTO ProductImages VALUES (${req.body.productid},"img/${req.body.name}.png")`,(err,result)=>{
             if (err) throw err;
+            res.json(result);
         })
     })
 });
-
+function randomrelatedproducts(categoryid){
+    return new Promise((resolve,reject)=>{
+        connection.query(`select id from productbycategory where idcategory=${categoryid} order by rand() limit 0,2`,(err,result)=>{
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
+}
 app.get("/productinfo/:id",(req,res)=>{
     connection.query(`SELECT * FROM ProductInfo WHERE id=${req.params.id}`, (err,result)=>{
         if(err) throw err;
@@ -79,16 +116,21 @@ app.get("/productinfo/:id",(req,res)=>{
     })
 });
 
-app.post("/comments",(req,res)=>{
-    connection.query(`INSERT INTO Comments(idproduct, score, description, user, dateTime) VALUES(${req.body.product}, ${req.body.score},"${req.body.description}","${req.body.user}","${req.body.dateTime}")`,(err,result)=>{
+app.post("/comments",authenticateToken,(req,res)=>{
+    connection.query(`SELECT username FROM USERS WHERE email="${req.user.email}"`,(err,result)=>{
         if (err) throw err;
-        res.send(result);
-    }
-    )
+        if(result){
+            connection.query(`INSERT INTO Comments(idproduct, score, description, user, dateTime) VALUES(${req.body.product}, ${req.body.score},"${req.body.description}","${result[0].username}","${req.body.dateTime}")`,(err,result)=>{
+                if (err) throw err;
+                res.send(result);
+            }
+            )
+        }
+    })
 });
 
 app.get("/comments/:id",(req,res)=>{
-    connection.query(`SELECT * FROM Comments WHERE idproduct=${req.params.id}`,(err,result)=>{
+    connection.query(`SELECT * FROM commentswithimage WHERE idproduct=${req.params.id}`,(err,result)=>{
         if (err) throw err;
         res.send(result);
     })
@@ -99,6 +141,20 @@ app.post("/register",(req,res)=>{
         if (err) throw err;
         res.send(result);
     })
+})
+
+app.get("/username/:email",(req,res)=>{
+    connection.query(`SELECT username FROM USERS WHERE email="${req.params.email}"`,(err,result)=>{
+        if (err) throw err;
+        res.send(result);
+    })
+})
+
+app.get("/verify",authenticateToken,(req,res)=>{
+    if(req.user){
+        res.json(req.user.email);
+    }else
+    res.send(400);
 })
 
 app.post("/login",checkUser,(req,res)=>{ 
@@ -117,19 +173,87 @@ function checkUser(req,res,next){
         })
     }
 
-    function generateAccessToken (email, password) {
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+        if (!token) {
+          return res.sendStatus(401);
+    }
+        const result = verifyAccessToken(token);
+      
+        if (!result.success) {
+          return res.status(403).json("token expirado");
+    }
+        req.user = result.data;
+        next();
+      }
+
+function generateAccessToken (email, password) {
     const payload = {
       email: email,
       password: password
     };
-    const secret = '622c12fb446b491f56ab32b63de9d02f7c0715fb0d9b82762bae096408c21f6ee4bd152b4d2fa0a82e5e47b635a331658c48c0983fef7c96f99467d4b814ee3c';
+    
     const options = { expiresIn: '3h' };
-  
     return jwt.sign(payload, secret, options);
   }
 
+function verifyAccessToken(token) {
+    try {
+      const decoded = jwt.verify(token, secret);
+      return { success: true, data: decoded };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
 
+app.get("/users",authenticateToken,(req,res)=>{
+    connection.query(`SELECT * FROM Users WHERE email="${req.user.email}" AND password="${sha256(req.user.password)}"`,(err, result)=>{
+        if (err) throw err;
+        res.json(result);
+    })
+})
+app.put("/users",authenticateToken,(req,res)=>{
+    let user = req.body;
+    let imageBuffer = Buffer.from(user.image, "base64");
+    fs.writeFileSync(`./images/${req.body.username}.png`,imageBuffer);
+    connection.query(`UPDATE Users SET username="${user.username}",name="${user.name}",secondname="${user.secondname}",surname="${user.surname}",secondsurname="${user.secondsurname}",phone="${user.phone}",address="${user.address}",image="${user.username}.png" where email="${req.user.email}"`,(err,result)=>{
+        if (err) throw err;
+        res.json(result);
+    })
+})
 
+app.post("/cart",authenticateToken,(req,res)=>{
+     connection.query(`INSERT INTO users_products(emailUser, idProduct) values("${req.user.email}","${req.body.productid}")`,(err,result)=>{
+        if (err){
+            if(err.errno == "1062"){
+                res.json("Entrada duplicada");
+            }
+        };
+        res.json(result);
+    })
+})
+
+app.get("/cart",authenticateToken,(req,res)=>{
+    connection.query(`SELECT * FROM users_products where emailUser="${req.user.email}"`,(err,result)=>{
+        if(err) throw err;
+        res.json(result);
+    })
+})
+
+app.put("/cart/:idproduct",authenticateToken,(req,res)=>{
+    connection.query(`UPDATE users_products SET productCount="${req.body.productcount}" where idProduct="${req.params.idproduct}" AND emailUser="${req.user.email}"`,(err, result)=>{
+        if (err) throw err
+        res.json(result);
+    })
+})
+
+app.delete("/cart/:idproduct",authenticateToken,(req,res)=>{
+    connection.query(`DELETE from users_products WHERE idProduct="${req.params.idproduct}" AND emailUser="${req.user.email}"`,(err, result)=>{
+        if (err) throw err;
+        res.json(result);
+    })
+})
 
 
 

@@ -12,17 +12,26 @@ const nombre = document.getElementById('nombre'),
   profileFormButton = document.getElementById('profileFormButton'),
   alertResult = document.getElementById('alertResult');
 
-let image,
-  imageText,
-  usersArray = new Array(),
+let imageText,
   reader = new FileReader();
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.users) {
-    usersArray = JSON.parse(localStorage.users);
-    getUserInfo();
+document.addEventListener('DOMContentLoaded',() => {
+
+  if (localStorage.token != "invitado") {
+      fetch(USERS_URL,{
+			headers: { "Content-Type": "application/json; charset=utf-8",
+			"authorization":  "Bearer "+localStorage.token}
+		  })
+		  .then(response => response.json())
+		  .then(data => data[0])
+      .then(data => {
+        getUserInfo(data);
+      })
+		  .catch(error => console.log(error));
+    // getUserInfo();
+  }else{
+    location.href = "login.html"
   }
-  email.value = localStorage.email;
 
   imagenSelector.addEventListener('change', () => {
     image = imagenSelector.files[0];
@@ -30,34 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   reader.addEventListener('load', () => {
-    imageText = reader.result;
-    imagenPlaceholder.src = imageText;
+    let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+    if ((encoded.length % 4) > 0) {
+      encoded += '='.repeat(4 - (encoded.length % 4));
+    }
+    imageText = encoded;
+    imagenPlaceholder.src = reader.result;
   });
 
   profileForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    let user;
-    let existingUser = usersArray.find(
-      (element) => element.email == localStorage.email
-    );
-    if (existingUser) {
-      user = existingUser;
-    } else {
-      user = new Object();
-      usersArray.push(user);
-    }
-    user.nombre = nombre.value;
-    user.segundoNombre = segundoNombre.value;
-    user.apellido = apellido.value;
-    user.segundoApellido = segundoApellido.value;
-    user.usuario = usuario.value;
-    user.email = email.value;
-    user.telefono = telefono.value;
-    user.direccion = direccion.value;
-    if (imageText) {
-      user.image = imageText;
-    }
-    localStorage.users = JSON.stringify(usersArray);
+    fetch(
+      USERS_URL, {
+        headers: { "Content-Type": "application/json; charset=utf-8",
+        "authorization":  "Bearer "+localStorage.token },
+        method: 'PUT',
+        body: JSON.stringify({
+          "name" : nombre.value,
+          "secondname": segundoNombre.value,
+          "surname" : apellido.value,
+          "secondsurname" : segundoApellido.value,
+          "username" : usuario.value,
+          "phone" : telefono.value,
+          "address" : direccion.value,
+          "image" : imageText
+        })
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error))
   });
 
   // Evento guardar cambios
@@ -70,19 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function getUserInfo() {
-  let user = usersArray.find((element) => element.email == localStorage.email);
+function getUserInfo(user) {
   if (user) {
-    nombre.value = user.nombre;
-    segundoNombre.value = user.segundoNombre;
-    apellido.value = user.apellido;
-    segundoApellido.value = user.segundoApellido;
-    usuario.value = user.usuario;
+    nombre.value = user.name;
+    segundoNombre.value = user.secondname;
+    apellido.value = user.surname;
+    segundoApellido.value = user.secondsurname;
+    usuario.value = user.username;
     email.value = user.email;
-    telefono.value = user.telefono;
-    direccion.value = user.direccion;
+    telefono.value = user.phone;
+    direccion.value = user.address;
     if (user.image){
-        imagenPlaceholder.src = user.image;
+        imagenPlaceholder.src = `http://localhost:3000/images/${user.username}.png`;
     } else {
         imagenPlaceholder.src = "/img/img_perfil.png";
     };

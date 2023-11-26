@@ -1,13 +1,6 @@
 const searchBtn = document.getElementById("button-addon2");
 
 document.addEventListener("DOMContentLoaded", function(){
-    function comprobarLogin(){
-        return ((localStorage.getItem("email") != null) && (localStorage.getItem("password") != null))
-    }
-    if (!comprobarLogin()){
-        location.href = "login.html"
-    } 
-
     searchBtn.addEventListener("click", ()=>{
         localStorage.setItem("searchquery",document.getElementById("searchinput").value);
         location.href = "search.html"

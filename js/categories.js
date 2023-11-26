@@ -88,12 +88,6 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    function comprobarLogin(){
-        return ((localStorage.getItem("email") != null) && (localStorage.getItem("password") != null))
-    }
-    if (!comprobarLogin()){
-        location.href = "login.html"
-    } 
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data

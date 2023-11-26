@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let divimgInfo = document.createElement('div');
 			data.images.split(',').forEach((image) => {
 				let imginfo = document.createElement('img');
-				imginfo.setAttribute('src', image);
+				imginfo.setAttribute('src', "http://localhost:3000/"+image);
 				divimgInfo.classList.add('divImgInfo');
 				divimgInfo.appendChild(imginfo);
 			});
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				divProductoRelacionado.classList.add('divRelated');
 				imageProductoRelacionado.classList.add('imageRelated');
 				nameProductoRelacionado.classList.add('pRelated');
-				imageProductoRelacionado.setAttribute('src', data.images.split(",")[0]);
+				imageProductoRelacionado.setAttribute('src', "http://localhost:3000/"+data.images.split(",")[0]);
 				nameProductoRelacionado.innerHTML += data.name;
 				divProductoRelacionado.addEventListener('click', () => {
 					localStorage.setItem('cardId', data.id);
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				divProductoRelacionado.appendChild(imageProductoRelacionado);
 				divProductoRelacionado.appendChild(nameProductoRelacionado);
 				divRelatedProducts.appendChild(divProductoRelacionado);
-			});
+			})});
 			productosRelacionados.appendChild(divRelatedProducts);
 
 			// Atributos y clases //
@@ -77,14 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
 			pSoldCount.classList.add('pSoldCount');
 			btnAddCarrito.classList.add('btnAddCarrito');
 			btnAddCarrito.addEventListener('click', () => {
-				let productosCarrito = JSON.parse(localStorage.getItem('productosCarrito'));
-				if (productosCarrito.includes(data.id)) {
-					alert('Ya esta en el carrito mi rey');
-				} else {
-					productosCarrito.push(data.id);
-					localStorage.setItem('productosCarrito', JSON.stringify(productosCarrito));
-				}
-			});
+				fetch(
+					USERS_CART, {
+					  headers: { "Content-Type": "application/json; charset=utf-8",
+					  "authorization":  "Bearer "+localStorage.token },
+					  method: 'POST',
+					  body: JSON.stringify({
+						"productid": localStorageValue
+					  })
+					})
+					.then(response => response.json())
+					.then(data => {
+						if(data == "Entrada duplicada"){
+							alert("Este producto ya se encuentra en el carrito");
+						}
+					})
+					.catch(error => console.log(error))
 			});
 
 			// Contenido de cada elemento //
@@ -130,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let divDescription = document.createElement('div');
 				let pTitle = document.createElement('p');
 				let pDescription = document.createElement('p');
-				let image = document.createElement('object');
+				let image = document.createElement('img');
 
 				// Estrellas en los comentarios //
 				let estrellas = [];
@@ -145,11 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				for (let i = 0; i < element.score; i++) {
 					estrellas[i].style.color = '#fd4';
 				}
-
 				// Atributos y clases //
-				image.data = 'gitlab.svg';
-				image.type = 'image/svg+xml';
-				image.onload = (e) => ResetearColores();
+				image.src = `http://localhost:3000/images/${element.image}`;
+				image.classList.add("imagenPerfil");
 				pTitle.classList.add('comment-title');
 				divCard.classList.add('cards');
 				divCardLoad.classList.add('tarjeta_load');
@@ -173,19 +179,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // AGREGAR COMENTARIOS //
 function agregarComentario() {
+	if(localStorage.token != "invitado"){
+		fetch(USERS_URL,{
+			headers: { "Content-Type": "application/json; charset=utf-8",
+			"authorization":  "Bearer "+localStorage.token}
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+			if(data == "token expirado"){
+				location.href="login.html";
+			}else{
+			return data[0];
+			}
+			})
+		  .then(data => {
 	// Creacion de elementos HTML //
 	let divCard = document.createElement('div');
 	let divCardLoad = document.createElement('div');
 	let divDescription = document.createElement('div');
 	let pTitle = document.createElement('p');
 	let pDescription = document.createElement('p');
-	let image;
+	let image = document.createElement('img');
 	
-
 	// Nombre del user //
-	let user = localStorage.getItem('email');
-	let partesDelUser = user.split('@');
-	let nombreUser = partesDelUser[0];
+	let user = data.username;
 
 	// Comentario del user //
 	let comentario = document.getElementById('add-comment__input').value;
@@ -212,25 +229,32 @@ function agregarComentario() {
 	for (let i = 0; i < puntaje; i++) {
 		estrellas[i].style.color = '#fd4';
 	}
-
+	fetch(PRODUCT_INFO_COMMENTS_URL,{
+		headers: { "Content-Type": "application/json; charset=utf-8",
+		"authorization":  "Bearer "+localStorage.token},
+		method: 'POST',
+		body: JSON.stringify({
+			"product": localStorage.cardId,
+			"score": puntaje,
+			"description": comentario,
+			"dateTime":  getDateTime()
+		})
+	  })
+	  .then(response => response.json())
+	  .then(data => {
+		if(data == "token expirado"){
+			location.href = "login.html"
+		}
+	  })
+	  .catch(error => console.log(error));
 	// Atributos y clases //
-	
-	if(localStorage.users && JSON.parse(localStorage.users).find(x => x.email === localStorage.email) && Object.hasOwn(JSON.parse(localStorage.users).find(x => x.email === localStorage.email),'image')){
-     image = document.createElement("img");
-	 image.classList.add("imagenPerfil");
-	 image.src = JSON.parse(localStorage.users).find(x => x.email = localStorage.email).image;
-	}else{
-	image = document.createElement('object')
-	image.data = 'gitlab.svg';
-	image.type = 'image/svg+xml';
-	image.onload = (e) => ResetearColores();
-    }
-
+	image.src = `http://localhost:3000/images/${data.image}`;
+	image.classList.add("imagenPerfil");
 	pTitle.classList.add('comment-title');
 	divCard.classList.add('cards');
 	divCardLoad.classList.add('tarjeta_load');
 	divDescription.classList.add('tarjeta_load_extreme_description');
-	pTitle.innerHTML = nombreUser + ' ' + pTitle.innerHTML;
+	pTitle.innerHTML = user;
 	pDescription.innerHTML = comentario;
 
 	// AppendChild's //
@@ -244,17 +268,35 @@ function agregarComentario() {
 	// Borrar inputs //
 	document.getElementById('add-comment__input').value = '';
 	puntajes.forEach((element) => (element.checked = false));
+  }).catch(error => console.log(error));
+}else{
+	alert("Debe ser un usuario registrado para comentar");
+}
 }
 
-
- function ResetearColores() {
-	let colores = ['#ffa7a7', '#ffa7fb', '#fff9a7', '#a7b0ff', '#b1ffa7', '#a7ffff'];
-	let contador = 0;
-	Array.from(document.getElementsByTagName('object')).forEach((element) => {
-		if (contador > colores.length - 1) {
-		contador = 0;
-		}
-		element.contentDocument.getElementsByTagName('svg')[0].style.color = colores[contador];
-		contador++;
-	});
- }
+ function getDateTime() {
+	var now     = new Date(); 
+	var year    = now.getFullYear();
+	var month   = now.getMonth()+1; 
+	var day     = now.getDate();
+	var hour    = now.getHours();
+	var minute  = now.getMinutes();
+	var second  = now.getSeconds(); 
+	if(month.toString().length == 1) {
+		 month = '0'+month;
+	}
+	if(day.toString().length == 1) {
+		 day = '0'+day;
+	}   
+	if(hour.toString().length == 1) {
+		 hour = '0'+hour;
+	}
+	if(minute.toString().length == 1) {
+		 minute = '0'+minute;
+	}
+	if(second.toString().length == 1) {
+		 second = '0'+second;
+	}   
+	var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;   
+	 return dateTime;
+}

@@ -2,24 +2,32 @@ document.addEventListener('DOMContentLoaded', () => {
 	const tableItems = document.getElementById('tableItems');
 	tableItems.classList.add('tableItems');
 
-	let listaDelCarrito = JSON.parse(localStorage.getItem('productosCarrito'));
-	listaDelCarrito.forEach((element) => {
-		getJSONData(PRODUCT_INFO_URL + element + EXT_TYPE).then((data) => {
-			let producto = data.data[0];
-			console.log(producto);
-			mostrarProducto(
-				producto.name,
-				producto.images.split(",")[0],
-				producto.currency,
-				producto.cost,
-				1,
-				producto.id,
-				true
-			);
-		});
+	fetch(USERS_CART,{
+		headers: { "Content-Type": "application/json; charset=utf-8",
+		"authorization":  "Bearer "+localStorage.token}
+	  })
+	  .then(response => response.json())
+	  .then(data => {
+		data.forEach(element =>{
+			fetch(PRODUCT_INFO_URL + element.idProduct)
+			.then((response) => response.json())
+			.then(data => data[0])
+			.then((producto) => {
+				mostrarProducto(
+					producto.name,
+					producto.images.split(",")[0],
+					producto.currency,
+					producto.cost,
+					element.productCount,
+					producto.id,
+				);
+			})
+		})
+	  })
+	  .catch(error => console.log(error));
 	});
 
-	function mostrarProducto(name, image, currency, unitCost, count, id, eliminar) {
+	function mostrarProducto(name, image, currency, unitCost, count, id) {
 		// Creación de elementos HTML //
 		let row = document.createElement('div');
 		row.classList.add('rowC');
@@ -41,25 +49,36 @@ document.addEventListener('DOMContentLoaded', () => {
 		let tdBtnBorrar = document.createElement('div');
 		let btnBorrar = document.createElement('button');
 
-		imgCart.setAttribute('src', image);
+		imgCart.setAttribute('src',"http://localhost:3000/" +image);
 		nameCart.innerHTML += name;
 		priceCart.innerHTML += currency + ' ' + unitCost;
 		cantCart.setAttribute('type', 'number');
 		cantCart.setAttribute('min', '1');
 		cantCart.value = count;
 		cantCart.addEventListener('change', () => {
-			subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
-            subtotalFinal();
-            envio();
-			TotalE();
+			fetch(
+				USERS_CART + id, {
+				  headers: { "Content-Type": "application/json; charset=utf-8",
+				  "authorization":  "Bearer "+localStorage.token},
+				  method: 'PUT',
+				  body: JSON.stringify({
+					"productcount" : cantCart.value
+				  })
+				})
+				subtotalCart.innerHTML = currency + ' ' + unitCost * cantCart.value;
+				subtotalFinal();
+				envio();
+				TotalE();
 		});
 		btnBorrar.innerHTML = 'Eliminar';
 		btnBorrar.addEventListener('click', () => {
 			btnBorrar.parentElement.parentElement.remove();
-			if (eliminar) {
-				listaDelCarrito.splice(listaDelCarrito.indexOf(id), 1);
-				localStorage.setItem('productosCarrito', JSON.stringify(listaDelCarrito));
-			}
+			fetch(
+				USERS_CART + id, {
+				  headers: { "Content-Type": "application/json; charset=utf-8",
+				  "authorization":  "Bearer "+localStorage.token},
+				  method: 'DELETE'
+				})
             subtotalFinal();
 			envio();
 			TotalE();
@@ -100,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		TotalE();
 	};
 	finalizarCompra()
-});
 document.addEventListener('scroll', () => {
     document.documentElement.dataset.scroll = window.scrollY;
 });

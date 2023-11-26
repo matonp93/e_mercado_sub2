@@ -1,17 +1,32 @@
 const CATEGORIES_URL = 'http://localhost:3000/categories';
 const REGISTER_URL = 'http://localhost:3000/register';
-const PUBLISH_PRODUCT_URL = 'https://japceibal.github.io/emercado-api/sell/publish.json';
 const PRODUCTS_URL = 'http://localhost:3000/products/';
 const PRODUCT_INFO_URL = 'http://localhost:3000/productinfo/';
 const PRODUCT_INFO_COMMENTS_URL = 'http://localhost:3000/comments/';
-const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
-const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
+const VERIFY_TOKEN_URL = 'http://localhost:3000/verify';
+const USERNAME_URL = 'http://localhost:3000/username/';
+const USERS_URL = 'http://localhost:3000/users'
+const USERS_CART = 'http://localhost:3000/cart/'
+const PRODUCTIMG_URL = 'http://localhost:3000/productimage/'
 const EXT_TYPE = '';
 const modoOscuroBtn = document.getElementsByName("Tema");
 const btnSalir = document.getElementById('deslogear');
 const btnVerPerfil = document.getElementById('irAPerfil');
 const btnCarrito = document.getElementById('carrito');
 let sumaNavbar = 0;
+	function comprobarLogin(){
+		fetch(VERIFY_TOKEN_URL,{
+			headers: { "Content-Type": "application/json; charset=utf-8",
+			"authorization":  "Bearer "+localStorage.token}
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+			if(!(data == "token expirado")){
+				usernameNavbar(data);
+			}else{location.href = "login.html"}
+		  })
+		  .catch(error => console.log(error));
+	}
 
 let showSpinner = function () {
 	document.getElementById('spinner-wrapper').style.display = 'block';
@@ -47,20 +62,20 @@ let getJSONData = function (url) {
 };
 
 function salir() {
-	localStorage.removeItem("email");
-	localStorage.removeItem("password");
+	localStorage.removeItem("token");
 	location.href = 'login.html';
 } //Se encarga de limpiar el localStorage y nos redirecciona a la pagina login.html
 
 function verPerfil() { 
-	if (localStorage.email === "invitado"){ // Comprueba si esta ingresado como invitado
-		location.href = 'login.html';
-	} else {
-		location.href = 'my-profile.html';
-	};
+	location.href = "my-profile.html";
 } // Nos redirecciona a la pagina my-profile.html
 
 document.addEventListener('DOMContentLoaded', ()=> {
+	if (localStorage.token != "invitado"){
+		comprobarLogin()
+	}
+	else {document.getElementById('user-info').textContent = "invitado"}
+
 	btnSalir.addEventListener('click', () => {
 		salir();
 	});
@@ -83,12 +98,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
 	if (localStorage.getItem("productosCarrito") == null){
 		localStorage.setItem("productosCarrito", JSON.stringify([]));
 	}
-
-	//Pone el nombre del usuario en el dropdown del navbar
-	document.getElementById('user-info').textContent = localStorage.getItem('email').split('@')[0];
-		
+	
 	DiferenciarTema(localStorage.getItem("preferencia"));
 });
+
+// Trae el username de la base de datos y lo pone en el navbar
+function usernameNavbar(email){
+	fetch(USERNAME_URL + email)
+	.then(response => response.json())
+	.then(data => document.getElementById('user-info').textContent = data[0].username);
+}
 
 // Modo Oscuro
 
@@ -141,7 +160,7 @@ function productosNavbar(element) {
 	let imgDiv = document.createElement('div');
 	imgDiv.classList.add('imgDiv');
 	let imagen = document.createElement('img');
-	imagen.setAttribute('src', element.images.split(",")[0]);
+	imagen.setAttribute('src', "http://localhost:3000/"+element.images.split(",")[0]);
 	imagen.classList.add('imgCarrito');
 	imgDiv.appendChild(imagen);
 
@@ -215,14 +234,20 @@ function subtotalNavbar (){
 } 
 
 function carritoNavbar() {
-	let prods = JSON.parse(localStorage.productosCarrito);
-	prods.forEach((element) =>
-	fetch(PRODUCT_INFO_URL + element + EXT_TYPE)
-		.then((response) => response.json())
-		.then(data => data[0])
-		.then((data) =>  productosNavbar(data))
-		);
-
+	fetch(USERS_CART,{
+		headers: { "Content-Type": "application/json; charset=utf-8",
+		"authorization":  "Bearer "+localStorage.token}
+	  })
+	  .then(response => response.json())
+	  .then(data => {
+		data.forEach(element =>{
+			fetch(PRODUCT_INFO_URL + element.idProduct)
+			.then((response) => response.json())
+			.then(data => data[0])
+			.then((data) =>  productosNavbar(data))
+		})
+	  })
+	  .catch(error => console.log(error));
 }
 if (!(document.location.pathname.includes('/cart.html'))){
 	carritoNavbar();

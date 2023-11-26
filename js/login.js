@@ -24,11 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function login(password, email){
         if ((validarPassword(password)) && (validarEmail(email))){
-            localStorage.setItem("email", email);
-            localStorage.setItem("password", password);
+            fetch("http://localhost:3000/login", {
+             headers: { "Content-Type": "application/json; charset=utf-8" },
+             method: 'POST',
+             body : JSON.stringify({
+                email: email,
+                password: password
+             })
+            })
+        .then(response => response.json())
+        .then(data => {
+            localStorage.token = data;
             location.href = "index.html";
-        } else {
-            accesoDenegado();
+        } )
+        .catch(error => accesoDenegado())
         }
     }
 
@@ -40,8 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         login(password, email);
     });
     btnInvitado.addEventListener("click", ()=>{
-        localStorage.setItem("email", "invitado");
-        localStorage.setItem("password", "invitado");
+        localStorage.token = "invitado";
         location.href = "index.html";
     })
 
