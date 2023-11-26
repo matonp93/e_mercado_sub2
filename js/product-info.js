@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let divDescription = document.createElement('div');
 				let pTitle = document.createElement('p');
 				let pDescription = document.createElement('p');
-				let image = document.createElement('object');
+				let image = document.createElement('img');
 
 				// Estrellas en los comentarios //
 				let estrellas = [];
@@ -154,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					estrellas[i].style.color = '#fd4';
 				}
 				// Atributos y clases //
-				image.data = 'gitlab.svg';
-				image.type = 'image/svg+xml';
+				image.src = `http://localhost:3000/images/${element.image}`;
+				image.classList.add("imagenPerfil");
 				pTitle.classList.add('comment-title');
 				divCard.classList.add('cards');
 				divCardLoad.classList.add('tarjeta_load');
@@ -186,8 +186,13 @@ function agregarComentario() {
 		  })
 		  .then(response => response.json())
 		  .then(data => {
-			if(!(data == "token expirado")){
-	console.log(data);
+			if(data == "token expirado"){
+				location.href="login.html";
+			}else{
+			return data[0];
+			}
+			})
+		  .then(data => {
 	// Creacion de elementos HTML //
 	let divCard = document.createElement('div');
 	let divCardLoad = document.createElement('div');
@@ -197,9 +202,7 @@ function agregarComentario() {
 	let image = document.createElement('img');
 	
 	// Nombre del user //
-	let user = localStorage.getItem('email');
-	let partesDelUser = user.split('@');
-	let nombreUser = partesDelUser[0];
+	let user = data.username;
 
 	// Comentario del user //
 	let comentario = document.getElementById('add-comment__input').value;
@@ -245,12 +248,13 @@ function agregarComentario() {
 	  })
 	  .catch(error => console.log(error));
 	// Atributos y clases //
-	image.src = data.image;
+	image.src = `http://localhost:3000/images/${data.image}`;
+	image.classList.add("imagenPerfil");
 	pTitle.classList.add('comment-title');
 	divCard.classList.add('cards');
 	divCardLoad.classList.add('tarjeta_load');
 	divDescription.classList.add('tarjeta_load_extreme_description');
-	pTitle.innerHTML = nombreUser + ' ' + pTitle.innerHTML;
+	pTitle.innerHTML = user;
 	pDescription.innerHTML = comentario;
 
 	// AppendChild's //
@@ -264,7 +268,6 @@ function agregarComentario() {
 	// Borrar inputs //
 	document.getElementById('add-comment__input').value = '';
 	puntajes.forEach((element) => (element.checked = false));
-	}else{location.href = "login.html"}
   }).catch(error => console.log(error));
 }else{
 	alert("Debe ser un usuario registrado para comentar");

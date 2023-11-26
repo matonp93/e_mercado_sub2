@@ -44,14 +44,26 @@ app.post("/categories", (req, res) => {
 });
 
 app.get("/products",(req,res) =>{
-    connection.query('SELECT * from ProductByCategory',(err, rows)=>{
+    let filters = "";
+    if(req.query.filters){
+        filters = req.query.filters;
+    }else{
+        filters = " order by soldCount desc";
+    }
+    connection.query('SELECT * from ProductByCategory'+filters,(err, rows)=>{
         if (err) throw err;
         res.send(rows);
     })
 });
 
 app.get("/products/:categoryid",(req,res) =>{
-    connection.query(`SELECT * FROM ProductByCategory WHERE idCategory=${req.params.categoryid}`,(err, rows)=>{
+    let filters = "";
+    if(req.query.filters){
+        filters = req.query.filters;
+    }else{
+        filters = " order by soldCount desc";
+    }
+    connection.query(`SELECT * FROM ProductByCategory WHERE idCategory="${req.params.categoryid}"`+filters,(err, rows)=>{
         if (err) throw err;
         res.send(rows);
     })
@@ -88,7 +100,7 @@ app.post("/comments",authenticateToken,(req,res)=>{
     connection.query(`SELECT username FROM USERS WHERE email="${req.user.email}"`,(err,result)=>{
         if (err) throw err;
         if(result){
-            connection.query(`INSERT INTO Comments(idproduct, score, description, user, dateTime) VALUES(${req.body.product}, ${req.body.score},"${req.body.description}","${result}","${req.body.dateTime}")`,(err,result)=>{
+            connection.query(`INSERT INTO Comments(idproduct, score, description, user, dateTime) VALUES(${req.body.product}, ${req.body.score},"${req.body.description}","${result[0].username}","${req.body.dateTime}")`,(err,result)=>{
                 if (err) throw err;
                 res.send(result);
             }
@@ -98,7 +110,7 @@ app.post("/comments",authenticateToken,(req,res)=>{
 });
 
 app.get("/comments/:id",(req,res)=>{
-    connection.query(`SELECT * FROM Comments WHERE idproduct=${req.params.id}`,(err,result)=>{
+    connection.query(`SELECT * FROM commentswithimage WHERE idproduct=${req.params.id}`,(err,result)=>{
         if (err) throw err;
         res.send(result);
     })
