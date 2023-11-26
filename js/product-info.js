@@ -153,11 +153,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				for (let i = 0; i < element.score; i++) {
 					estrellas[i].style.color = '#fd4';
 				}
-
 				// Atributos y clases //
 				image.data = 'gitlab.svg';
 				image.type = 'image/svg+xml';
-				image.onload = (e) => ResetearColores();
 				pTitle.classList.add('comment-title');
 				divCard.classList.add('cards');
 				divCardLoad.classList.add('tarjeta_load');
@@ -181,15 +179,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // AGREGAR COMENTARIOS //
 function agregarComentario() {
+	if(localStorage.token != "invitado"){
+		fetch(USERS_URL,{
+			headers: { "Content-Type": "application/json; charset=utf-8",
+			"authorization":  "Bearer "+localStorage.token}
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+			if(!(data == "token expirado")){
+	console.log(data);
 	// Creacion de elementos HTML //
 	let divCard = document.createElement('div');
 	let divCardLoad = document.createElement('div');
 	let divDescription = document.createElement('div');
 	let pTitle = document.createElement('p');
 	let pDescription = document.createElement('p');
-	let image;
+	let image = document.createElement('img');
 	
-
 	// Nombre del user //
 	let user = localStorage.getItem('email');
 	let partesDelUser = user.split('@');
@@ -220,20 +226,26 @@ function agregarComentario() {
 	for (let i = 0; i < puntaje; i++) {
 		estrellas[i].style.color = '#fd4';
 	}
-
+	fetch(PRODUCT_INFO_COMMENTS_URL,{
+		headers: { "Content-Type": "application/json; charset=utf-8",
+		"authorization":  "Bearer "+localStorage.token},
+		method: 'POST',
+		body: JSON.stringify({
+			"product": localStorage.cardId,
+			"score": puntaje,
+			"description": comentario,
+			"dateTime":  getDateTime()
+		})
+	  })
+	  .then(response => response.json())
+	  .then(data => {
+		if(data == "token expirado"){
+			location.href = "login.html"
+		}
+	  })
+	  .catch(error => console.log(error));
 	// Atributos y clases //
-	
-	if(localStorage.users && JSON.parse(localStorage.users).find(x => x.email === localStorage.email) && Object.hasOwn(JSON.parse(localStorage.users).find(x => x.email === localStorage.email),'image')){
-     image = document.createElement("img");
-	 image.classList.add("imagenPerfil");
-	 image.src = JSON.parse(localStorage.users).find(x => x.email = localStorage.email).image;
-	}else{
-	image = document.createElement('object')
-	image.data = 'gitlab.svg';
-	image.type = 'image/svg+xml';
-	image.onload = (e) => ResetearColores();
-    }
-
+	image.src = data.image;
 	pTitle.classList.add('comment-title');
 	divCard.classList.add('cards');
 	divCardLoad.classList.add('tarjeta_load');
@@ -252,17 +264,36 @@ function agregarComentario() {
 	// Borrar inputs //
 	document.getElementById('add-comment__input').value = '';
 	puntajes.forEach((element) => (element.checked = false));
+	}else{location.href = "login.html"}
+  }).catch(error => console.log(error));
+}else{
+	alert("Debe ser un usuario registrado para comentar");
+}
 }
 
-
- function ResetearColores() {
-	let colores = ['#ffa7a7', '#ffa7fb', '#fff9a7', '#a7b0ff', '#b1ffa7', '#a7ffff'];
-	let contador = 0;
-	Array.from(document.getElementsByTagName('object')).forEach((element) => {
-		if (contador > colores.length - 1) {
-		contador = 0;
-		}
-		element.contentDocument.getElementsByTagName('svg')[0].style.color = colores[contador];
-		contador++;
-	});
- }
+ function getDateTime() {
+	var now     = new Date(); 
+	var year    = now.getFullYear();
+	var month   = now.getMonth()+1; 
+	var day     = now.getDate();
+	var hour    = now.getHours();
+	var minute  = now.getMinutes();
+	var second  = now.getSeconds(); 
+	if(month.toString().length == 1) {
+		 month = '0'+month;
+	}
+	if(day.toString().length == 1) {
+		 day = '0'+day;
+	}   
+	if(hour.toString().length == 1) {
+		 hour = '0'+hour;
+	}
+	if(minute.toString().length == 1) {
+		 minute = '0'+minute;
+	}
+	if(second.toString().length == 1) {
+		 second = '0'+second;
+	}   
+	var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;   
+	 return dateTime;
+}

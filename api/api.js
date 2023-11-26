@@ -84,12 +84,17 @@ app.get("/productinfo/:id",(req,res)=>{
     })
 });
 
-app.post("/comments",(req,res)=>{
-    connection.query(`INSERT INTO Comments(idproduct, score, description, user, dateTime) VALUES(${req.body.product}, ${req.body.score},"${req.body.description}","${req.body.user}","${req.body.dateTime}")`,(err,result)=>{
+app.post("/comments",authenticateToken,(req,res)=>{
+    connection.query(`SELECT username FROM USERS WHERE email="${req.user.email}"`,(err,result)=>{
         if (err) throw err;
-        res.send(result);
-    }
-    )
+        if(result){
+            connection.query(`INSERT INTO Comments(idproduct, score, description, user, dateTime) VALUES(${req.body.product}, ${req.body.score},"${req.body.description}","${result}","${req.body.dateTime}")`,(err,result)=>{
+                if (err) throw err;
+                res.send(result);
+            }
+            )
+        }
+    })
 });
 
 app.get("/comments/:id",(req,res)=>{
@@ -200,6 +205,20 @@ app.post("/cart",authenticateToken,(req,res)=>{
 app.get("/cart",authenticateToken,(req,res)=>{
     connection.query(`SELECT * FROM users_products where emailUser="${req.user.email}"`,(err,result)=>{
         if(err) throw err;
+        res.json(result);
+    })
+})
+
+app.put("/cart/:idproduct",authenticateToken,(req,res)=>{
+    connection.query(`UPDATE users_products SET productCount="${req.body.productcount}" where idProduct="${req.params.idproduct}" AND emailUser="${req.user.email}"`,(err, result)=>{
+        if (err) throw err
+        res.json(result);
+    })
+})
+
+app.delete("/cart/:idproduct",authenticateToken,(req,res)=>{
+    connection.query(`DELETE from users_products WHERE idProduct="${req.params.idproduct}" AND emailUser="${req.user.email}"`,(err, result)=>{
+        if (err) throw err;
         res.json(result);
     })
 })
