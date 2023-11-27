@@ -1,0 +1,94 @@
+body{
+  font-family: 'Nunito', serif;
+}
+
+h1#title {
+  text-align: center;
+}
+.containerMyPerfil {
+  padding-top: 40px;
+  margin: auto;
+  max-width: 800px;
+}
+
+.perfilCamp {
+  display: flex;
+  gap: 20px;
+
+  @media (width <= 769px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+#profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-control {
+  color: var(--textcolor);
+  display: flex;
+  background-color: var(--background);
+  border: none;
+  border-bottom: 2px solid var(--textcolor);
+  outline: none;
+}
+.form-control[readonly]{
+  background-color: var(--background);
+}
+
+.form-control:focus {
+  color: var(--textcolor);
+  box-shadow: none;
+  background-color: var(--background);
+  outline: none;
+}
+
+.perfilImageCamp {
+  border: 2px solid var(--textcolor);
+  transition: filter 0.2s;
+  overflow: hidden;
+  width: 100px;
+  position: relative;
+  border-radius: 50px;
+  margin: auto;
+
+  &:hover {
+    filter: brightness(0.5);
+  }
+}
+.img-fluid {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.choseImage {
+  position: absolute;
+  padding-right: 60px;
+  padding-bottom: 45px;
+  bottom: 0;
+  right: 0;
+  scale: 4;
+}
+
+#imagenSelector {
+  opacity: 0;
+  position: absolute;
+}
+
+#profileFormButton {
+  background-color: var(--primary);
+  color: var(--textcolor2);
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  transition: opacity 0.2s;
+  text-transform: uppercase;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
